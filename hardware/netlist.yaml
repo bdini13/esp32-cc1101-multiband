@@ -1,0 +1,79 @@
+project: esp32-cc1101-multiband
+revision: A1
+status: corrected_schematic_placement_initial_ground_copper_signal_routing_pending
+authority: architectural_summary_only_generate_schematic_py_is_pin_level_source
+
+rails:
+  GND: common_ground
+  VBUS_IN: usb_c_5v_after_connector
+  VBUS_PROTECTED: after_fuse_and_transient_protection
+  +3V3: regulator_output
+  +3V3_RF: after_rf_ferrite
+
+interfaces:
+  usb:
+    connector: J1
+    nets: [VBUS_IN, USB_DP_CONN, USB_DM_CONN, CC1, CC2, GND]
+    cc_resistors:
+      CC1: {to: GND, value: 5.1k}
+      CC2: {to: GND, value: 5.1k}
+    data_path:
+      USB_DP_CONN: [D1, USB_DP]
+      USB_DM_CONN: [D1, USB_DM]
+
+  uart_programmer:
+    bridge: U5
+    supply_mode: external_3v3_VIO_VDD_VREGIN
+    vbus_sense: {upper_resistor: 22.1k, lower_resistor: 47.5k, node: USB_VBUS_SENSE}
+    connections:
+      USB_DP: U5.DP
+      USB_DM: U5.DM
+      UART_TX_ESP: [U5.RXD, U1.GPIO1]
+      UART_RX_ESP: [U5.TXD, U1.GPIO3]
+      AUTO_DTR: [U5.DTR, auto_reset.GPIO0_driver]
+      AUTO_RTS: [U5.RTS, auto_reset.EN_driver]
+
+  cc1101_spi:
+    connections:
+      SPI_SCLK: [U1.GPIO18, U2.SCLK]
+      SPI_MISO: [U1.GPIO19, U2.SO]
+      SPI_MOSI: [U1.GPIO23, U2.SI]
+      CC1101_CSN: [U1.GPIO21, U2.CSn]
+      CC1101_GDO0: [U1.GPIO26, U2.GDO0]
+      CC1101_GDO2: [U1.GPIO27, U2.GDO2]
+
+  rf_switch_control:
+    connections:
+      RF_SW0: [U1.GPIO32, U3.V2, U4.V2, pulldown_100k]
+      RF_SW1: [U1.GPIO33, U3.V1, U4.V1, pulldown_100k]
+    truth_table:
+      "00": ISOLATED_SAFE_BOOT
+      "01": 315MHz
+      "10": 433MHz
+      "11": 868_915MHz
+
+rf_chain:
+  topology:
+    - U2.RF_P_RF_N
+    - B1.broadband_balun
+    - U3.input_selector
+    - parallel:
+        - branch_315MHz
+        - branch_433MHz
+        - branch_868_915MHz
+    - U4.output_selector
+    - optional_pi_tuning
+    - J2.SMA_50ohm
+  value_source: M5Stack_Cap_CC1101_Rev_0.3_2026-05-28
+  rule: rf_values_footprints_and_connectivity_require_independent_review_before_layout
+
+power:
+  usb_input: [J1.VBUS, F1, D2, VBUS_PROTECTED]
+  regulator: [VBUS_PROTECTED, U6, +3V3]
+  rf_supply: [+3V3, FB1, +3V3_RF]
+  esp32_supply: [+3V3, U1.3V3]
+  cc1101_supply: [+3V3_RF, U2.DVDD, U2.AVDD, U2.DGUARD]
+  switch_supply: [+3V3_RF, U3.VDD, U4.VDD]
+  regulator_part: AP7361C-33E-13
+  regulator_pinout: {"1": VBUS_PROTECTED, "2": GND, "3": +3V3}
+  uart_supply: [+3V3, U5.VIO, U5.VDD, U5.VREGIN]

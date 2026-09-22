@@ -1,0 +1,28 @@
+# Local-only research, caches, archives and editor state
+.DS_Store
+tmp/
+logs/
+reports/checkpoints/
+**/__pycache__/
+*.py[cod]
+.venv/
+.pio/
+**/.pio/
+.vscode/
+.idea/
+*.kicad_prl
+*.kicad_pcb.lck
+*.kicad_sch.lck
+~*.lck
+*-backups/
+*.bak
+*.zip
+*.tar.gz
+.env
+.env.*
+!.env.example
+# Do not accidentally publish prototype order packages or credentials.
+fabrication/
+gerbers/
+*.pem
+*.key

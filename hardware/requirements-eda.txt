@@ -1,0 +1,2 @@
+kicad-sch-api==0.5.6
+

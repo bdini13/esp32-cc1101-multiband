@@ -1,0 +1,486 @@
+{
+  "status": "PASS",
+  "scope": "Corrected draft only; not manufacturing approval",
+  "checks": [
+    {
+      "check": "U2.4 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U2.9 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U2.11 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U2.14 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U2.15 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U2.18 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U2.16 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U2.19 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U2.21 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U2.5 -> CC1101_DCOUPL",
+      "pass": true
+    },
+    {
+      "check": "U5.5 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "U5.6 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "U5.7 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "U5.8 -> USB_VBUS_SENSE",
+      "pass": true
+    },
+    {
+      "check": "R5.1 -> VBUS_PROTECTED",
+      "pass": true
+    },
+    {
+      "check": "R5.2 -> USB_VBUS_SENSE",
+      "pass": true
+    },
+    {
+      "check": "R5 divider value 22.1k 1%",
+      "pass": true
+    },
+    {
+      "check": "R6.1 -> USB_VBUS_SENSE",
+      "pass": true
+    },
+    {
+      "check": "R6.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "R6 divider value 47.5k 1%",
+      "pass": true
+    },
+    {
+      "check": "D3.1 -> GND",
+      "pass": true
+    },
+    {
+      "check": "D3.2 -> STATUS_LED_A",
+      "pass": true
+    },
+    {
+      "check": "D4.1 -> GND",
+      "pass": true
+    },
+    {
+      "check": "D4.2 -> POWER_LED_A",
+      "pass": true
+    },
+    {
+      "check": "D2.1 -> VBUS_PROTECTED",
+      "pass": true
+    },
+    {
+      "check": "D2.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "PESD5V0S1UL uses SOD-882",
+      "pass": true
+    },
+    {
+      "check": "Regulator is E, not different-pinout ER",
+      "pass": true
+    },
+    {
+      "check": "U6.1 -> VBUS_PROTECTED",
+      "pass": true
+    },
+    {
+      "check": "U6.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U6.3 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "Regulator tab is pin 2 (GND)",
+      "pass": true
+    },
+    {
+      "check": "U3.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U3.2 -> RF_SW0",
+      "pass": true
+    },
+    {
+      "check": "U3.3 -> RF_SW1",
+      "pass": true
+    },
+    {
+      "check": "U3.8 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U4.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U4.2 -> RF_SW0",
+      "pass": true
+    },
+    {
+      "check": "U4.3 -> RF_SW1",
+      "pass": true
+    },
+    {
+      "check": "U4.8 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C3.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C3.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C4.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C4.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C6.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C6.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C7.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C7.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C8.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C8.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C9.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C9.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C11.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C11.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C12.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C12.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C21.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C21.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C22.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C22.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C23.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C23.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C24.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C24.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C25.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C25.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C26.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C26.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C60.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C60.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C61.1 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "C61.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U1.2_to_C11.1_mm <= 3.0",
+      "pass": true
+    },
+    {
+      "check": "U1.2_to_C12.1_mm <= 3.0",
+      "pass": true
+    },
+    {
+      "check": "U2.4_to_C21.1_mm <= 3.5",
+      "pass": true
+    },
+    {
+      "check": "U2.9_to_C22.1_mm <= 3.5",
+      "pass": true
+    },
+    {
+      "check": "U2.11_to_C23.1_mm <= 3.5",
+      "pass": true
+    },
+    {
+      "check": "U2.14_to_C24.1_mm <= 3.5",
+      "pass": true
+    },
+    {
+      "check": "U2.15_to_C25.1_mm <= 3.5",
+      "pass": true
+    },
+    {
+      "check": "U2.18_to_C26.1_mm <= 3.5",
+      "pass": true
+    },
+    {
+      "check": "U3.1_to_C60.1_mm <= 2.5",
+      "pass": true
+    },
+    {
+      "check": "U4.1_to_C61.1_mm <= 2.5",
+      "pass": true
+    },
+    {
+      "check": "U5.5_to_C4.1_mm <= 2.5",
+      "pass": true
+    },
+    {
+      "check": "U5.6_to_C6.1_mm <= 2.5",
+      "pass": true
+    },
+    {
+      "check": "U5.7_to_C7.1_mm <= 2.5",
+      "pass": true
+    },
+    {
+      "check": "Y1.1 -> CC1101_XOSC_Q1",
+      "pass": true
+    },
+    {
+      "check": "Y1.3 -> CC1101_XOSC_Q2",
+      "pass": true
+    },
+    {
+      "check": "Y1.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "Y1.4 -> GND",
+      "pass": true
+    },
+    {
+      "check": "ABM8 uses manufacturer four-pad footprint",
+      "pass": true
+    },
+    {
+      "check": "C31 initial 10 pF crystal load assumption",
+      "pass": true
+    },
+    {
+      "check": "C32 initial 10 pF crystal load assumption",
+      "pass": true
+    },
+    {
+      "check": "CC1101 crystal pin 8 within 3.5 mm",
+      "pass": true
+    },
+    {
+      "check": "CC1101 crystal pin 10 within 3.5 mm",
+      "pass": true
+    },
+    {
+      "check": "Balun orientation matches top-view audit frame",
+      "pass": true
+    },
+    {
+      "check": "Balun pin 1 manufacturer TOP-view location",
+      "pass": true
+    },
+    {
+      "check": "Balun pin 2 manufacturer TOP-view location",
+      "pass": true
+    },
+    {
+      "check": "Balun pin 3 manufacturer TOP-view location",
+      "pass": true
+    },
+    {
+      "check": "Balun pin 4 manufacturer TOP-view location",
+      "pass": true
+    },
+    {
+      "check": "Balun pin 5 manufacturer TOP-view location",
+      "pass": true
+    },
+    {
+      "check": "Balun pin 6 manufacturer TOP-view location",
+      "pass": true
+    },
+    {
+      "check": "B1.1 -> BALUN_50R",
+      "pass": true
+    },
+    {
+      "check": "B1.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "B1.3 -> BAL_N",
+      "pass": true
+    },
+    {
+      "check": "B1.4 -> BAL_P",
+      "pass": true
+    },
+    {
+      "check": "HRO TYPE-C-31-M-12 connector footprint",
+      "pass": true
+    },
+    {
+      "check": "HRO connector mouth at x=0, opening faces left",
+      "pass": true
+    },
+    {
+      "check": "USB signal pad row is inside PCB",
+      "pass": true
+    },
+    {
+      "check": "ESP32 antenna feed lies beyond y=0 board edge",
+      "pass": true
+    },
+    {
+      "check": "Four copper layers",
+      "pass": true
+    },
+    {
+      "check": "Eight initial regulator thermal vias",
+      "pass": true
+    },
+    {
+      "check": "Initial F.Cu / In1.Cu / B.Cu ground heat-spreading zones",
+      "pass": true
+    },
+    {
+      "check": "All generated PCB pad nets and values match schematic XML",
+      "pass": true
+    },
+    {
+      "check": "BOM contains exactly every schematic footprint once",
+      "pass": true
+    },
+    {
+      "check": "BOM values and footprints match schematic",
+      "pass": true
+    }
+  ],
+  "measurements": {
+    "U1.2_to_C11.1_mm": 1.951,
+    "U1.2_to_C12.1_mm": 1.866,
+    "U2.4_to_C21.1_mm": 1.332,
+    "U2.9_to_C22.1_mm": 3.472,
+    "U2.11_to_C23.1_mm": 2.658,
+    "U2.14_to_C24.1_mm": 2.212,
+    "U2.15_to_C25.1_mm": 2.437,
+    "U2.18_to_C26.1_mm": 2.144,
+    "U3.1_to_C60.1_mm": 1.681,
+    "U4.1_to_C61.1_mm": 1.263,
+    "U5.5_to_C4.1_mm": 1.454,
+    "U5.6_to_C6.1_mm": 2.003,
+    "U5.7_to_C7.1_mm": 1.356,
+    "U2.8_to_Y1.1_mm": 3.449,
+    "U2.10_to_Y1.3_mm": 1.762,
+    "ESP32_antenna_tip_y_mm": -6.45
+  },
+  "parity_mismatches": [],
+  "footprints": 107
+}

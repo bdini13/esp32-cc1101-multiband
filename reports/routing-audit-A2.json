@@ -1,0 +1,257 @@
+{
+  "status": "EXPERIMENT_ONLY_NOT_RELEASED",
+  "track_segments_by_layer_and_vias": {
+    "F.Cu": 580,
+    "vias": 123,
+    "In2.Cu": 64,
+    "B.Cu": 91
+  },
+  "total_trace_length_by_net_mm": {
+    "/+3V3": 146.511,
+    "/+3V3_RF": 82.456,
+    "/AUTO_DTR_N": 22.647,
+    "/AUTO_Q1_BASE": 2.225,
+    "/AUTO_Q2_BASE": 1.914,
+    "/AUTO_RTS_N": 9.876,
+    "/BALUN_50R": 1.065,
+    "/BALUN_M1": 4.075,
+    "/BALUN_M2": 5.241,
+    "/BAL_N": 1.402,
+    "/BAL_P": 1.402,
+    "/CC1101_CSN": 30.957,
+    "/CC1101_DCOUPL": 1.821,
+    "/CC1101_GDO0": 48.545,
+    "/CC1101_GDO2": 46.834,
+    "/CC1101_RBIAS": 1.71,
+    "/CC1101_RF_N": 1.665,
+    "/CC1101_RF_P": 2.109,
+    "/CC1101_XOSC_Q1": 6.874,
+    "/CC1101_XOSC_Q2": 2.325,
+    "/CHASSIS": 26.825,
+    "/CP2102_RST_N": 7.856,
+    "/ESP_EN": 46.11,
+    "/ESP_IO0": 45.818,
+    "/EXP_GPIO13": 16.002,
+    "/EXP_GPIO14": 20.548,
+    "/EXP_GPIO16": 25.981,
+    "/EXP_GPIO17": 26.025,
+    "/EXP_GPIO22": 33.298,
+    "/EXP_GPIO34": 38.172,
+    "/EXP_GPIO35": 37.27,
+    "/GND": 95.213,
+    "/POWER_LED_A": 4.128,
+    "/RF315_A": 4.518,
+    "/RF315_B": 3.764,
+    "/RF315_TRAP": 2.4,
+    "/RF433_A": 3.764,
+    "/RF433_B": 3.764,
+    "/RF433_C": 3.764,
+    "/RF868_A": 4.29,
+    "/RF868_B": 2.845,
+    "/RF_COMBINED": 3.947,
+    "/RF_FEED": 0.905,
+    "/RF_SMA": 12.803,
+    "/RF_SW0": 56.991,
+    "/RF_SW1": 52.54,
+    "/SPI_MISO": 38.476,
+    "/SPI_MOSI": 51.276,
+    "/SPI_SCLK": 29.812,
+    "/STATUS_LED": 32.417,
+    "/STATUS_LED_A": 4.135,
+    "/UART_RX_ESP": 35.635,
+    "/UART_TX_ESP": 92.957,
+    "/USB_CC1": 11.807,
+    "/USB_CC2": 13.05,
+    "/USB_DM": 4.49,
+    "/USB_DM_CONN": 4.949,
+    "/USB_DP_CONN": 7.963,
+    "/USB_VBUS_SENSE": 17.903,
+    "/VBUS_IN": 16.163,
+    "/VBUS_PROTECTED": 92.714
+  },
+  "layer_constraint_violations": [],
+  "power_segments_below_0_40_mm_require_review": [
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 1.333
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.911
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.357
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.625
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 1.453
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.378
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 2.476
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.192
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.091
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 1.276
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.113
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.25,
+      "length_mm": 0.027
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 1.526
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 2.389
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.515
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 1.392
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.387
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 1.703
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 2.703
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.25,
+      "length_mm": 0.5
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 2.743
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.502
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.75
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.548
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 4.199
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.25,
+      "length_mm": 0.45
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.25,
+      "length_mm": 0.027
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.25,
+      "length_mm": 0.05
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.15,
+      "length_mm": 0.76
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.15,
+      "length_mm": 0.695
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.15,
+      "length_mm": 1.081
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.15,
+      "length_mm": 1.795
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.15,
+      "length_mm": 0.54
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.15,
+      "length_mm": 1.572
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.15,
+      "length_mm": 2.76
+    }
+  ],
+  "not_validated": [
+    "RF impedance/matching",
+    "USB differential coupling/skew",
+    "Power voltage drop and thermal behavior",
+    "Local bypass loops",
+    "Digital exclusion beneath RF/crystal"
+  ]
+}

@@ -1,0 +1,13 @@
+(sym_lib_table
+  (lib (name "ESP32_CC1101")(type "KiCad")(uri "${KIPRJMOD}/lib/ESP32_CC1101.kicad_sym")(options "")(descr "Named and typed project RF symbols"))
+  (lib (name "Connector")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Connector.kicad_sym")(options "")(descr ""))
+  (lib (name "Connector_Generic")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Connector_Generic.kicad_sym")(options "")(descr ""))
+  (lib (name "Device")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Device.kicad_sym")(options "")(descr ""))
+  (lib (name "Interface_USB")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Interface_USB.kicad_sym")(options "")(descr ""))
+  (lib (name "Power_Protection")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Power_Protection.kicad_sym")(options "")(descr ""))
+  (lib (name "power")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/power.kicad_sym")(options "")(descr ""))
+  (lib (name "Regulator_Linear")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Regulator_Linear.kicad_sym")(options "")(descr ""))
+  (lib (name "RF_Module")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/RF_Module.kicad_sym")(options "")(descr ""))
+  (lib (name "Switch")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Switch.kicad_sym")(options "")(descr ""))
+  (lib (name "Transistor_BJT")(type "KiCad")(uri "${KICAD10_SYMBOL_DIR}/Transistor_BJT.kicad_sym")(options "")(descr ""))
+)
