@@ -1,0 +1,11 @@
+{
+  "revision": "A2",
+  "reviews": [
+    {"id": "power", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Resolve LDO thermal margin, power widths, USB current availability and startup budget."},
+    {"id": "rf", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Approve low-band switch solution, matching topology and RF/clock layout for prototype testing."},
+    {"id": "impedance", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Confirm fabricator stackup, RF impedance, USB differential geometry and uninterrupted return paths."},
+    {"id": "parts", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Approve exact parts, tolerances, ratings, sourcing and assembly substitutions."},
+    {"id": "mechanical", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Check connector drawings, SMA vertical fit, antenna keepout, solder/paste and assembly orientation."},
+    {"id": "independent", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Obtain independent human electrical/RF review of the exact candidate and documented prototype risks."}
+  ]
+}

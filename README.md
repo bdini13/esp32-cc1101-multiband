@@ -35,6 +35,11 @@ file or a fabrication package. Bottom and inner routes are not shown here.*
 [Latest design report](reports/design-updates-A2-2026-09-22.md) ·
 [Draft BOM](hardware/bom-draft.csv) · [Roadmap](ROADMAP.md)
 
+Latest work: [2026-09-23 checkpoint](reports/overnight-checkpoint-2026-09-23.md) —
+safer digital diagnostics, 17 host fault-injection tests, six preflight tests,
+and a fresh [pre-order blocker report](reports/preflight-A2.json). Hardware
+remains A2; this update does not complete routing or approve manufacturing.
+
 ## Building blocks and design inputs
 
 ### ESP32-WROOM-32E-N8 — controller and 2.4 GHz connectivity
@@ -171,9 +176,10 @@ placement overwrites the generated board; preserve manual routing first.**
 See [rebuild instructions](hardware/REBUILD.md) and
 [firmware instructions](firmware/bringup/README.md).
 
-Initial firmware resets the CC1101, reads PARTNUM/VERSION over SPI and logs
-results. It does not configure a receiver or transmitter and has not run on
-physical hardware. Its plausibility check is not an identity or RF certification.
+Initial firmware resets the CC1101, checks repeated PARTNUM/VERSION reads and
+stable IDLE state, and logs explicit failures. It does not configure a receiver
+or transmitter and has not run on physical hardware. Passing digital diagnostics
+is not proof of authenticity or RF qualification.
 
 ## AI disclosure
 

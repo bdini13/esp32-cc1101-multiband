@@ -64,3 +64,9 @@ view. Missing exact SMA/custom-RF models are documented in the update report.
 
 Firmware compilation (with PlatformIO installed): `pio run -d firmware/bringup`.
 No board is connected or flashed by this build command.
+
+Host checks: `python3 tools/test_firmware.py` and `python3 tools/test_preflight.py`.
+For fresh ERC/candidate DRC plus explicit order blockers, run
+`python3 tools/preflight.py --kicad-cli "$KICAD_CLI" --output reports/preflight-A2.json`.
+Exit 2 means blocked, not a tool crash. No ordering/fabrication action is performed.
+See the [checkpoint report](../reports/overnight-checkpoint-2026-09-23.md) for scope.

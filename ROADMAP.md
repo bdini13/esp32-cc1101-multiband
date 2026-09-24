@@ -48,7 +48,8 @@ claims or equivalence to another module.
 
 ## 5. Firmware and usability — planned
 
-- [ ] Robust ID validation, timeouts and repeatable factory diagnostics.
+- [x] Repeated ID validation, timeouts and 17 host fault-injection tests.
+- [ ] Bench-validate diagnostics and develop repeatable factory tests.
 - [ ] Receive-first frequency/modem profiles and a documented control interface.
 - [ ] Verified IDLE/isolate/select/reconfigure sequence for band changes.
 - [ ] Deliberately selected region/power profiles before transmit features.

@@ -29,8 +29,11 @@
 | 34 | Input only; no internal pull resistor |
 | 35 | Input only; no internal pull resistor |
 
-GPIO2, GPIO4, GPIO5, GPIO12, and GPIO15 remain unused on Rev A because they are
-strapping pins and provide little benefit here. GPIO6 through GPIO11 are used
+GPIO2, GPIO5, GPIO12, and GPIO15 remain unused on Rev A because they are
+strapping pins. GPIO4 is also unused, but is not one of the five documented
+boot-strapping GPIOs. GPIO0 is the fifth strapping pin and is used for BOOT.
+See the [Espressif schematic checklist](https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32/schematic-checklist.html).
+GPIO6 through GPIO11 are used
 internally by the WROOM module flash and are unavailable.
 
 ## RF selection sequence
@@ -38,6 +41,8 @@ internally by the WROOM module flash and are unavailable.
 ```text
 CC1101 SIDLE
 wait for MARCSTATE == IDLE
+RF_SW0/RF_SW1 = 00 (isolate)
+wait >= 10 us
 RF_SW0/RF_SW1 = target truth-table value
 wait >= 10 us
 write target-band register profile
@@ -46,3 +51,6 @@ wait for calibration completion
 enter RX only when requested
 ```
 
+This is a future implementation sequence, not an available bring-up command.
+The current firmware never leaves the isolated state. Final switch timing and
+break-before-make behavior must be checked against the chosen RF hardware.
