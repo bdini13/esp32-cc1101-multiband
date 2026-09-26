@@ -1,72 +1,91 @@
-# Regeneration and verification
+# A3 regeneration and verification
 
-Run from the project root. These commands regenerate design files, so preserve
-any manual KiCad edits first. The Python generators are the editable source for
-this checkpoint; `netlist.yaml` is only a human-readable architecture summary.
+Use KiCad 10.0.6 and its matching `pcbnew` Python, plus a separate Python
+environment containing `kicad-sch-api==0.5.6` from requirements-eda.txt.
+Set KICAD_CLI, KICAD_PYTHON, SCHEMATIC_PYTHON, KICAD_SYMBOL_DIR and
+KICAD_FP_ROOT to your installation. Do not use system Python for pcbnew
+unless that installation provides it.
 
-The A2 checkpoint used KiCad 10.0.6, its bundled `pcbnew` Python, and
-`kicad-sch-api==0.5.6`. Install the schematic dependency from
-`requirements-eda.txt` into a separate environment. Set the executables and
-library paths below for your installation; the macOS system-wide paths are
-examples. On Linux, use a Python interpreter with the KiCad `pcbnew` module.
-`generate_pcb.py` honors `KICAD_FP_ROOT` and otherwise detects common paths.
+## Which board is which?
+
+- `esp32-cc1101-multiband.kicad_pcb`: generated placement seed, intentionally unrouted.
+- `A3-critical-routes.kicad_pcb`: manually specified RF/clock/USB/power seed.
+- `routing/A3-before-local-finishing.kicad_pcb`: preserved imported router checkpoint.
+- `A3-routing-candidate.kicad_pcb`: current fully connected review candidate.
+
+Every PCB needs its same-basename .kicad_pro so clearances and minimum
+track/drill rules are loaded. Loading a checkpoint without its project can
+silently apply different defaults. No file is approved for ordering.
+
+## Rebuild the source capture
+
+Run from the repository root. These commands overwrite generated source
+capture/placement files. Preserve any manual edits first.
 
 ```sh
 set -e
-KICAD_CLI='/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli'
-KICAD_PYTHON='/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3'
-SCHEMATIC_PYTHON='.venv/bin/python'
-export KICAD_SYMBOL_DIR='/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols'
-export KICAD_FP_ROOT='/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints'
-
+"$SCHEMATIC_PYTHON" hardware/generate_symbols.py
+"$SCHEMATIC_PYTHON" hardware/generate_a3_footprints.py
 "$SCHEMATIC_PYTHON" hardware/generate_schematic.py
 "$KICAD_CLI" sch export netlist --format kicadxml --output hardware/esp32-cc1101-multiband.xml hardware/esp32-cc1101-multiband.kicad_sch
 "$KICAD_CLI" sch export netlist --format kicadsexpr --output hardware/esp32-cc1101-multiband.net hardware/esp32-cc1101-multiband.kicad_sch
+"$SCHEMATIC_PYTHON" tools/sanitize_netlist_paths.py
 "$KICAD_PYTHON" hardware/generate_pcb.py
-"$KICAD_PYTHON" hardware/configure_routing.py
+"$SCHEMATIC_PYTHON" hardware/configure_routing.py
 "$SCHEMATIC_PYTHON" hardware/generate_bom.py
-"$KICAD_PYTHON" hardware/audit_design.py
-"$KICAD_CLI" sch erc --format json --output reports/erc-A2.json hardware/esp32-cc1101-multiband.kicad_sch
-"$KICAD_CLI" pcb drc --format json --output reports/drc-A2-placement.json hardware/esp32-cc1101-multiband.kicad_pcb
-"$KICAD_CLI" sch export svg --output output/svg-A2/ hardware/esp32-cc1101-multiband.kicad_sch
+"$KICAD_PYTHON" hardware/route_critical.py
 ```
 
-Inspect the JSON findings, not just command exit codes. A2 placement DRC reports
-zero violations but 217 unconnected items. Incomplete routing is a release
-blocker. Do not generate Gerbers from this checkpoint for ordering.
+The finishing step shifts C60 0.4 mm north relative to the placement seed.
+It does not silently change the schematic or the preserved router checkpoint.
 
-## Separate routing experiment
+## Reproduce the final local finishing step
 
-Run `prepare_routing.py` with KiCad Python to export `tmp/A2-route-input.dsn`.
-It regenerates the project net classes and replaces all DSN classes with
-explicit membership and top-only restrictions for RF, analog and USB nets.
-Keep In1.Cu disabled for traces in the router. This does not configure controlled
-impedance or USB differential-pair routing.
+```sh
+"$KICAD_PYTHON" hardware/finish_routes.py hardware/routing/A3-before-local-finishing.kicad_pcb
+"$KICAD_CLI" pcb drc --format json --output reports/drc-A3-routing-candidate.json hardware/A3-routing-candidate.kicad_pcb
+"$KICAD_PYTHON" hardware/audit_connectivity.py hardware/esp32-cc1101-multiband.xml hardware/A3-routing-candidate.kicad_pcb reports/connectivity-A3.json
+"$KICAD_PYTHON" hardware/audit_routing.py
+```
 
-The local test used Freerouting 2.4.1, analytics/API/GUI disabled, layers
-`true,false,true,true`, 500 um copper-to-edge, 250 um hole clearance,
-150 um neck-down, fanout and optimizer disabled, five passes/two-minute limit.
-The final session is `tmp/A2-route-v6.ses`; this is a disposable experimental
-artifact, not a release source. It is not included in the public repository;
-rerun the router to produce a new session. The imported candidate itself is
-included for review. Downloaded application paths are machine-local.
+Expected: native DRC 0 violations / 0 unconnected items; parity passes.
+Never apply this checkpoint-specific finishing script to a different router
+output. It is not a generic autorouter.
 
-Run `import_routing.py tmp/A2-route-v6.ses` with KiCad Python. It writes only
-`A2-routing-candidate.kicad_pcb` and copies the matching project settings to
-its basename so native DRC uses the same rules. Then run `audit_routing.py`
-and native KiCad DRC on that candidate. Do not promote it based on router
-completion or a reduced airwire count alone. Preserve manual routing separately
-before running the placement generator, which intentionally recreates the board.
+For a new router run, use `prepare_routing.py hardware/A3-critical-routes.kicad_pcb`
+with KiCad Python. It exports `tmp/A3-route-input.dsn`. The A3 experiment used
+Freerouting 2.4.1, In1 disabled for traces, minimum neck 0.15 mm, ordinary
+via 0.60/0.30 mm, 0.50 mm copper-to-edge and 0.25 mm hole clearance.
+RF/analog/USB are top-only except the already locked USB connector crossover.
+Preserve all critical routes; a new session requires fresh finishing/review.
+Import with `import_routing.py tmp/new-session.ses hardware/A3-critical-routes.kicad_pcb`.
+The shipped final candidate, not a claim of deterministic autorouting, is the
+review artifact.
 
-For renders, pass `--define-var KICAD10_3DMODEL_DIR=.../SharedSupport/3dmodels`
-to `kicad-cli pcb render`. Use `--rotate '330,0,20'` for the current angled
-view. Missing exact SMA/custom-RF models are documented in the update report.
+## Recheck and reproduce firmware
 
-Firmware compilation (with PlatformIO installed): `pio run -d firmware/bringup`.
-No board is connected or flashed by this build command.
+```sh
+"$KICAD_PYTHON" hardware/audit_design.py
+"$KICAD_PYTHON" tools/test_connectivity.py
+"$SCHEMATIC_PYTHON" tools/test_firmware.py
+"$SCHEMATIC_PYTHON" tools/test_preflight.py
+"$SCHEMATIC_PYTHON" tools/engineering_budget.py
+pio run -d firmware/bringup
+"$SCHEMATIC_PYTHON" tools/preflight.py --kicad-cli "$KICAD_CLI" --kicad-python "$KICAD_PYTHON" --output reports/preflight-A3.json
+```
 
-Host checks: `python3 tools/test_firmware.py` and `python3 tools/test_preflight.py`.
-For fresh ERC/candidate DRC plus explicit order blockers, run
-`python3 tools/preflight.py --kicad-cli "$KICAD_CLI" --output reports/preflight-A2.json`.
-Exit 2 means blocked, not a tool crash. No ordering/fabrication action is performed.
-See the [checkpoint report](../reports/overnight-checkpoint-2026-09-23.md) for scope.
+Run the checks independently: artifact audit currently exits 1 because the
+retained 3.5 mm crystal pin-10 screening target fails (actual 4.478 mm).
+Preflight exits 2: that screening failure plus six pending review categories.
+Do not change a threshold or mark a human review approved to make checks green.
+Firmware tests/build are host-only; no hardware is flashed by these commands.
+
+## Design images
+
+Use `kicad-cli sch export svg` for the schematic and `pcb export svg` with
+`--layers F.Cu,Edge.Cuts --page-size-mode 2 --exclude-drawing-sheet --mode-single`
+for the top routing view. Use `pcb render --rotate '330,0,20'` and set
+`--define-var KICAD10_3DMODEL_DIR=...` for the 3D image. These are real KiCad
+renders, not product photos. USB/SMA/custom-IC 3D bodies are incomplete.
+
+No Gerbers, purchase orders or paid supplier submissions are generated here.

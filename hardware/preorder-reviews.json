@@ -1,11 +1,11 @@
 {
-  "revision": "A2",
+  "revision": "A3",
   "reviews": [
-    {"id": "power", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Resolve LDO thermal margin, power widths, USB current availability and startup budget."},
-    {"id": "rf", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Approve low-band switch solution, matching topology and RF/clock layout for prototype testing."},
+    {"id": "power", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Review AP63203 buck, DC-biased capacitance, USB current/descriptor/J4 sequencing, narrow branch traces, back-powering and thermal test plan."},
+    {"id": "rf", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Approve PE42442 mapping, matching topology and RF/clock layout for prototype tuning; explicitly review the crystal pin-10 distance screening failure."},
     {"id": "impedance", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Confirm fabricator stackup, RF impedance, USB differential geometry and uninterrupted return paths."},
     {"id": "parts", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Approve exact parts, tolerances, ratings, sourcing and assembly substitutions."},
-    {"id": "mechanical", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Check connector drawings, SMA vertical fit, antenna keepout, solder/paste and assembly orientation."},
+    {"id": "mechanical", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Check connector drawings, SMA vertical fit, antenna keepout, solder/paste and orientation. Require resin-filled/copper-capped vias at C21 (46.5,18.9) and U5 EP (16,19.4), plus DFM review of all pad-adjacent vias."},
     {"id": "independent", "status": "pending", "reviewer": "", "evidence": "", "requirement": "Obtain independent human electrical/RF review of the exact candidate and documented prototype risks."}
   ]
 }

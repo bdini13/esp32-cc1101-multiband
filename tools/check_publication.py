@@ -31,20 +31,23 @@ def main():
             if target and not (p.parent / target).exists():
                 problems.append(f'Broken local link in {name}: {target}')
     audit = json.loads((ROOT / 'reports/design-audit.json').read_text())
-    assert audit['status'] == 'PASS'
-    assert len(audit['checks']) == 115 and all(c['pass'] for c in audit['checks'])
-    for report, unconnected in [('drc-A2-placement.json', 217), ('drc-A2-routing-candidate.json', 23)]:
+    # Publication integrity is not engineering approval. Retain the visible
+    # crystal screening failure; never change its threshold to obtain green.
+    failures=[c['check'] for c in audit['checks'] if not c['pass']]
+    assert failures == ['CC1101 crystal pin 10 within 3.5 mm'], failures
+    for report, unconnected in [('drc-A3-routing-candidate.json', 0)]:
         data = json.loads((ROOT / 'reports' / report).read_text())
         assert len(data['violations']) == 0, report
         assert len(data['unconnected_items']) == unconnected, report
     with (ROOT / 'hardware/bom-draft.csv').open() as f:
         rows = list(csv.DictReader(f))
-    assert sum(int(r['Qty per board']) for r in rows) == 81
-    assert sum(r['Status'] == 'VERIFY_STOCK_AND_ASSEMBLY' for r in rows) == 63
-    assert sum(r['Status'] == 'SELECT_EXACT_PART' for r in rows) == 18
+    assert all(r['Proposed part'].strip() for r in rows if int(r['Qty per board'])>0)
+    assert not json.loads((ROOT/'reports/connectivity-A3.json').read_text())
+    preflight=json.loads((ROOT/'reports/preflight-A3.json').read_text())
+    assert preflight['revision']=='A3' and preflight['status']=='BLOCKED'
     if problems:
         raise SystemExit('\n'.join(problems))
-    print(f'PASS: {len(tracked)} tracked files; Markdown links and published A2 counts checked.')
+    print(f'PASS: {len(tracked)} tracked files; Markdown links and published A3 evidence checked.')
     print('This is not a secret-scanning guarantee, license opinion or engineering approval.')
 
 

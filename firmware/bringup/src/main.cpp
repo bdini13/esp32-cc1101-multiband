@@ -1,12 +1,18 @@
 #include <Arduino.h>
 #include <SPI.h>
 #include "radio_diagnostics.h"
+#include "rf_boot.h"
 
 namespace Pins {
 constexpr uint8_t kSclk = 18, kMiso = 19, kMosi = 23, kChipSelect = 21;
 constexpr uint8_t kGdo0 = 26, kGdo2 = 27;
-constexpr uint8_t kRfSwitch0 = 32, kRfSwitch1 = 33, kStatusLed = 25;
+constexpr uint8_t kStatusLed = 25;
 }
+
+struct RfPins {
+  void high(uint8_t pin) { digitalWrite(pin,HIGH); }
+  void output(uint8_t pin) { pinMode(pin,OUTPUT); }
+};
 
 SPIClass radioSpi(VSPI);
 struct RadioHal {
@@ -32,22 +38,20 @@ struct RadioHal {
   uint32_t nowUs() { return micros(); }
   void delayUs(uint32_t value) { delayMicroseconds(value); }
   void isolateRf() {
-    digitalWrite(Pins::kRfSwitch0, LOW);
-    digitalWrite(Pins::kRfSwitch1, LOW);
+    RfPins pins;
+    RfBoot::isolate(pins);
     delayMicroseconds(10);
   }
 };
 
 void setup() {
-  // Preload latches before enabling outputs. External pulldowns still protect
+  // A3 ONLY: PE42442 V3/V2/V1=111 is all-off. External pullups protect
   // RF selection during reset/boot, before firmware has executed.
   digitalWrite(Pins::kChipSelect, HIGH);
   pinMode(Pins::kChipSelect, OUTPUT);
-  digitalWrite(Pins::kRfSwitch0, LOW);
-  digitalWrite(Pins::kRfSwitch1, LOW);
+  RfPins rfPins;
+  RfBoot::begin(rfPins);
   digitalWrite(Pins::kStatusLed, LOW);
-  pinMode(Pins::kRfSwitch0, OUTPUT);
-  pinMode(Pins::kRfSwitch1, OUTPUT);
   pinMode(Pins::kStatusLed, OUTPUT);
   pinMode(Pins::kGdo0, INPUT);
   pinMode(Pins::kGdo2, INPUT);
@@ -58,7 +62,7 @@ void setup() {
 
   Serial.begin(115200);
   delay(300);
-  Serial.println("ESP32 + CC1101 A2 digital diagnostics v2");
+  Serial.println("ESP32 + CC1101 A3 digital diagnostics v3 (PE42442)");
   radioSpi.begin(Pins::kSclk, Pins::kMiso, Pins::kMosi, Pins::kChipSelect);
   RadioHal hal;
   Diagnostics::Radio<RadioHal> radio(hal);

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate explicit A2 project routing classes. No rule-error exclusions."""
+"""Generate explicit A3 project routing classes. No rule-error exclusions."""
 import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
@@ -33,7 +33,7 @@ def main():
             cls = "RF_LOCAL"
         elif name in ANALOG:
             cls = "ANALOG_LOCAL"
-        elif name in ("/+3V3", "/+3V3_RF", "/VBUS_IN", "/VBUS_PROTECTED"):
+        elif name in ("/+3V3", "/+3V3_RF", "/+3V3_USB", "/VBUS_IN", "/VBUS_PROTECTED", "/VBUS_SWITCHED", "/BUCK_SW"):
             cls = "POWER"
         elif name in ("/USB_DP", "/USB_DM", "/USB_DP_CONN", "/USB_DM_CONN"):
             cls = "USB"

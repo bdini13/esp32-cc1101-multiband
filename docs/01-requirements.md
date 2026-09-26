@@ -1,6 +1,6 @@
 # Rev A Requirements
 
-Status: initial requirements captured 2026-09-20; A1 corrections 2026-09-22.
+Status: initial requirements captured 2026-09-20; updated for A3 2026-09-26.
 These are target requirements, not assertions that the draft already satisfies them.
 
 ## Functional requirements
@@ -22,14 +22,15 @@ These are target requirements, not assertions that the draft already satisfies t
 
 - USB input: nominal 5 V.
 - Logic and radio rail: 3.3 V.
-- 3.3 V regulator rating: at least 1 A with thermal margin for expected load.
-  A1 uses AP7361C-33E-13; actual continuous board current remains limited by
-  USB source capability, fuse derating and measured thermal behavior.
+- A3 uses AP63203 fixed 3.3 V buck, rated 2 A as an IC, not as a board.
+  Actual board current is limited by USB source capability, voltage drop,
+  fuse derating and measured thermal behavior; full simultaneous Wi-Fi/RF
+  load is not yet approved. Configure the USB descriptor with J4 open first.
 - USB-C CC1 and CC2: independent 5.1 kohm pull-down resistors.
 - USB D+ and D-: ESD protected and routed as a differential pair.
 - ESP32 EN: RC power-on reset plus USB-UART automatic reset control.
 - CC1101: dedicated local decoupling at every supply pin.
-- RF switches: hardware pulldowns select the isolated `00` state during boot;
+- RF switches: five 10 kohm pullups select the isolated `111` state during boot;
   firmware must keep the CC1101 idle during path changes.
 
 ## Mechanical requirements
@@ -52,15 +53,15 @@ These are target requirements, not assertions that the draft already satisfies t
 - Firmware band API: `315`, `433`, `868`, or `915`.
 - Selecting a band first idles the radio, then changes the RF switches, waits
   for settling, loads band-specific CC1101 registers, and calibrates.
-- Switch state `00` is the intentional all-paths-isolated safe state.
+- A3 switch state `111` is the all-paths-isolated safe state; `000` selects RF4.
 - Transmit operations require an explicit region profile and compatible
   antenna confirmation in production firmware.
 
 ## Prototype quantity
 
 - Five assembled Rev A boards.
-- Order at least two spare bare PCBs if the fabricator panel economics permit.
-- Purchase one 315 MHz, one 433 MHz, and one 868/915 MHz antenna per board.
+- Optional spare boards and band-appropriate antennas need a separately
+  approved quote; no purchase is authorized by this requirements document.
 
 ## Explicitly out of scope for Rev A
 

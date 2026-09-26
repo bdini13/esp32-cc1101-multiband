@@ -13,12 +13,16 @@ does not close a phase; all acceptance gates require human review.
 
 ## 2. Pre-order engineering — in progress
 
-- [ ] Finish 23 candidate unconnected items; recheck the whole layout.
+- [x] Finish candidate connectivity: A3 native DRC has zero violations/unconnected items.
 - [ ] Manually review RF, oscillator, USB pair, power and ground returns.
-- [ ] Resolve 35 sub-target power-width segments and regulator thermal budget.
+- [x] Replace the thermally constrained LDO with a buck and explicitly route main power.
+- [ ] Approve branch-current/voltage-drop and buck load-step/thermal testing.
 - [ ] Confirm USB current availability and startup behavior.
 - [ ] Confirm fabricator stackup and 50-ohm RF / 90-ohm USB geometry.
-- [ ] Select 18 remaining populated BOM positions; verify all sourcing.
+- [x] Propose exact parts for all populated BOM positions.
+- [ ] Verify current stock, authorized sourcing and assembler substitutions.
+- [ ] Review the longer crystal connection; measure startup and frequency on prototypes.
+- [ ] Confirm filled/capped via processing at C21 and the USB bridge exposed pad.
 - [ ] Review connectors, solder/paste, RF pin mapping and assembly orientation.
 - [ ] Obtain independent electrical/RF review; repeat ERC/DRC/audits.
 

@@ -41,5 +41,11 @@ class PreflightTests(unittest.TestCase):
         self.reviews += [self.reviews[0]]
         self.assertIn('Duplicate human review IDs', self.result())
 
+    def test_artifact_failure_still_blocks_clean_native_checks(self):
+        artifact={'checks':[{'pass':True},{'pass':False}]}
+        counts, blockers=evaluate(self.erc,self.drc,self.bom,self.reviews,artifact)
+        self.assertEqual(counts['artifact_failed_checks'],1)
+        self.assertIn('artifact_failed_checks: 1',blockers)
+
 if __name__ == '__main__':
     unittest.main()

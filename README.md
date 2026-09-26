@@ -4,7 +4,7 @@ A custom USB-C development board combining an **ESP32-WROOM-32E-N8** with an
 integrated **CC1101** sub-GHz radio, software-selected RF paths, and a vertical
 SMA antenna connector at the opposite end from USB-C.
 
-**Rev A2 · Work in progress · Not ready to manufacture or sell**
+**Rev A3 · Fully connected review candidate · Not approved to manufacture or sell**
 
 The aim is to replace a separate ESP32 board, CC1101 breakout and jumper wires
 with one purpose-built PCB. The first intended build is **five assembled
@@ -13,32 +13,32 @@ product sales are a future option, not a launch announcement.
 
 ## Current design
 
-![A2 angled KiCad placement render, USB area on the left and SMA footprint on the right](output/placement-A2-3d.png)
+![A3 angled KiCad routed-board render, USB area left and SMA footprint right](output/routing-A3-3d.png)
 
-*KiCad placement render—not a photograph of a built board. USB, SMA and some
+*KiCad design render—not a photograph of a built board. USB, SMA and some
 RF parts lack complete 3D bodies. Their absence in the image does not mean
 they were removed from the design.*
 
 <details>
 <summary>Top view and experimental routing</summary>
 
-![Top-side A2 component placement](output/placement-A2-top.png)
-
-![A2 top-copper routing experiment with unfinished connections](output/routing-A2-top.svg)
+![A3 top-copper routing candidate](output/routing-A3-top.svg)
 
 *The routing image is a separate experimental candidate, not the main placement
 file or a fabrication package. Bottom and inner routes are not shown here.*
 
 </details>
 
-[Schematic SVG](output/svg-A2/esp32-cc1101-multiband.svg) ·
-[Latest design report](reports/design-updates-A2-2026-09-22.md) ·
+[Schematic SVG](output/svg-A3/esp32-cc1101-multiband.svg) ·
+[Latest design report](reports/prototype-review-A3-2026-09-26.md) ·
 [Draft BOM](hardware/bom-draft.csv) · [Roadmap](ROADMAP.md)
 
-Latest work: [2026-09-23 checkpoint](reports/overnight-checkpoint-2026-09-23.md) —
-safer digital diagnostics, 17 host fault-injection tests, six preflight tests,
-and a fresh [pre-order blocker report](reports/preflight-A2.json). Hardware
-remains A2; this update does not complete routing or approve manufacturing.
+Latest work: A3 replaces the power supply and RF switches, completes routed
+connectivity, adds safe RF boot sequencing and proposes all populated parts.
+See [engineering decisions and first-power instructions](docs/06-A3-prototype-engineering.md)
+and the [pre-order blocker report](reports/preflight-A3.json). One retained
+crystal-placement screening check fails; independent/supplier reviews remain
+pending. No hardware has been tested. Do not order historical A2 files.
 
 ## Building blocks and design inputs
 
@@ -91,9 +91,10 @@ This is a different implementation, not an endorsed M5Stack product.
 |---|---|
 | USB-C | HRO TYPE-C-31-M-12, USB 2.0 connection |
 | USB-to-UART | Silicon Labs CP2102N-A02-GQFN24 |
-| 3.3 V regulator | AP7361C-33E-13; thermal capacity under review |
+| 3.3 V regulator | AP63203WU-7 buck, XAL4030 4.7 uH inductor |
+| USB startup / UART isolation | TPS22918, SN74LVC2G125; J4 ships unjumpered |
 | Radio reference | Abracon ABM8, 26 MHz; load requires validation |
-| RF selection | Two Infineon BGS13SN8 SP3T switches, GPIO-controlled |
+| RF selection | Two pSemi PE42442A-Z SP4T switches; three paths used |
 | RF balun | B0310J50100AHF |
 | Antenna connector | Amphenol 132134, vertical standard SMA female, 50 ohm |
 
@@ -106,7 +107,7 @@ approval; the BOM is not an approved shopping list.
 | Feature | Planned behavior | Status |
 |---|---|---|
 | Four target bands | 315 / 433 / 868 / 915 MHz, one selected at a time | Not RF-validated |
-| Software band switching | GPIO-operated RF switches; no DIP switches | Circuit and helper code drafted |
+| Software band switching | GPIO-operated RF switches; no DIP switches | Circuit present; firmware isolation only |
 | Three RF branches | Dedicated 315 and 433 paths; shared 868/915 path | Matching, loss and isolation unmeasured |
 | Single sub-GHz SMA | Vertical connector opposite USB-C | Placed; mechanical approval pending |
 | USB-C power/programming | 5 V input, USB-to-UART flashing/logging | Captured; not bench-tested |
@@ -126,33 +127,37 @@ guaranteed protocol compatibility in this revision.
 
 ## What has actually been checked?
 
-Snapshot: **2026-09-22**, KiCad 10.0.6. Design-file checks, not lab results.
+Snapshot: **2026-09-26**, KiCad 10.0.6. Design-file checks, not lab results.
 
 | Check | Result |
 |---|---|
 | Schematic ERC | 0 reported violations |
-| Main placement DRC | 0 reported violations; **217 unconnected items** |
-| Targeted artifact checks | 115 / 115 passing |
-| Separate routing candidate DRC | 0 reported violations; **23 unconnected items** |
-| Candidate power routing | 35 segments below the 0.40 mm target need review |
-| Parts selection | 63 / 81 populated positions have proposed exact parts |
+| Main placement seed DRC | 0 violations; 283 unconnected items (not the routed board) |
+| Targeted artifact checks | 179 / 180; crystal pin-10 distance screening fails |
+| Separate A3 routed candidate DRC | **0 violations; 0 unconnected items** |
+| Fresh schematic / routed PCB comparison | Every numbered pad net, value and footprint name matches |
+| Layer constraints | No signal traces on In1; RF/clock top-only; documented USB crossover |
+| Candidate power routing | Main rails explicitly routed; 62 narrower branch/neck segments flagged for review |
+| Parts selection | **94 / 94** populated positions have proposed exact parts; sourcing unapproved |
 | Physical boards tested | **None** |
 
-Zero reported violations does not mean a working, connected or compliant board.
-Manual RF/USB/clock routing, power/return-path review and impedance design remain
-unfinished. The regulator has inadequate screening margin for an assumed
-continuous 500 mA load. Low-band switch performance, shared upper-band matching
-and crystal startup/frequency accuracy remain unverified.
+Zero reported violations does not prove working or compliant hardware. A3's
+power redesign addresses the earlier LDO heat problem and the new switches
+cover the target bands in their specified frequency range. Actual power
+sequencing, temperature, impedance, matching and crystal startup/frequency
+remain unmeasured. C21 and U5 contain in-pad vias requiring filled/capped
+processing; supplier DFM confirmation is mandatory. USB power must be
+configured before fitting J4, and full combined Wi-Fi/radio load is not approved.
 
 [Raw reports](reports/) · [Verification checklist](docs/04-verification-plan.md) ·
-[Routing, thermal and RF validation plan](docs/05-A2-routing-and-validation.md)
+[Power, routing and RF validation plan](docs/06-A3-prototype-engineering.md)
 
 ## Roadmap
 
 1. **Design capture — substantially complete:** schematic, placement, draft
    BOM, local footprints, bring-up firmware and automated checks.
-2. **Finish layout — in progress:** critical routing, full connectivity, exact
-   parts, power architecture decision, mechanical and independent review.
+2. **Prototype review — in progress:** routed connectivity and proposed parts
+   complete; crystal, power, mechanical, supplier and independent review open.
 3. **Five-board build — not ordered:** reviewed fabrication and assembly files,
    then separately approved prototype procurement.
 4. **Bench and RF tuning — not started:** power/temperature, USB, crystal,
@@ -168,7 +173,7 @@ There is no release date, sales price, preorder or claim of certification.
 ## Open the project
 
 Open `hardware/esp32-cc1101-multiband.kicad_pro` in **KiCad 10** for the main
-placement and schematic. Open `hardware/A2-routing-candidate.kicad_pro`
+placement seed and schematic. Open `hardware/A3-routing-candidate.kicad_pro`
 separately for the unapproved routing experiment. Do not order either one.
 
 Python generators are the editable source for this checkpoint. **Regenerating

@@ -3,6 +3,7 @@
 from pathlib import Path
 import re
 import json
+import sys
 import xml.etree.ElementTree as ET
 import pcbnew
 import configure_routing
@@ -13,9 +14,10 @@ ROOT = HERE.parent
 
 def main():
     configure_routing.main()
-    board = pcbnew.LoadBoard(str(HERE / "esp32-cc1101-multiband.kicad_pcb"))
+    source = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / "esp32-cc1101-multiband.kicad_pcb"
+    board = pcbnew.LoadBoard(str(source))
     data = json.loads((HERE / "esp32-cc1101-multiband.kicad_pro").read_text())["net_settings"]
-    out = ROOT / "tmp" / "A2-route-input.dsn"
+    out = ROOT / "tmp" / "A3-route-input.dsn"
     if not pcbnew.ExportSpecctraDSN(board, str(out)):
         raise RuntimeError("DSN export failed")
     text = out.read_text()

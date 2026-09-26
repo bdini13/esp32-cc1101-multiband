@@ -12,6 +12,7 @@ from pathlib import Path
 
 import kicad_sch_api as ksa
 from kicad_sch_api.library.cache import get_symbol_cache
+from kicad_sch_api.core.pin_utils import get_component_pin_info
 from generate_symbols import main as generate_symbols
 
 
@@ -31,7 +32,17 @@ def add(sch, lib_id, ref, value, x, y, footprint=None, **props):
 
 
 def label(sch, ref, pin, net):
-    sch.add_label(net, pin=(ref, str(pin)), size=1.0)
+    # Explicit outward stubs keep net names outside IC bodies. The library's
+    # pin-label convenience method places names over the pin names in KiCad 10.
+    comp=sch.components.get(ref)
+    pos, angle=get_component_pin_info(comp,str(pin))
+    length=3.81 if ref.startswith(('U','J','B','Y')) else 0
+    if ref=='J1': length=0  # Dense symbol has intersecting alternate-pin stubs.
+    dx,dy={0:(-length,0),90:(0,length),180:(length,0),270:(0,-length)}[int(angle)%360]
+    endpoint=(pos.x+dx,pos.y+dy)
+    if length: sch.add_wire((pos.x,pos.y),endpoint)
+    sch.labels.add(net,endpoint,rotation=0,size=.85,
+                   justify_h='right' if dx<0 else 'left',justify_v='bottom')
 
 
 def labels(sch, ref, mapping):
@@ -56,8 +67,8 @@ def main():
     sch.set_paper_size("A2")
     sch.set_title_block(
         title="ESP32-WROOM-32E + CC1101 Multiband",
-        date="2026-09-22",
-        rev="A2 - ROUTING DRAFT",
+        date="2026-09-26",
+        rev="A3 DRAFT",
         company="Personal prototype",
         comments={
             1: "NOT FOR MANUFACTURE - RF footprints/layout/tuning pending verification",
@@ -117,7 +128,7 @@ def main():
          "4": "USB_DM", "2": "GND", "5": "VBUS_PROTECTED"},
     )
     passive_to_nets(
-        sch, "Device:Polyfuse", "F1", "500mA PTC", 95, 35,
+        sch, "Device:Polyfuse", "F1", "750mA PTC", 95, 35,
         "VBUS_IN", "VBUS_PROTECTED", "Fuse:Fuse_1206_3216Metric"
     )
     passive_to_nets(
@@ -125,22 +136,43 @@ def main():
         "VBUS_PROTECTED", "GND", "Diode_SMD:D_SOD-882"
     )
     add(
-        sch, "Regulator_Linear:AP7361C-33E", "U6", "AP7361C-33E-13",
-        145, 45, "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
+        sch, "ESP32_CC1101:AP63203", "U6", "AP63203WU-7",
+        145, 45, "ESP32_CC1101_RF:Diodes_TSOT26"
     )
-    labels(sch, "U6", {"1": "VBUS_PROTECTED", "2": "GND",
-                        "3": "+3V3"})
+    labels(sch, "U6", {"1": "+3V3", "2": "VBUS_SWITCHED", "3": "VBUS_SWITCHED",
+                        "4": "GND", "5": "BUCK_SW", "6": "BUCK_BST"})
+    passive_to_nets(sch, "Device:L", "L1", "4.7uH XAL4030", 170, 35,
+                    "BUCK_SW", "+3V3", "Inductor_SMD:L_Coilcraft_XAL4030-XXX")
+    passive_to_nets(sch, "Device:C", "C13", "22uF 25V", 180, 65,
+                    "+3V3", "GND", "Capacitor_SMD:C_1206_3216Metric")
+    passive_to_nets(sch, "Device:C", "C14", "100nF", 170, 50,
+                    "BUCK_BST", "BUCK_SW", "Capacitor_SMD:C_0402_1005Metric")
+    add(sch, "ESP32_CC1101:TPS22918", "U7", "TPS22918DBVR", 430, 45,
+        "Package_TO_SOT_SMD:SOT-23-6")
+    labels(sch, "U7", {"1":"VBUS_PROTECTED", "2":"GND", "3":"MAIN_POWER_EN",
+                        "4":"POWER_SLEW", "5":"VBUS_SWITCHED", "6":"VBUS_SWITCHED"})
+    passive_to_nets(sch, "Device:C", "C70", "10nF", 460, 40,
+                    "POWER_SLEW", "GND", "Capacitor_SMD:C_0402_1005Metric")
+    passive_to_nets(sch, "Device:R", "R70", "10k", 460, 55,
+                    "USB_ACTIVE", "GND", "Resistor_SMD:R_0603_1608Metric")
+    passive_to_nets(sch, "Device:R", "R71", "100k", 460, 70,
+                    "MAIN_POWER_EN", "GND", "Resistor_SMD:R_0603_1608Metric")
+    add(sch, "Connector_Generic:Conn_01x03", "J4", "POWER ARM AUTO / EXT", 430, 83,
+        "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
+    labels(sch, "J4", {"1":"USB_ACTIVE", "2":"MAIN_POWER_EN", "3":"+3V3_USB"})
+    sch.add_text("J4: ship UNJUMPERED. Configure CP2102N for 500mA before AUTO (1-2).\nEXT (2-3) only with a known adequate 5V source; no USB power negotiation.", (405, 105), size=1)
     passive_to_nets(
-        sch, "Device:C", "C1", "10uF 10V", 130, 65,
-        "VBUS_PROTECTED", "GND", "Capacitor_SMD:C_0805_2012Metric"
+        sch, "Device:C", "C1", "22uF 25V", 130, 65,
+        "VBUS_SWITCHED", "GND", "Capacitor_SMD:C_1206_3216Metric"
     )
     passive_to_nets(
-        sch, "Device:C", "C2", "22uF 6.3V", 160, 65,
-        "+3V3", "GND", "Capacitor_SMD:C_0805_2012Metric"
+        sch, "Device:C", "C2", "22uF 25V", 160, 65,
+        "+3V3", "GND", "Capacitor_SMD:C_1206_3216Metric"
     )
     for ref, net, x in (("PWR1", "GND", 135),
                         ("PWR2", "VBUS_PROTECTED", 145),
-                        ("PWR3", "+3V3_RF", 155)):
+                        ("PWR3", "+3V3_RF", 155), ("PWR4", "+3V3_USB", 165),
+                        ("PWR5", "+3V3", 175)):
         add(sch, "power:PWR_FLAG", ref, "PWR_FLAG", x, 82, None)
         label(sch, ref, "1", net)
 
@@ -155,35 +187,42 @@ def main():
         "U5",
         {
             "2": "GND", "25": "GND", "3": "USB_DP", "4": "USB_DM",
-            "5": "+3V3", "6": "+3V3", "7": "+3V3",
+            "5": "+3V3_USB", "6": "+3V3_USB", "7": "VBUS_PROTECTED",
             "8": "USB_VBUS_SENSE", "9": "CP2102_RST_N",
-            "19": "AUTO_RTS_N", "20": "UART_TX_ESP", "21": "UART_RX_ESP",
+            "15": "USB_ACTIVE", "19": "AUTO_RTS_N", "20": "UART_RX_USB", "21": "UART_TX_USB",
             "23": "AUTO_DTR_N",
         },
     )
-    for pin in ("1", "10", "11", "12", "13", "14", "15", "16", "17", "18", "22", "24"):
+    for pin in ("1", "10", "11", "12", "13", "14", "16", "17", "18", "22", "24"):
         nc(sch, "U5", pin)
     passive_to_nets(
         sch, "Device:C", "C3", "4.7uF", 265, 35,
-        "+3V3", "GND", "Capacitor_SMD:C_0603_1608Metric"
+        "+3V3_USB", "GND", "Capacitor_SMD:C_0603_1608Metric"
     )
     passive_to_nets(
         sch, "Device:C", "C4", "100nF", 265, 47,
-        "+3V3", "GND", "Capacitor_SMD:C_0402_1005Metric"
+        "+3V3_USB", "GND", "Capacitor_SMD:C_0402_1005Metric"
     )
     passive_to_nets(
         sch, "Device:R", "R3", "1k", 265, 60,
-        "CP2102_RST_N", "+3V3", "Resistor_SMD:R_0603_1608Metric"
+        "CP2102_RST_N", "+3V3_USB", "Resistor_SMD:R_0603_1608Metric"
     )
-    # CP2102N Figure 2.3: all supply pins on the external 3.3 V rail.
-    # One 100 nF + 4.7 uF pair per supply pin, physically local on the PCB.
+    # CP2102N Figure 2.1: internal regulator powers only USB-side logic.
+    # VIO shares VDD bulk C3; a second bulk capacitor is not fitted at VIO.
     for ref, value, x, y, fp in (
         ("C6", "100nF", 365, 35, "Capacitor_SMD:C_0402_1005Metric"),
         ("C7", "100nF", 380, 35, "Capacitor_SMD:C_0402_1005Metric"),
-        ("C8", "4.7uF", 365, 50, "Capacitor_SMD:C_0603_1608Metric"),
+        ("C8", "DNP", 365, 50, "Capacitor_SMD:C_0603_1608Metric"),
         ("C9", "4.7uF", 380, 50, "Capacitor_SMD:C_0603_1608Metric"),
     ):
-        passive_to_nets(sch, "Device:C", ref, value, x, y, "+3V3", "GND", fp)
+        passive_to_nets(sch, "Device:C", ref, value, x, y,
+                        "VBUS_PROTECTED" if ref in ("C7", "C9") else "+3V3_USB", "GND", fp)
+    add(sch, "ESP32_CC1101:SN74LVC2G125", "U8", "SN74LVC2G125DCTR", 430, 145,
+        "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm")
+    labels(sch, "U8", {"1":"GND", "2":"UART_TX_USB", "3":"UART_RX_USB", "4":"GND",
+                        "5":"UART_TX_ESP", "6":"UART_RX_ESP", "7":"GND", "8":"+3V3"})
+    passive_to_nets(sch, "Device:C", "C71", "100nF", 460, 145,
+                    "+3V3", "GND", "Capacitor_SMD:C_0402_1005Metric")
     passive_to_nets(sch, "Device:R", "R5", "22.1k 1%", 365, 70,
                     "VBUS_PROTECTED", "USB_VBUS_SENSE", "Resistor_SMD:R_0603_1608Metric")
     passive_to_nets(sch, "Device:R", "R6", "47.5k 1%", 380, 70,
@@ -213,7 +252,7 @@ def main():
                         "3": "ESP_IO0"})
 
     # --------------------------------------------------------------- ESP32
-    sch.add_text("ESP32-WROOM-32E", (20, 105), size=2.0)
+    sch.add_text("ESP32-WROOM-32E", (65, 105), size=2.0)
     add(
         sch, "RF_Module:ESP32-WROOM-32E", "U1", "ESP32-WROOM-32E-N8",
         80, 160, "RF_Module:ESP32-WROOM-32E"
@@ -226,13 +265,13 @@ def main():
             "7": "EXP_GPIO35", "8": "RF_SW0", "9": "RF_SW1",
             "10": "STATUS_LED", "11": "CC1101_GDO0", "12": "CC1101_GDO2",
             "13": "EXP_GPIO14", "16": "EXP_GPIO13", "25": "ESP_IO0",
-            "27": "EXP_GPIO16", "28": "EXP_GPIO17",
+            "26": "RF_DISABLE", "27": "RF_OUT0", "28": "RF_OUT1",
             "30": "SPI_SCLK", "31": "SPI_MISO", "33": "CC1101_CSN",
             "34": "UART_RX_ESP", "35": "UART_TX_ESP", "36": "EXP_GPIO22",
             "37": "SPI_MOSI", "[1,15,38,39]": "GND",
         },
     )
-    for pin in ("4", "5", "14", "23", "24", "26", "29"):
+    for pin in ("4", "5", "14", "23", "24", "29"):
         nc(sch, "U1", pin)
     passive_to_nets(
         sch, "Device:R", "R10", "10k", 125, 120,
@@ -255,15 +294,15 @@ def main():
         "ESP_IO0", "GND", "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
     )
     passive_to_nets(
-        sch, "Device:R", "R12", "1k", 125, 185,
+        sch, "Device:R", "R12", "330R 1%", 125, 185,
         "STATUS_LED", "STATUS_LED_A", "Resistor_SMD:R_0603_1608Metric"
     )
     passive_to_nets(
-        sch, "Device:LED", "D3", "STATUS BLUE", 145, 185,
+        sch, "Device:LED", "D3", "STATUS GREEN", 145, 185,
         "GND", "STATUS_LED_A", "LED_SMD:LED_0603_1608Metric"
     )
     passive_to_nets(
-        sch, "Device:R", "R13", "2.2k", 125, 198,
+        sch, "Device:R", "R13", "330R 1%", 125, 198,
         "+3V3", "POWER_LED_A", "Resistor_SMD:R_0603_1608Metric"
     )
     passive_to_nets(
@@ -277,8 +316,8 @@ def main():
     labels(
         sch, "J3",
         {"1": "+3V3", "2": "VBUS_PROTECTED", "3": "GND",
-         "4": "EXP_GPIO13", "5": "EXP_GPIO14", "6": "EXP_GPIO16",
-         "7": "EXP_GPIO17", "8": "EXP_GPIO22", "9": "EXP_GPIO34",
+         "4": "EXP_GPIO13", "5": "EXP_GPIO14", "6": "RF_OUT0",
+         "7": "RF_OUT1", "8": "EXP_GPIO22", "9": "EXP_GPIO34",
          "10": "EXP_GPIO35"},
     )
 
@@ -347,13 +386,18 @@ def main():
         "CC1101_XOSC_Q2", "GND", "Capacitor_SMD:C_0402_1005Metric"
     )
     passive_to_nets(
-        sch, "Device:R", "R31", "100k pulldown", 315, 215,
-        "RF_SW0", "GND", "Resistor_SMD:R_0603_1608Metric"
+        sch, "Device:R", "R31", "10k pullup", 315, 215,
+        "RF_SW0", "+3V3_RF", "Resistor_SMD:R_0603_1608Metric"
     )
     passive_to_nets(
-        sch, "Device:R", "R32", "100k pulldown", 335, 215,
-        "RF_SW1", "GND", "Resistor_SMD:R_0603_1608Metric"
+        sch, "Device:R", "R32", "10k pullup", 335, 215,
+        "RF_SW1", "+3V3_RF", "Resistor_SMD:R_0603_1608Metric"
     )
+    passive_to_nets(sch, "Device:R", "R33", "10k pullup", 355, 215,
+                    "RF_DISABLE", "+3V3_RF", "Resistor_SMD:R_0603_1608Metric")
+    for ref, net, x in (("R34", "RF_OUT0", 375), ("R35", "RF_OUT1", 395)):
+        passive_to_nets(sch, "Device:R", ref, "10k pullup", x, 215,
+                        net, "+3V3_RF", "Resistor_SMD:R_0603_1608Metric")
 
     # -------------------------------------------------------------- RF PATH
     sch.add_text("MULTIBAND RF PATH - REFERENCE VALUES; VNA TUNING REQUIRED",
@@ -393,35 +437,36 @@ def main():
     )
     passive_to_nets(
         sch, "Device:L", "L41", "6.8nH 5%", 88, 250,
-        "BALUN_M1", "BALUN_M2", "Inductor_SMD:L_0402_1005Metric"
+        "BALUN_M1", "RF_SWITCH_IN", "Inductor_SMD:L_0402_1005Metric"
     )
     passive_to_nets(
         sch, "Device:C", "C44", "1.2pF C0G", 88, 300,
-        "BALUN_M2", "GND", "Capacitor_SMD:C_0402_1005Metric"
-    )
-    passive_to_nets(
-        sch, "Device:R", "R40", "0R", 103, 250,
-        "BALUN_M2", "RF_SWITCH_IN", "Resistor_SMD:R_0402_1005Metric"
+        "RF_SWITCH_IN", "GND", "Capacitor_SMD:C_0402_1005Metric"
     )
 
     for ref, x in (("U3", 122), ("U4", 292)):
         add(
-            sch, "ESP32_CC1101:BGS13SN8", ref,
-            "BGS13SN8E6327XTSA1", x, 275,
-            "ESP32_CC1101_RF:Infineon_PG-TSNP-8-1",
+            sch, "ESP32_CC1101:PE42442", ref,
+            "PE42442A-Z", x, 275,
+            "ESP32_CC1101_RF:pSemi_PE42442_QFN24",
         )
-        # BGS13SN8 pin 2 is V2 and pin 3 is V1. Naming the nets SW0/SW1
-        # follows the M5Stack public schematic: SW0->V2 and SW1->V1.
-        labels(sch, ref, {"1": "+3V3_RF", "2": "RF_SW0",
-                          "3": "RF_SW1", "8": "GND"})
+        labels(sch, ref, {"16": "+3V3_RF", "17": "RF_SW0" if ref=="U3" else "RF_OUT0",
+                          "18": "RF_SW1" if ref=="U3" else "RF_OUT1",
+                          "19": "RF_DISABLE", "5": ref+"_RF4_TERM"})
+        for pin in (1,2,3,4,6,7,9,10,12,13,15,20,21,23,24,25):
+            label(sch, ref, pin, "GND")
+        passive_to_nets(sch, "Device:R", "R60" if ref=="U3" else "R61", "49.9R 1%", x, 350,
+                        ref+"_RF4_TERM", "GND", "Resistor_SMD:R_0402_1005Metric")
     for ref, x in (("C60", 115), ("C61", 280)):
         passive_to_nets(sch, "Device:C", ref, "100nF", x, 330,
                         "+3V3_RF", "GND", "Capacitor_SMD:C_0402_1005Metric")
 
-    labels(sch, "U3", {"6": "RF_SWITCH_IN", "5": "RF_315_IN",
-                        "7": "RF_433_IN", "4": "RF_868_915_IN"})
-    labels(sch, "U4", {"5": "RF_315_OUT", "7": "RF_433_OUT",
-                        "4": "RF868_B", "6": "RF_COMBINED"})
+    labels(sch, "U3", {"22": "RF_SWITCH_IN", "14": "RF_315_IN",
+                        "11": "RF_433_IN", "8": "RF_868_915_IN"})
+    # Reverse outer branches at the output switch so all RF routes can remain
+    # on the top layer without crossings. U4 has independent software controls.
+    labels(sch, "U4", {"8": "RF_315_OUT", "11": "RF_433_OUT",
+                        "14": "RF868_B", "22": "RF_COMBINED"})
 
     # 315 MHz branch: series L-L-L plus a series-L/shunt-C trap and DNP trim.
     passive_to_nets(sch, "Device:L", "L42", "10nH 5%", 145, 245,
@@ -485,7 +530,7 @@ def main():
     sch.add_text(
         "RF VALUES ABOVE ARE STARTING VALUES FROM M5STACK CAP CC1101 REV 0.3, NOT A TUNE CERTIFICATE.\n"
         "Do not order until custom RF footprints, placement, impedance geometry, and peer review are complete.",
-        (95, 340), size=1.15,
+        (380, 365), size=1.0,
     )
 
     # Board-level note.

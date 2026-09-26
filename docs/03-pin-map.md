@@ -1,56 +1,37 @@
-# ESP32 Pin Map
+# A3 ESP32 pin map
 
-## Assigned pins
-
-| ESP32 GPIO | Direction | Function | Boot-sensitive? |
-|---:|---|---|---|
-| 0 | Input | BOOT button / auto-program | Yes; required |
-| 1 | Output | UART0 TX to CP2102N | No |
-| 3 | Input | UART0 RX from CP2102N | No |
-| 18 | Output | CC1101 SPI SCLK | No |
-| 19 | Input | CC1101 SPI MISO/SO | No |
-| 21 | Output | CC1101 CSn | No |
-| 23 | Output | CC1101 SPI MOSI/SI | No |
-| 25 | Output | Status LED, active high | No |
-| 26 | Input | CC1101 GDO0 interrupt | No |
-| 27 | Input | CC1101 GDO2 interrupt | No |
-| 32 | Output | RF_SW0, pulldown | No |
-| 33 | Output | RF_SW1, pulldown | No |
-
-## Expansion header candidates
-
-| ESP32 GPIO | Capability/constraint |
+| GPIO | Function |
 |---:|---|
-| 13 | General purpose; avoid forcing during boot until reviewed |
-| 14 | General purpose; JTAG clock default function |
-| 16 | General purpose |
-| 17 | General purpose |
-| 22 | General purpose / convenient I2C SCL |
-| 34 | Input only; no internal pull resistor |
-| 35 | Input only; no internal pull resistor |
+| 0 | BOOT / automatic programming; strapping pin |
+| 1 / 3 | UART TX / RX through powered-off-protected buffer |
+| 4 | RF_DISABLE, V3 of both switches; HIGH disables |
+| 16 / 17 | RF_OUT0 / RF_OUT1, U4 V1 / V2 |
+| 18 / 19 / 23 | CC1101 SCLK / MISO / MOSI |
+| 21 | CC1101 CSn |
+| 25 | Active-high status LED |
+| 26 / 27 | CC1101 GDO0 / GDO2 |
+| 32 / 33 | RF_SW0 / RF_SW1, U3 V1 / V2 |
 
-GPIO2, GPIO5, GPIO12, and GPIO15 remain unused on Rev A because they are
-strapping pins. GPIO4 is also unused, but is not one of the five documented
-boot-strapping GPIOs. GPIO0 is the fifth strapping pin and is used for BOOT.
-See the [Espressif schematic checklist](https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32/schematic-checklist.html).
-GPIO6 through GPIO11 are used
-internally by the WROOM module flash and are unavailable.
+GPIO16/17 exposed at optional J3 are RF debug taps, **not spare outputs**.
+GPIO13/14/22 and input-only GPIO34/35 are expansion candidates; do not
+drive the radio-control taps externally. GPIO6–11 belong to internal flash.
+GPIO2/5/12/15 remain unused strapping pins; GPIO4 is not a strapping pin.
 
-## RF selection sequence
+## Switch states
 
-```text
-CC1101 SIDLE
-wait for MARCSTATE == IDLE
-RF_SW0/RF_SW1 = 00 (isolate)
-wait >= 10 us
-RF_SW0/RF_SW1 = target truth-table value
-wait >= 10 us
-write target-band register profile
-CC1101 SCAL
-wait for calibration completion
-enter RX only when requested
-```
+| Mode | GPIO4 | GPIO32,33 | GPIO16,17 |
+|---|---:|---|---|
+| Isolated boot | 1 | 1,1 | 1,1 |
+| 315 MHz | 0 | 1,0 | 1,1 |
+| 433 MHz | 0 | 0,1 | 0,1 |
+| 868/915 MHz | 0 | 1,1 | 1,0 |
 
-This is a future implementation sequence, not an available bring-up command.
-The current firmware never leaves the isolated state. Final switch timing and
-break-before-make behavior must be checked against the chosen RF hardware.
+Five 10 kohm pullups establish HIGH before firmware. The startup helper
+preloads all outputs HIGH before enabling their drivers. **000 selects RF4;
+it does not isolate.** Never use A2's old switch helper on this board.
+
+Future selection: require stable CC1101 IDLE, raise GPIO4, wait at least
+50 us, set both independent selector pairs, wait at least 50 us, lower
+GPIO4, configure/calibrate the radio and verify completion. Respect the
+switch's maximum switching rate. Receive/transmit and this selection sequence
+are not implemented in the current diagnostic-only firmware.

@@ -1,54 +1,60 @@
 Reference,Value,Footprint,Proposed part,DNP,Qty per board,Qty for five,Status,Notes
 B1,B0310J50100AHF,ESP32_CC1101_RF:TTM_B0310J50100AHF,B0310J50100AHF,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
-C1,10uF 10V,Capacitor_SMD:C_0805_2012Metric,,no,1,5,SELECT_EXACT_PART,"Select tolerance, voltage/current rating and DC-bias derating."
-C2,22uF 6.3V,Capacitor_SMD:C_0805_2012Metric,,no,1,5,SELECT_EXACT_PART,"Select tolerance, voltage/current rating and DC-bias derating."
-C3,4.7uF,Capacitor_SMD:C_0603_1608Metric,GRM188R61A475KE15D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C4,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C5,4.7nF 1kV,Capacitor_SMD:C_1206_3216Metric,,no,1,5,SELECT_EXACT_PART,"Select tolerance, voltage/current rating and DC-bias derating."
-C6,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C7,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C8,4.7uF,Capacitor_SMD:C_0603_1608Metric,GRM188R61A475KE15D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C9,4.7uF,Capacitor_SMD:C_0603_1608Metric,GRM188R61A475KE15D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C10,1uF,Capacitor_SMD:C_0603_1608Metric,,no,1,5,SELECT_EXACT_PART,"Select tolerance, voltage/current rating and DC-bias derating."
-C11,10uF,Capacitor_SMD:C_0603_1608Metric,,no,1,5,SELECT_EXACT_PART,"Select tolerance, voltage/current rating and DC-bias derating."
-C12,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C20,10uF,Capacitor_SMD:C_0603_1608Metric,,no,1,5,SELECT_EXACT_PART,"Select tolerance, voltage/current rating and DC-bias derating."
-C21,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C22,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C23,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C24,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C25,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C26,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C30,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C31,15pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,15 pF C0G starting value uses TI typical 2.5 pF total stray: 15/2+2.5=10 pF. Measure/trim.
-C32,15pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,15 pF C0G starting value uses TI typical 2.5 pF total stray: 15/2+2.5=10 pF. Measure/trim.
-C40,100pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
-C41,100pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
-C42,0.6pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+C1,22uF 25V,Capacitor_SMD:C_1206_3216Metric,CC1206MKX5R8BB226,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"22uF 25V X5R 1206; bias curve reviewed. Verify effective capacitance, aging and transient margin on hardware."
+C2,22uF 25V,Capacitor_SMD:C_1206_3216Metric,CC1206MKX5R8BB226,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"22uF 25V X5R 1206; bias curve reviewed. Verify effective capacitance, aging and transient margin on hardware."
+C3,4.7uF,Capacitor_SMD:C_0603_1608Metric,GRM188R61A475KE15D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C4,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C5,4.7nF 1kV,Capacitor_SMD:C_1206_3216Metric,CC1206KKX7RCBB472,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C6,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C7,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C8,DNP,Capacitor_SMD:C_0603_1608Metric,GRM188R61A475KE15D,yes,0,0,DNP_DEFAULT,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C9,4.7uF,Capacitor_SMD:C_0603_1608Metric,GRM188R61A475KE15D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C10,1uF,Capacitor_SMD:C_0603_1608Metric,CC0603KRX7R7BB105,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C11,10uF,Capacitor_SMD:C_0603_1608Metric,CC0603KRX5R6BB106,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C12,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C13,22uF 25V,Capacitor_SMD:C_1206_3216Metric,CC1206MKX5R8BB226,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"22uF 25V X5R 1206; bias curve reviewed. Verify effective capacitance, aging and transient margin on hardware."
+C14,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C20,10uF,Capacitor_SMD:C_0603_1608Metric,CC0603KRX5R6BB106,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C21,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C22,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C23,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C24,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C25,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C26,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C30,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C31,15pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402JRNPO9BN150,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,15 pF C0G starting value uses TI typical 2.5 pF total stray: 15/2+2.5=10 pF. Measure/trim.
+C32,15pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402JRNPO9BN150,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,15 pF C0G starting value uses TI typical 2.5 pF total stray: 15/2+2.5=10 pF. Measure/trim.
+C40,100pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402JRNPO9BN101,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+C41,100pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402JRNPO9BN101,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+C42,0.6pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402BRNPO9BNR60,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C43,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
-C44,1.2pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
-C45,8pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+C44,1.2pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402BRNPO9BN1R2,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+C45,8pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402CRNPO9BN8R0,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C46,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
-C47,10pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+C47,10pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402JRNPO9BN100,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C48,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
-C49,6.2pF C0G,Capacitor_SMD:C_0402_1005Metric,,no,1,5,SELECT_EXACT_PART,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+C49,6.2pF C0G,Capacitor_SMD:C_0402_1005Metric,CC0402CRNPO9BN6R2,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C50,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C51,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C52,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C53,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 C54,DNP,Capacitor_SMD:C_0402_1005Metric,,yes,0,0,DNP_DEFAULT,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
-C60,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-C61,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
+C60,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C61,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C70,10nF,Capacitor_SMD:C_0402_1005Metric,CC0402KRX7R9BB103,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+C71,100nF,Capacitor_SMD:C_0402_1005Metric,GRM155R71C104KA88D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
 D1,USBLC6-2SC6,Package_TO_SOT_SMD:SOT-23-6,USBLC6-2SC6,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
 D2,PESD5V0S1UL,Diode_SMD:D_SOD-882,PESD5V0S1UL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
-D3,STATUS BLUE,LED_SMD:LED_0603_1608Metric,,no,1,5,SELECT_EXACT_PART,
-D4,POWER GREEN,LED_SMD:LED_0603_1608Metric,,no,1,5,SELECT_EXACT_PART,
+D3,STATUS GREEN,LED_SMD:LED_0603_1608Metric,APT1608LZGCK,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
+D4,POWER GREEN,LED_SMD:LED_0603_1608Metric,APT1608LZGCK,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
 D5,RF ESD DNP,Diode_SMD:D_0402_1005Metric,,yes,0,0,DNP_DEFAULT,
-F1,500mA PTC,Fuse:Fuse_1206_3216Metric,MF-NSMF050-2,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Bourns 1206, hold 0.5 A at 23 C, 13.2 V; temperature derating and voltage drop must be tested."
+F1,750mA PTC,Fuse:Fuse_1206_3216Metric,MF-NSMF075/13X-2,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Bourns 1206, hold 0.75 A at 23 C / 0.61 A at 50 C, 13.2 V, R1max 0.35ohm. NOT a USB current limiter; test fault/thermal behavior."
 FB1,600R@100MHz,Inductor_SMD:L_0603_1608Metric,BLM18AG601SN1D,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Murata 0603, 600 ohm at 100 MHz, 0.5 A, DCR <=0.38 ohm."
 J1,USB-C USB2.0,Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12,TYPE-C-31-M-12,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,HRO base M-12 variant; do not substitute M-12A/B/C without drawing review.
 J2,SMA FEMALE VERTICAL 50 OHM,Connector_Coaxial:SMA_Amphenol_132134_Vertical,132134,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Amphenol standard SMA female straight TH, 50 ohm; drawing/physical fit approval pending."
 J3,EXPANSION (DNP),Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical,,yes,0,0,DNP_DEFAULT,
+J4,POWER ARM AUTO / EXT,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,TSW-103-07-G-S,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,Ship UNJUMPERED; loose SNT-100-BK-G accessory. AUTO 1-2 only after CP2102N 500mA configuration; EXT 2-3 only adequate 5V source.
+L1,4.7uH XAL4030,Inductor_SMD:L_Coilcraft_XAL4030-XXX,XAL4030-472MEC,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,4.7uH +/-20%; 44.1mOhm max DCR; marked terminal 1 toward BUCK_SW. Verify temperature/ripple.
 L40,3.3nH 5%,Inductor_SMD:L_0402_1005Metric,0402HP-3N3XJRW,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 L41,6.8nH 5%,Inductor_SMD:L_0402_1005Metric,0402HP-6N8XJRW,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 L42,10nH 5%,Inductor_SMD:L_0402_1005Metric,0402HP-10NXJRW,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
@@ -64,23 +70,29 @@ L51,10nH 5%,Inductor_SMD:L_0402_1005Metric,0402HP-10NXJRW,no,1,5,VERIFY_STOCK_AN
 L52,2.2nH 5%,Inductor_SMD:L_0402_1005Metric,0402HP-2N2XJRW,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
 Q1,MMBT3904,Package_TO_SOT_SMD:SOT-23,MMBT3904,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
 Q2,MMBT3904,Package_TO_SOT_SMD:SOT-23,MMBT3904,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
-R1,5.1k 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-075K1L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R2,5.1k 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-075K1L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R3,1k,Resistor_SMD:R_0603_1608Metric,RC0603FR-071KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R4,1M,Resistor_SMD:R_0603_1608Metric,RC0603FR-071ML,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R5,22.1k 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-0722K1L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R6,47.5k 1%,Resistor_SMD:R_0603_1608Metric,,no,1,5,SELECT_EXACT_PART,"Select tolerance, voltage/current rating and DC-bias derating."
-R10,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R11,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R12,1k,Resistor_SMD:R_0603_1608Metric,RC0603FR-071KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R13,2.2k,Resistor_SMD:R_0603_1608Metric,RC0603FR-072K2L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R20,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R21,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R30,56k 1%,Resistor_SMD:R_0402_1005Metric,RC0402FR-0756KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R31,100k pulldown,Resistor_SMD:R_0603_1608Metric,RC0603FR-07100KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R32,100k pulldown,Resistor_SMD:R_0603_1608Metric,RC0603FR-07100KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Select tolerance, voltage/current rating and DC-bias derating."
-R40,0R,Resistor_SMD:R_0402_1005Metric,RC0402JR-070RL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+R1,5.1k 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-075K1L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R2,5.1k 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-075K1L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R3,1k,Resistor_SMD:R_0603_1608Metric,RC0603FR-071KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R4,1M,Resistor_SMD:R_0603_1608Metric,RC0603FR-071ML,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R5,22.1k 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-0722K1L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R6,47.5k 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-0747K5L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R10,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R11,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R12,330R 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-07330RL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R13,330R 1%,Resistor_SMD:R_0603_1608Metric,RC0603FR-07330RL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R20,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R21,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R30,56k 1%,Resistor_SMD:R_0402_1005Metric,RC0402FR-0756KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R31,10k pullup,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R32,10k pullup,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R33,10k pullup,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R34,10k pullup,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R35,10k pullup,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
 R41,0R,Resistor_SMD:R_0402_1005Metric,RC0402JR-070RL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,RF starting value; choose RF-rated series/Q/SRF and tune on actual PCB.
+R60,49.9R 1%,Resistor_SMD:R_0402_1005Metric,RC0402FR-0749R9L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R61,49.9R 1%,Resistor_SMD:R_0402_1005Metric,RC0402FR-0749R9L,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R70,10k,Resistor_SMD:R_0603_1608Metric,RC0603FR-0710KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
+R71,100k,Resistor_SMD:R_0603_1608Metric,RC0603FR-07100KL,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"Verify selected tolerance, voltage/current rating and applicable DC-bias derating."
 SW1,RESET,Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2,KMR221GLFS,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
 SW2,BOOT,Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2,KMR221GLFS,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
 TP1,GND,TestPoint:TestPoint_Pad_D1.0mm,,no,0,0,PCB_FEATURE_NO_PURCHASE,
@@ -97,8 +109,10 @@ TP11,RF_SW1,TestPoint:TestPoint_Pad_D1.0mm,,no,0,0,PCB_FEATURE_NO_PURCHASE,
 TP12,UART_TX_ESP,TestPoint:TestPoint_Pad_D1.0mm,,no,0,0,PCB_FEATURE_NO_PURCHASE,
 U1,ESP32-WROOM-32E-N8,RF_Module:ESP32-WROOM-32E,ESP32-WROOM-32E-N8,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
 U2,CC1101RGPR,Package_DFN_QFN:Texas_RGP0020H_VQFN-20-1EP_4x4mm_P0.5mm_EP2.4x2.4mm_ThermalVias,CC1101RGPR,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
-U3,BGS13SN8E6327XTSA1,ESP32_CC1101_RF:Infineon_PG-TSNP-8-1,BGS13SN8E6327XTSA1,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
-U4,BGS13SN8E6327XTSA1,ESP32_CC1101_RF:Infineon_PG-TSNP-8-1,BGS13SN8E6327XTSA1,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
+U3,PE42442A-Z,ESP32_CC1101_RF:pSemi_PE42442_QFN24,PE42442A-Z,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,30MHz-6GHz switch; A3 pinout/control only. Datasheet capability does not validate complete RF chain.
+U4,PE42442A-Z,ESP32_CC1101_RF:pSemi_PE42442_QFN24,PE42442A-Z,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,30MHz-6GHz switch; A3 pinout/control only. Datasheet capability does not validate complete RF chain.
 U5,CP2102N-A02-GQFN24,Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm,CP2102N-A02-GQFN24,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
-U6,AP7361C-33E-13,Package_TO_SOT_SMD:SOT-223-3_TabPin2,AP7361C-33E-13,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"E pinout, NOT ER. Thermal validation pending; 1 A IC rating is not board capacity."
+U6,AP63203WU-7,ESP32_CC1101_RF:Diodes_TSOT26,AP63203WU-7,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,Fixed 3.3 V buck; input must stay >=3.8 V. 2 A IC rating is NOT USB/board capacity.
+U7,TPS22918DBVR,Package_TO_SOT_SMD:SOT-23-6,TPS22918DBVR,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
+U8,SN74LVC2G125DCTR,Package_SO:SSOP-8_2.95x2.8mm_P0.65mm,SN74LVC2G125DCTR,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,
 Y1,ABM8-26.000MHZ-10-1-U-T,ESP32_CC1101_RF:Abracon_ABM8_4Pin_3.2x2.5mm,ABM8-26.000MHZ-10-1-U-T,no,1,5,VERIFY_STOCK_AND_ASSEMBLY,"26 MHz, four pads, CL 10 pF, ESR 50 ohm; -10 to +60 C part rating. Startup and load trim pending."

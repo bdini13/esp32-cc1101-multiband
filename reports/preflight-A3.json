@@ -1,0 +1,864 @@
+{
+  "generated_utc": "2026-09-26T13:24:34.349878+00:00",
+  "revision": "A3",
+  "kicad_version": "10.0.6",
+  "status": "BLOCKED",
+  "scope": "Prototype pre-order checks only; no bench/RF/compliance validation.",
+  "schematic_parity": "Fresh CLI XML compared to candidate references, values, footprint names and every numbered pad net.",
+  "counts": {
+    "erc_violations": 0,
+    "candidate_drc_violations": 0,
+    "candidate_unconnected": 0,
+    "populated_positions_without_exact_part": 0,
+    "artifact_failed_checks": 1
+  },
+  "blockers": [
+    "artifact_failed_checks: 1",
+    "Human review pending: impedance",
+    "Human review pending: independent",
+    "Human review pending: mechanical",
+    "Human review pending: parts",
+    "Human review pending: power",
+    "Human review pending: rf"
+  ],
+  "input_sha256": {
+    "hardware/A2-routing-candidate.kicad_pcb": "b32fbdf6c85bc7dbc3253fc2fd0781e924ad1163cfcd07e16303f44eb0ff1a7f",
+    "hardware/A2-routing-candidate.kicad_pro": "625036fc1827f9f2f5dfd8739605a6df3112d13a86ebecd3a76f0dfa28c9af4f",
+    "hardware/A3-critical-routes.kicad_pcb": "e2ba381e4229f21128f2022ad10be8e827f066c82af93771e921808b13ed8b7c",
+    "hardware/A3-critical-routes.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
+    "hardware/A3-routing-candidate.kicad_pcb": "c3a48f205171fc8cc8fbb7b726f8c19429724a8c3ffed2dd2e0aad3a6224120d",
+    "hardware/A3-routing-candidate.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
+    "hardware/bom-accessories.csv": "1df1c83aae1ffbd06f3e97a6a04e0719b0c97d892e1fea1951de9e9a38bb5b7e",
+    "hardware/bom-draft.csv": "c0a95095fabc3aeb3e921455e92f1ad08ec79f1a9479f377a2c6a0f4f89c311e",
+    "hardware/esp32-cc1101-multiband.kicad_pcb": "7130155a8eb4d4f2b7a503922a5d07ddf3f75f3de38dec71603d68e6719ee098",
+    "hardware/esp32-cc1101-multiband.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
+    "hardware/esp32-cc1101-multiband.kicad_sch": "a915076b521d7a1c9dc41c04d9e430d88ee989d7f33fabb327cdf97aae2b0feb",
+    "hardware/lib/ESP32_CC1101.kicad_sym": "9b90792b1d1f8cf65f2a950a6d62304eb6ec982331837b6ba7ebb870df275ea0",
+    "hardware/lib/esp32_cc1101.pretty/Abracon_ABM8_4Pin_3.2x2.5mm.kicad_mod": "46e9aa35638184b490456c8f2071676846f0c2ac63c607efa8094ae04ee0d878",
+    "hardware/lib/esp32_cc1101.pretty/Diodes_TSOT26.kicad_mod": "76df35c9566860d84982a3623d5a357039af42702e7e0f611c71682de70f3097",
+    "hardware/lib/esp32_cc1101.pretty/Infineon_PG-TSNP-8-1.kicad_mod": "12961760699c4faf2b3baa5fac61045b57540fa98529920f2c6de5d1da6d31dd",
+    "hardware/lib/esp32_cc1101.pretty/TTM_B0310J50100AHF.kicad_mod": "4de59aa713a3e3ffe21f10771175d70db3bbaa45282f1378d2e15964af73e156",
+    "hardware/lib/esp32_cc1101.pretty/pSemi_PE42442_QFN24.kicad_mod": "442c46c2e1428373552c79599769c67a6dad33e9d03341d1b778dc7cc3f0f4a5",
+    "hardware/preorder-reviews.json": "df9db8dc7b02575c2dd3018c43bf54fa2a3c3a052a9f91077c7b122d04c08161",
+    "hardware/routing/A3-before-local-finishing.kicad_pcb": "60b0e3e03b1f008f6f4a87288fa9de4e5116cbb246284e9da549f358a65636e2",
+    "hardware/routing/A3-before-local-finishing.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0"
+  },
+  "erc": {
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-26T09:24:32",
+    "ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ],
+    "included_severities": [
+      "error",
+      "warning"
+    ],
+    "kicad_version": "10.0.6",
+    "sheets": [
+      {
+        "path": "/",
+        "uuid_path": "/ae0d6d45-6d1f-475d-bfe2-60ec3aa4e7f3",
+        "violations": []
+      }
+    ],
+    "source": "esp32-cc1101-multiband.kicad_sch"
+  },
+  "candidate_drc": {
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-26T09:24:33",
+    "ignored_checks": [
+      {
+        "description": "Footprint has no courtyard defined",
+        "key": "missing_courtyard"
+      },
+      {
+        "description": "Track endpoint not centered on via",
+        "key": "track_not_centered_on_via"
+      },
+      {
+        "description": "Tuning profile track geometries",
+        "key": "tuning_profile_track_geometries"
+      },
+      {
+        "description": "Footprint doesn't match symbol's footprint filters",
+        "key": "footprint_filters_mismatch"
+      },
+      {
+        "description": "Footprint component type doesn't match footprint pads",
+        "key": "footprint_type_mismatch"
+      }
+    ],
+    "included_severities": [
+      "error",
+      "warning"
+    ],
+    "kicad_version": "10.0.6",
+    "schematic_parity": [],
+    "source": "A3-routing-candidate.kicad_pcb",
+    "unconnected_items": [],
+    "violations": []
+  },
+  "artifact_audit": {
+    "status": "FAIL",
+    "scope": "Corrected draft only; not manufacturing approval",
+    "checks": [
+      {
+        "check": "U2.4 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U2.9 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U2.11 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U2.14 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U2.15 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U2.18 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U2.16 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U2.19 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U2.21 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U2.5 -> CC1101_DCOUPL",
+        "pass": true
+      },
+      {
+        "check": "U5.5 -> +3V3_USB",
+        "pass": true
+      },
+      {
+        "check": "U5.6 -> +3V3_USB",
+        "pass": true
+      },
+      {
+        "check": "U5.7 -> VBUS_PROTECTED",
+        "pass": true
+      },
+      {
+        "check": "U5.15 -> USB_ACTIVE",
+        "pass": true
+      },
+      {
+        "check": "U5.20 -> UART_RX_USB",
+        "pass": true
+      },
+      {
+        "check": "U5.21 -> UART_TX_USB",
+        "pass": true
+      },
+      {
+        "check": "U5.8 -> USB_VBUS_SENSE",
+        "pass": true
+      },
+      {
+        "check": "R5.1 -> VBUS_PROTECTED",
+        "pass": true
+      },
+      {
+        "check": "R5.2 -> USB_VBUS_SENSE",
+        "pass": true
+      },
+      {
+        "check": "R5 divider value 22.1k 1%",
+        "pass": true
+      },
+      {
+        "check": "R6.1 -> USB_VBUS_SENSE",
+        "pass": true
+      },
+      {
+        "check": "R6.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "R6 divider value 47.5k 1%",
+        "pass": true
+      },
+      {
+        "check": "D3.1 -> GND",
+        "pass": true
+      },
+      {
+        "check": "D3.2 -> STATUS_LED_A",
+        "pass": true
+      },
+      {
+        "check": "D4.1 -> GND",
+        "pass": true
+      },
+      {
+        "check": "D4.2 -> POWER_LED_A",
+        "pass": true
+      },
+      {
+        "check": "D2.1 -> VBUS_PROTECTED",
+        "pass": true
+      },
+      {
+        "check": "D2.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "PESD5V0S1UL uses SOD-882",
+        "pass": true
+      },
+      {
+        "check": "Regulator is fixed 3.3 V AP63203",
+        "pass": true
+      },
+      {
+        "check": "U6.1 -> +3V3",
+        "pass": true
+      },
+      {
+        "check": "U6.2 -> VBUS_SWITCHED",
+        "pass": true
+      },
+      {
+        "check": "U6.3 -> VBUS_SWITCHED",
+        "pass": true
+      },
+      {
+        "check": "U6.4 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U6.5 -> BUCK_SW",
+        "pass": true
+      },
+      {
+        "check": "U6.6 -> BUCK_BST",
+        "pass": true
+      },
+      {
+        "check": "Buck uses manufacturer TSOT26 land pattern",
+        "pass": true
+      },
+      {
+        "check": "U7.1 -> VBUS_PROTECTED",
+        "pass": true
+      },
+      {
+        "check": "U7.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U7.3 -> MAIN_POWER_EN",
+        "pass": true
+      },
+      {
+        "check": "U7.4 -> POWER_SLEW",
+        "pass": true
+      },
+      {
+        "check": "U7.5 -> VBUS_SWITCHED",
+        "pass": true
+      },
+      {
+        "check": "U7.6 -> VBUS_SWITCHED",
+        "pass": true
+      },
+      {
+        "check": "U8.1 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U8.2 -> UART_TX_USB",
+        "pass": true
+      },
+      {
+        "check": "U8.3 -> UART_RX_USB",
+        "pass": true
+      },
+      {
+        "check": "U8.4 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U8.5 -> UART_TX_ESP",
+        "pass": true
+      },
+      {
+        "check": "U8.6 -> UART_RX_ESP",
+        "pass": true
+      },
+      {
+        "check": "U8.7 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U8.8 -> +3V3",
+        "pass": true
+      },
+      {
+        "check": "L1.1 -> BUCK_SW",
+        "pass": true
+      },
+      {
+        "check": "L1.2 -> +3V3",
+        "pass": true
+      },
+      {
+        "check": "C14.1 -> BUCK_BST",
+        "pass": true
+      },
+      {
+        "check": "C14.2 -> BUCK_SW",
+        "pass": true
+      },
+      {
+        "check": "C70.1 -> POWER_SLEW",
+        "pass": true
+      },
+      {
+        "check": "C70.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "R70.1 -> USB_ACTIVE",
+        "pass": true
+      },
+      {
+        "check": "R70.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "R71.1 -> MAIN_POWER_EN",
+        "pass": true
+      },
+      {
+        "check": "R71.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "J4.1 -> USB_ACTIVE",
+        "pass": true
+      },
+      {
+        "check": "J4.2 -> MAIN_POWER_EN",
+        "pass": true
+      },
+      {
+        "check": "J4.3 -> +3V3_USB",
+        "pass": true
+      },
+      {
+        "check": "C1 high-voltage 1206 capacitor selected for DC-bias margin",
+        "pass": true
+      },
+      {
+        "check": "C2 high-voltage 1206 capacitor selected for DC-bias margin",
+        "pass": true
+      },
+      {
+        "check": "C13 high-voltage 1206 capacitor selected for DC-bias margin",
+        "pass": true
+      },
+      {
+        "check": "R31 pulls RF_SW0 HIGH at reset",
+        "pass": true
+      },
+      {
+        "check": "R31 uses 10k, not weak 100k pullup",
+        "pass": true
+      },
+      {
+        "check": "R32 pulls RF_SW1 HIGH at reset",
+        "pass": true
+      },
+      {
+        "check": "R32 uses 10k, not weak 100k pullup",
+        "pass": true
+      },
+      {
+        "check": "R33 pulls RF_DISABLE HIGH at reset",
+        "pass": true
+      },
+      {
+        "check": "R33 uses 10k, not weak 100k pullup",
+        "pass": true
+      },
+      {
+        "check": "R34 pulls RF_OUT0 HIGH at reset",
+        "pass": true
+      },
+      {
+        "check": "R34 uses 10k, not weak 100k pullup",
+        "pass": true
+      },
+      {
+        "check": "R35 pulls RF_OUT1 HIGH at reset",
+        "pass": true
+      },
+      {
+        "check": "R35 uses 10k, not weak 100k pullup",
+        "pass": true
+      },
+      {
+        "check": "U3.16 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U3.17 -> RF_SW0",
+        "pass": true
+      },
+      {
+        "check": "U3.18 -> RF_SW1",
+        "pass": true
+      },
+      {
+        "check": "U3.19 -> RF_DISABLE",
+        "pass": true
+      },
+      {
+        "check": "U3.20 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U3.25 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U3 30 MHz-6 GHz specified switch",
+        "pass": true
+      },
+      {
+        "check": "U4.16 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "U4.17 -> RF_OUT0",
+        "pass": true
+      },
+      {
+        "check": "U4.18 -> RF_OUT1",
+        "pass": true
+      },
+      {
+        "check": "U4.19 -> RF_DISABLE",
+        "pass": true
+      },
+      {
+        "check": "U4.20 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U4.25 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U4 30 MHz-6 GHz specified switch",
+        "pass": true
+      },
+      {
+        "check": "U3.14 -> RF_315_IN",
+        "pass": true
+      },
+      {
+        "check": "U3.11 -> RF_433_IN",
+        "pass": true
+      },
+      {
+        "check": "U3.8 -> RF_868_915_IN",
+        "pass": true
+      },
+      {
+        "check": "U3.22 -> RF_SWITCH_IN",
+        "pass": true
+      },
+      {
+        "check": "U4.8 -> RF_315_OUT",
+        "pass": true
+      },
+      {
+        "check": "U4.11 -> RF_433_OUT",
+        "pass": true
+      },
+      {
+        "check": "U4.14 -> RF868_B",
+        "pass": true
+      },
+      {
+        "check": "U4.22 -> RF_COMBINED",
+        "pass": true
+      },
+      {
+        "check": "C3.1 -> +3V3_USB",
+        "pass": true
+      },
+      {
+        "check": "C3.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C4.1 -> +3V3_USB",
+        "pass": true
+      },
+      {
+        "check": "C4.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C6.1 -> +3V3_USB",
+        "pass": true
+      },
+      {
+        "check": "C6.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C8.1 -> +3V3_USB",
+        "pass": true
+      },
+      {
+        "check": "C8.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C7.1 -> VBUS_PROTECTED",
+        "pass": true
+      },
+      {
+        "check": "C7.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C9.1 -> VBUS_PROTECTED",
+        "pass": true
+      },
+      {
+        "check": "C9.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C11.1 -> +3V3",
+        "pass": true
+      },
+      {
+        "check": "C11.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C12.1 -> +3V3",
+        "pass": true
+      },
+      {
+        "check": "C12.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C71.1 -> +3V3",
+        "pass": true
+      },
+      {
+        "check": "C71.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C8 omitted to limit attach-time capacitance",
+        "pass": true
+      },
+      {
+        "check": "C21.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C21.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C22.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C22.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C23.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C23.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C24.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C24.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C25.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C25.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C26.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C26.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C60.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C60.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "C61.1 -> +3V3_RF",
+        "pass": true
+      },
+      {
+        "check": "C61.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "U1.2_to_C11.1_mm <= 3.0",
+        "pass": true
+      },
+      {
+        "check": "U1.2_to_C12.1_mm <= 3.0",
+        "pass": true
+      },
+      {
+        "check": "U2.4_to_C21.1_mm <= 3.5",
+        "pass": true
+      },
+      {
+        "check": "U2.9_to_C22.1_mm <= 3.5",
+        "pass": true
+      },
+      {
+        "check": "U2.11_to_C23.1_mm <= 3.5",
+        "pass": true
+      },
+      {
+        "check": "U2.14_to_C24.1_mm <= 3.5",
+        "pass": true
+      },
+      {
+        "check": "U2.15_to_C25.1_mm <= 3.5",
+        "pass": true
+      },
+      {
+        "check": "U2.18_to_C26.1_mm <= 3.5",
+        "pass": true
+      },
+      {
+        "check": "U3.16_to_C60.1_mm <= 2.5",
+        "pass": true
+      },
+      {
+        "check": "U4.16_to_C61.1_mm <= 2.5",
+        "pass": true
+      },
+      {
+        "check": "U5.5_to_C4.1_mm <= 2.5",
+        "pass": true
+      },
+      {
+        "check": "U5.6_to_C6.1_mm <= 2.5",
+        "pass": true
+      },
+      {
+        "check": "U5.7_to_C7.1_mm <= 2.5",
+        "pass": true
+      },
+      {
+        "check": "Y1.1 -> CC1101_XOSC_Q1",
+        "pass": true
+      },
+      {
+        "check": "Y1.3 -> CC1101_XOSC_Q2",
+        "pass": true
+      },
+      {
+        "check": "Y1.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "Y1.4 -> GND",
+        "pass": true
+      },
+      {
+        "check": "ABM8 uses manufacturer four-pad footprint",
+        "pass": true
+      },
+      {
+        "check": "C31 initial 10 pF crystal load assumption",
+        "pass": true
+      },
+      {
+        "check": "C32 initial 10 pF crystal load assumption",
+        "pass": true
+      },
+      {
+        "check": "CC1101 crystal pin 8 within 3.5 mm",
+        "pass": true
+      },
+      {
+        "check": "CC1101 crystal pin 10 within 3.5 mm",
+        "pass": false
+      },
+      {
+        "check": "Balun orientation matches top-view audit frame",
+        "pass": true
+      },
+      {
+        "check": "Balun pin 1 manufacturer TOP-view location",
+        "pass": true
+      },
+      {
+        "check": "Balun pin 2 manufacturer TOP-view location",
+        "pass": true
+      },
+      {
+        "check": "Balun pin 3 manufacturer TOP-view location",
+        "pass": true
+      },
+      {
+        "check": "Balun pin 4 manufacturer TOP-view location",
+        "pass": true
+      },
+      {
+        "check": "Balun pin 5 manufacturer TOP-view location",
+        "pass": true
+      },
+      {
+        "check": "Balun pin 6 manufacturer TOP-view location",
+        "pass": true
+      },
+      {
+        "check": "B1.1 -> BALUN_50R",
+        "pass": true
+      },
+      {
+        "check": "B1.2 -> GND",
+        "pass": true
+      },
+      {
+        "check": "B1.3 -> BAL_N",
+        "pass": true
+      },
+      {
+        "check": "B1.4 -> BAL_P",
+        "pass": true
+      },
+      {
+        "check": "HRO TYPE-C-31-M-12 connector footprint",
+        "pass": true
+      },
+      {
+        "check": "HRO connector mouth at x=0, opening faces left",
+        "pass": true
+      },
+      {
+        "check": "USB signal pad row is inside PCB",
+        "pass": true
+      },
+      {
+        "check": "ESP32 antenna feed lies beyond y=0 board edge",
+        "pass": true
+      },
+      {
+        "check": "Four copper layers",
+        "pass": true
+      },
+      {
+        "check": "Eight initial power-area ground stitching vias",
+        "pass": true
+      },
+      {
+        "check": "Placement ground vias have not been reassigned by touching power pads",
+        "pass": true
+      },
+      {
+        "check": "RF_N bridge pad lies above RF_P: no differential crossover",
+        "pass": true
+      },
+      {
+        "check": "Initial F.Cu / In1.Cu / B.Cu ground heat-spreading zones",
+        "pass": true
+      },
+      {
+        "check": "All generated PCB pad nets and values match schematic XML",
+        "pass": true
+      },
+      {
+        "check": "BOM contains exactly every schematic footprint once",
+        "pass": true
+      },
+      {
+        "check": "BOM values and footprints match schematic",
+        "pass": true
+      }
+    ],
+    "measurements": {
+      "U1.2_to_C11.1_mm": 1.951,
+      "U1.2_to_C12.1_mm": 1.866,
+      "U2.4_to_C21.1_mm": 1.366,
+      "U2.9_to_C22.1_mm": 3.472,
+      "U2.11_to_C23.1_mm": 2.658,
+      "U2.14_to_C24.1_mm": 2.212,
+      "U2.15_to_C25.1_mm": 2.437,
+      "U2.18_to_C26.1_mm": 2.144,
+      "U3.16_to_C60.1_mm": 1.445,
+      "U4.16_to_C61.1_mm": 2.32,
+      "U5.5_to_C4.1_mm": 1.454,
+      "U5.6_to_C6.1_mm": 2.003,
+      "U5.7_to_C7.1_mm": 1.356,
+      "U2.8_to_Y1.1_mm": 2.195,
+      "U2.10_to_Y1.3_mm": 4.478,
+      "ESP32_antenna_tip_y_mm": -6.45
+    },
+    "parity_mismatches": [],
+    "footprints": 121
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "revision": "A3",
+  "status": "CALCULATED_ASSUMPTIONS_NOT_BENCH_VALIDATION",
+  "impedance_screen": {
+    "model": "first-order, bare microstrip; NOT a field solver",
+    "rf_width_mm": 0.35,
+    "rf_ohm_estimate": 49.98,
+    "usb_width_mm": 0.3,
+    "usb_gap_mm": 0.2,
+    "usb_ohm_estimate": 88.62,
+    "stackup_target": "JLC04161H-7628, L1-L2 0.2104mm, Dk4.4, outer Cu35um",
+    "limitations": "Pad necks, USB contact crossover and uncoupled bends differ; confirm with fabricator."
+  },
+  "input_power_screens": [
+    {
+      "connector_v": 5.0,
+      "output_a": 0.5,
+      "input_a": 0.4255,
+      "buck_input_v": 4.7873,
+      "within_500mA_screen": true
+    },
+    {
+      "connector_v": 5.0,
+      "output_a": 0.55,
+      "input_a": 0.468,
+      "buck_input_v": 4.766,
+      "within_500mA_screen": true
+    },
+    {
+      "connector_v": 4.75,
+      "output_a": 0.5,
+      "input_a": 0.4489,
+      "buck_input_v": 4.5255,
+      "within_500mA_screen": true
+    },
+    {
+      "connector_v": 4.75,
+      "output_a": 0.55,
+      "input_a": 0.4942,
+      "buck_input_v": 4.5029,
+      "within_500mA_screen": true
+    },
+    {
+      "connector_v": 4.4,
+      "output_a": 0.5,
+      "input_a": 0.487,
+      "buck_input_v": 4.1565,
+      "within_500mA_screen": true
+    },
+    {
+      "connector_v": 4.4,
+      "output_a": 0.55,
+      "input_a": 0.5368,
+      "buck_input_v": 4.1316,
+      "within_500mA_screen": false
+    }
+  ],
+  "power_assumptions": {
+    "buck_efficiency": 0.85,
+    "usb_overhead_a": 0.02,
+    "input_series_resistance_ohm": 0.5,
+    "buck_loss_at_550mA_w": 0.32,
+    "old_ldo_loss_at_550mA_w": 0.935,
+    "warning": "Efficiency/resistance are assumptions, not certified worst-case. USB full load is not guaranteed at low cable-end voltage."
+  },
+  "inductor_ripple": {
+    "vin_v": 5.25,
+    "vout_v": 3.3,
+    "l_min_uH": 3.7600000000000002,
+    "f_min_MHz": 0.9,
+    "ripple_pp_a": 0.362,
+    "peak_at_550mA_a": 0.731
+  },
+  "capacitor_screen": {
+    "c1_c2_c13": "CC1206MKX5R8BB226",
+    "assumed_bias_retention_at_3v3": 0.8,
+    "assumed_bias_retention_at_5v": 0.65,
+    "tolerance_multiplier": 0.8,
+    "x5r_temperature_multiplier": 0.85,
+    "estimated_two_output_caps_uF": 23.94,
+    "estimated_input_cap_uF": 9.72,
+    "warning": "Bias factors are approximate typical-curve readings. Aging and lot variation need measurement/margin review."
+  },
+  "slew_screen": {
+    "ct_pF": 10000,
+    "typical_10_to_90_rise_ms_at_5V": 27.65,
+    "warning": "Not a current limiter. Buck soft-start/load steps and USB attach charge require scope measurement."
+  },
+  "rf_reset_screen": {
+    "external_pullup_ohm": 10000,
+    "assumed_internal_pulldown_ohm": 45000,
+    "logic_v_with_2uA_leakage_at_3V": 2.438,
+    "required_switch_vih_v": 1.17,
+    "warning": "Internal pull is typical, not a bound. Verify reset/boot waveforms."
+  },
+  "prototype_envelope": "Indoor bench, nominal 5V; no transmit, no USB power-budget claim for arbitrary loads/ports."
+}

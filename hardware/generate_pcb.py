@@ -52,6 +52,7 @@ def add_text(board, text, x, y, layer, size=1.0, thickness=0.15):
     item.SetText(text)
     item.SetPosition(point(x, y))
     item.SetLayer(layer)
+    item.SetMirrored(layer == pcbnew.B_SilkS)
     item.SetTextSize(point(size, size))
     item.SetTextThickness(mm(thickness))
     board.Add(item)
@@ -85,9 +86,9 @@ def add_ground_copper(board):
         for x, y in ((x1, y1), (x2, y1), (x2, y2), (x1, y2)):
             outline.Append(mm(x), mm(y))
         board.Add(zone)
-    # Outside the SOT-223 body: no open via-in-pad solder-wicking hazard.
-    for x in (21.8, 23.5):
-        for y in (3.5, 5.5, 7.5, 9.5):
+    # Ground stitching outside component pads; no open via-in-pad here.
+    for x, y in ((12,3.9),(12,4.9),(12,8.5),(12,10.3),
+                 (22,3.9),(23,4.8),(22,8.5),(14,8.5)):
             via = pcbnew.PCB_VIA(board)
             via.SetPosition(point(x, y))
             via.SetWidth(mm(0.60))
@@ -109,27 +110,37 @@ PLACEMENT = {
     "U1": (35.0, 6.30, 0),
     "U2": (52.0, 18.0, 0),
     "U5": (16.0, 20.0, 0),
-    "U6": (17.0, 6.5, 0),
+    "U6": (14.5, 5.5, 0),
+    "U7": (9.5, 9.8, 0),
+    "U8": (24.3, 30.0, 0),
+    "L1": (19.2, 5.5, 0),
+    "J4": (7.8, 1.9, 90),
+    "C13": (23.0, 8.5, -90),
+    "C14": (16.1, 2.5, 0),
+    "C70": (12.6, 11.3, 0),
+    "C71": (27.7, 28.8, 90),
+    "R70": (18.0, 12.3, 0),
+    "R71": (18.0, 14.3, 0),
 
     # USB-C input, protection, power, and UART programming.
-    "F1": (6.5, 9.5, 90),
+    "F1": (4.0, 9.5, 90),
     "D1": (11.0, 16.0, 0),
-    "D2": (10.5, 7.0, 0),
+    "D2": (6.8, 9.0, 90),
     "R1": (6.0, 25.0, 90),
     "R2": (8.0, 25.0, 90),
     "R3": (17.5, 24.8, 90),
     "R4": (3.2, 25.0, 0),
     "R5": (26.0, 24.0, 0),
     "R6": (26.0, 26.2, 0),
-    "C1": (10.8, 4.2, 180),
-    "C2": (10.8, 8.8, 180),
+    "C1": (10.2, 6.5, 180),
+    "C2": (18.7, 9.5, 180),
     "C3": (10.0, 24.5, 90),
     "C4": (12.2, 21.2, 180),
     "C5": (5.0, 28.0, 0),
     "C6": (12.2, 22.7, 180),
     "C7": (14.5, 23.75, -90),
     "C8": (10.0, 21.2, 90),
-    "C9": (14.8, 26.5, 90),
+    "C9": (10.5, 13.0, 0),
     "Q1": (22.3, 19.0, 0),
     "Q2": (22.3, 23.0, 0),
     "R20": (19.5, 18.0, 90),
@@ -151,7 +162,7 @@ PLACEMENT = {
     # CC1101 power, crystal, and local decoupling.
     "FB1": (46.5, 10.8, 0),
     "C20": (50.0, 11.5, 0),
-    "C21": (48.3, 18.5, 180),
+    "C21": (48.3, 18.8, 180),
     "C22": (49.0, 21.6, 180),
     "C23": (55.7, 21.3, 0),
     "C24": (55.5, 15.6, 0),
@@ -159,52 +170,62 @@ PLACEMENT = {
     "C26": (50.5, 14.1, 90),
     "C30": (48.3, 20.0, 180),
     "R30": (52.0, 14.1, 90),
-    "Y1": (52.5, 22.4, 0),
-    "C31": (51.35, 25.2, 90),
-    "C32": (55.7, 23.2, 0),
+    "Y1": (52.5, 23.2, -90),
+    "C31": (49.8, 22.9, 180),
+    "C32": (55.1, 24.5, 0),
     "R31": (60.0, 24.5, 0),
     "R32": (60.0, 26.5, 0),
+    "R33": (56.5, 27.5, 0),
+    "R34": (74.0, 28.5, 0),
+    "R35": (77.0, 28.5, 0),
 
     # CC1101 differential port and broadband balun match.
-    "C40": (57.0, 17.2, 0),
-    "C41": (57.0, 19.3, 0),
-    "C42": (55.25, 18.25, 90),
-    "B1": (59.3, 18.25, 0),
-    "L40": (61.5, 17.76, 0),
-    "C43": (61.2, 20.0, 90),
-    "L41": (63.5, 17.76, 0),
-    "C44": (63.2, 20.0, 90),
-    "R40": (64.5, 15.8, 90),
+    "C40": (54.7, 17.2, 0),
+    "C41": (54.7, 19.3, 0),
+    "C42": (52.95, 18.25, -90),
+    "B1": (57.0, 18.25, 0),
+    "L40": (59.2, 17.76, 0),
+    "C43": (59.9, 19.4, -90),
+    "L41": (61.2, 17.76, 0),
+    "C44": (61.6, 19.4, -90),
 
-    # Dual-SP3T band-selection network. Keep the topology visually obvious.
-    "U3": (66.2, 18.0, 180),
-    "C60": (68.5, 16.7, 0),
+    # Dual-SP4T switches use three filter paths and a terminated unused port.
+    "U3": (64.8, 18.0, 90),
+    "C60": (64.4, 14.8, 0),
+    "R60": (64.0, 21.3, 180),
     "L42": (67.8, 13.0, 0),
     "L43": (69.8, 13.0, 0),
     "L44": (71.8, 13.0, 0),
-    "L45": (67.8, 15.0, 90),
-    "C45": (69.8, 15.0, 90),
-    "C46": (71.8, 15.0, 90),
-    "L46": (68.0, 18.0, 0),
-    "C47": (68.0, 20.0, 90),
-    "L47": (70.0, 18.0, 0),
-    "C48": (70.0, 20.0, 90),
-    "L48": (72.0, 18.0, 0),
-    "C49": (72.0, 20.0, 90),
-    "L49": (74.0, 18.0, 0),
+    "L45": (68.8, 15.0, -90),
+    "C45": (70.5, 15.0, 90),
+    "C46": (71.1, 11.0, 90),
+    "L46": (68.3, 17.25, 0),
+    "C47": (69.1, 19.6, -90),
+    "L47": (70.3, 17.25, 0),
+    "C48": (71.1, 19.6, -90),
+    "L48": (72.3, 17.25, 0),
+    "C49": (73.1, 19.6, -90),
+    "L49": (74.2, 17.25, 0),
     "L50": (67.5, 23.0, 0),
-    "C50": (67.5, 25.0, 90),
+    "C50": (68.3, 25.0, -90),
     "L51": (70.0, 23.0, 0),
-    "C51": (70.0, 25.0, 90),
-    "U4": (76.5, 18.0, 0),
-    "C61": (75.0, 19.5, 180),
-    "C52": (76.5, 20.5, 90),
-    "L52": (78.3, 18.0, 0),
-    "R41": (80.2, 18.0, 0),
-    "C53": (74.8, 22.5, 90),
-    "C54": (77.0, 22.5, 90),
-    "D5": (79.2, 22.5, 90),
+    "C51": (71.0, 25.0, -90),
+    "U4": (78.0, 18.0, -90),
+    "C61": (78.25, 22.7, -90),
+    "R61": (78.3, 14.7, 0),
+    "C52": (81.5, 9.5, 90),
+    "L52": (83.0, 11.0, 0),
+    "R41": (85.0, 11.0, 0),
+    "C53": (84.0, 9.5, 90),
+    "C54": (86.5, 9.5, 90),
+    "D5": (88.2, 11.5, 0),
 }
+
+# Preserve the CC1101 local bypass/crystal geometry while making room for the
+# larger, low-band-specified RF switches. Input balun/match stays on F.Cu.
+for _ref in ("U2", "C21", "C22", "C23", "C24", "C25", "C26", "C30", "R30", "Y1", "C31", "C32"):
+    _x, _y, _a = PLACEMENT[_ref]
+    PLACEMENT[_ref] = (_x - 2.3, _y, _a)
 
 
 def main():
@@ -219,6 +240,7 @@ def main():
     # These match common prototype-fab capabilities and the exposed-pad via
     # arrays in KiCad's official ESP32/CC1101 footprints.
     settings.m_MinThroughDrill = mm(0.20)
+    settings.m_TrackMinWidth = mm(0.15)
 
     # Exact Rev A mechanical envelope: USB-C on the left short edge and SMA on
     # the right short edge. Corners stay square until enclosure requirements exist.
@@ -311,20 +333,40 @@ def main():
 
     add_ground_copper(board)
 
-    add_text(board, "ESP32 + CC1101 MULTIBAND  REV A2", 72, 3.0,
+    add_text(board, "ESP32 + CC1101 MULTIBAND  REV A3", 72, 3.0,
              pcbnew.F_SilkS, 0.8, 0.12)
-    add_text(board, "USB-C", 3.2, 9.5, pcbnew.F_SilkS, 0.8, 0.11)
+    add_text(board, "USB-C", 2.0, 6.5, pcbnew.F_SilkS, 0.8, 0.11)
     add_text(board, "RST", 9.5, 30.5, pcbnew.F_SilkS, 0.8, 0.10)
     add_text(board, "BOOT", 16.0, 30.5, pcbnew.F_SilkS, 0.8, 0.10)
     add_text(board, "SMA", 85.7, 24.5, pcbnew.F_SilkS, 0.8, 0.11)
+    add_text(board, "J4: 1-2 AUTO / 2-3 EXT", 17, 12.5, pcbnew.B_SilkS, .8, .12)
+    add_text(board, "CONFIGURE USB BEFORE FITTING J4", 22, 14, pcbnew.B_SilkS, .8, .12)
     add_text(board, "PLACEMENT DRAFT - NOT FOR MANUFACTURE", 45, 1.0,
              pcbnew.Dwgs_User, 0.8, 0.12)
 
     title = board.GetTitleBlock()
     title.SetTitle("ESP32-WROOM-32E + CC1101 Multiband")
-    title.SetRevision("A2 - ROUTING DRAFT")
+    title.SetRevision("A3 - ENGINEERING DRAFT")
     title.SetCompany("Personal prototype")
     pcbnew.SaveBoard(str(OUTPUT), board)
+    # pcbnew's SWIG interface does not expose mutable stackup items. Persist
+    # the reviewed, public JLC04161H-7628 proposal in KiCad's native syntax.
+    # This is a target stackup, not a fabricator-confirmed impedance coupon.
+    stackup = '''\n\t\t(stackup
+            (layer "F.SilkS" (type "Top Silk Screen"))
+            (layer "F.Mask" (type "Top Solder Mask") (thickness 0.01))
+            (layer "F.Cu" (type "copper") (thickness 0.035))
+            (layer "dielectric 1" (type "prepreg") (thickness 0.2104) (material "7628") (epsilon_r 4.4) (loss_tangent 0.02))
+            (layer "In1.Cu" (type "copper") (thickness 0.0152))
+            (layer "dielectric 2" (type "core") (thickness 1.065) (material "FR4") (epsilon_r 4.6) (loss_tangent 0.02))
+            (layer "In2.Cu" (type "copper") (thickness 0.0152))
+            (layer "dielectric 3" (type "prepreg") (thickness 0.2104) (material "7628") (epsilon_r 4.4) (loss_tangent 0.02))
+            (layer "B.Cu" (type "copper") (thickness 0.035))
+            (layer "B.Mask" (type "Bottom Solder Mask") (thickness 0.01))
+            (layer "B.SilkS" (type "Bottom Silk Screen"))
+            (copper_finish "ENIG") (dielectric_constraints no)
+        )'''
+    OUTPUT.write_text(OUTPUT.read_text().replace('(setup\n','(setup'+stackup+'\n',1))
     print(f"Saved {OUTPUT}")
     print(f"Footprints: {len(list(board.GetFootprints()))}")
     print(f"Nets: {board.GetNetCount()}")

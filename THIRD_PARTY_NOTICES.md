@@ -26,11 +26,16 @@ Custom footprints and sources are described in [hardware/lib/README.md](hardware
   No claim is made that its separately hosted hardware PDF inherits a software
   repository license. Source PDF/images are not republished here. Confirm any
   applicable hardware reuse rights before commercial release.
-- **Infineon, TTM/Anaren, Abracon:** drawings informed local RF/crystal footprints.
+- **Infineon (historical A1/A2), TTM/Anaren, Abracon:** drawings informed local RF/crystal footprints.
   [BGS13SN8](https://www.infineon.com/assets/row/public/documents/24/49/infineon-bgs13sn8-datasheet-en.pdf),
   [balun](https://cdn.ttm.com/repository/products/wireless-xinger/balun-transformers/B0310J50100AHF/B0310J50100AHF.pdf),
   [ABM8](https://abracon.com/Resonators/abm8.pdf).
-- Other sources are linked in [validation notes](docs/05-A2-routing-and-validation.md)
+- **pSemi and Diodes:** A3 switch/regulator pins and land patterns, from
+  [PE42442](https://psemi.com/pdf/datasheets/pe42442ds.pdf) and
+  [AP63203](https://www.diodes.com/assets/Datasheets/AP63200-AP63201-AP63203-AP63205.pdf).
+- **Silicon Labs and TI:** A3 USB power sequencing, load switch and UART buffer,
+  linked with exact component sources in the engineering notes.
+- Other sources are linked in [A3 engineering notes](docs/06-A3-prototype-engineering.md)
   and design reports. Datasheets remain their publishers' material.
 
 Circuit functions and component facts are distinguished from copyrighted
@@ -42,6 +47,7 @@ freedom-to-operate analysis.
 
 | Image | Source and scope |
 |---|---|
+| `output/routing-A3-3d.png`, `output/routing-A3-top.svg`, `output/svg-A3/` | Current project KiCad renders/exports, 2026-09-26; unapproved prototype candidate |
 | `output/placement-A2-3d.png`, `output/placement-A2-top.png` | Project KiCad renders, 2026-09-22; library/model terms above |
 | `output/routing-A2-top.svg`, schematic SVG | Exports from project design files; experimental/draft status retained |
 | ESP32-WROOM-32E reference | Externally hosted [Espressif image](https://www.espressif.com/sites/default/files/modules/ESP32-WROOM-32E%20S_0.png); owner's copyright, excluded from project license |

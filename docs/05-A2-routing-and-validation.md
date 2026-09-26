@@ -1,5 +1,9 @@
 # A2 routing and validation constraints
 
+**Historical A2 analysis, superseded for the current board.** See
+[A3 engineering decisions](06-A3-prototype-engineering.md). Do not apply A2
+power or switch decisions to A3.
+
 Status: engineering draft, not fabrication approval. No order has been placed.
 
 ## Stackup target

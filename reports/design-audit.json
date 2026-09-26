@@ -1,5 +1,5 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "scope": "Corrected draft only; not manufacturing approval",
   "checks": [
     {
@@ -43,15 +43,27 @@
       "pass": true
     },
     {
-      "check": "U5.5 -> +3V3",
+      "check": "U5.5 -> +3V3_USB",
       "pass": true
     },
     {
-      "check": "U5.6 -> +3V3",
+      "check": "U5.6 -> +3V3_USB",
       "pass": true
     },
     {
-      "check": "U5.7 -> +3V3",
+      "check": "U5.7 -> VBUS_PROTECTED",
+      "pass": true
+    },
+    {
+      "check": "U5.15 -> USB_ACTIVE",
+      "pass": true
+    },
+    {
+      "check": "U5.20 -> UART_RX_USB",
+      "pass": true
+    },
+    {
+      "check": "U5.21 -> UART_TX_USB",
       "pass": true
     },
     {
@@ -111,59 +123,287 @@
       "pass": true
     },
     {
-      "check": "Regulator is E, not different-pinout ER",
+      "check": "Regulator is fixed 3.3 V AP63203",
       "pass": true
     },
     {
-      "check": "U6.1 -> VBUS_PROTECTED",
+      "check": "U6.1 -> +3V3",
       "pass": true
     },
     {
-      "check": "U6.2 -> GND",
+      "check": "U6.2 -> VBUS_SWITCHED",
       "pass": true
     },
     {
-      "check": "U6.3 -> +3V3",
+      "check": "U6.3 -> VBUS_SWITCHED",
       "pass": true
     },
     {
-      "check": "Regulator tab is pin 2 (GND)",
+      "check": "U6.4 -> GND",
       "pass": true
     },
     {
-      "check": "U3.1 -> +3V3_RF",
+      "check": "U6.5 -> BUCK_SW",
       "pass": true
     },
     {
-      "check": "U3.2 -> RF_SW0",
+      "check": "U6.6 -> BUCK_BST",
       "pass": true
     },
     {
-      "check": "U3.3 -> RF_SW1",
+      "check": "Buck uses manufacturer TSOT26 land pattern",
       "pass": true
     },
     {
-      "check": "U3.8 -> GND",
+      "check": "U7.1 -> VBUS_PROTECTED",
       "pass": true
     },
     {
-      "check": "U4.1 -> +3V3_RF",
+      "check": "U7.2 -> GND",
       "pass": true
     },
     {
-      "check": "U4.2 -> RF_SW0",
+      "check": "U7.3 -> MAIN_POWER_EN",
       "pass": true
     },
     {
-      "check": "U4.3 -> RF_SW1",
+      "check": "U7.4 -> POWER_SLEW",
       "pass": true
     },
     {
-      "check": "U4.8 -> GND",
+      "check": "U7.5 -> VBUS_SWITCHED",
       "pass": true
     },
     {
-      "check": "C3.1 -> +3V3",
+      "check": "U7.6 -> VBUS_SWITCHED",
+      "pass": true
+    },
+    {
+      "check": "U8.1 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U8.2 -> UART_TX_USB",
+      "pass": true
+    },
+    {
+      "check": "U8.3 -> UART_RX_USB",
+      "pass": true
+    },
+    {
+      "check": "U8.4 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U8.5 -> UART_TX_ESP",
+      "pass": true
+    },
+    {
+      "check": "U8.6 -> UART_RX_ESP",
+      "pass": true
+    },
+    {
+      "check": "U8.7 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U8.8 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "L1.1 -> BUCK_SW",
+      "pass": true
+    },
+    {
+      "check": "L1.2 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C14.1 -> BUCK_BST",
+      "pass": true
+    },
+    {
+      "check": "C14.2 -> BUCK_SW",
+      "pass": true
+    },
+    {
+      "check": "C70.1 -> POWER_SLEW",
+      "pass": true
+    },
+    {
+      "check": "C70.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "R70.1 -> USB_ACTIVE",
+      "pass": true
+    },
+    {
+      "check": "R70.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "R71.1 -> MAIN_POWER_EN",
+      "pass": true
+    },
+    {
+      "check": "R71.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "J4.1 -> USB_ACTIVE",
+      "pass": true
+    },
+    {
+      "check": "J4.2 -> MAIN_POWER_EN",
+      "pass": true
+    },
+    {
+      "check": "J4.3 -> +3V3_USB",
+      "pass": true
+    },
+    {
+      "check": "C1 high-voltage 1206 capacitor selected for DC-bias margin",
+      "pass": true
+    },
+    {
+      "check": "C2 high-voltage 1206 capacitor selected for DC-bias margin",
+      "pass": true
+    },
+    {
+      "check": "C13 high-voltage 1206 capacitor selected for DC-bias margin",
+      "pass": true
+    },
+    {
+      "check": "R31 pulls RF_SW0 HIGH at reset",
+      "pass": true
+    },
+    {
+      "check": "R31 uses 10k, not weak 100k pullup",
+      "pass": true
+    },
+    {
+      "check": "R32 pulls RF_SW1 HIGH at reset",
+      "pass": true
+    },
+    {
+      "check": "R32 uses 10k, not weak 100k pullup",
+      "pass": true
+    },
+    {
+      "check": "R33 pulls RF_DISABLE HIGH at reset",
+      "pass": true
+    },
+    {
+      "check": "R33 uses 10k, not weak 100k pullup",
+      "pass": true
+    },
+    {
+      "check": "R34 pulls RF_OUT0 HIGH at reset",
+      "pass": true
+    },
+    {
+      "check": "R34 uses 10k, not weak 100k pullup",
+      "pass": true
+    },
+    {
+      "check": "R35 pulls RF_OUT1 HIGH at reset",
+      "pass": true
+    },
+    {
+      "check": "R35 uses 10k, not weak 100k pullup",
+      "pass": true
+    },
+    {
+      "check": "U3.16 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U3.17 -> RF_SW0",
+      "pass": true
+    },
+    {
+      "check": "U3.18 -> RF_SW1",
+      "pass": true
+    },
+    {
+      "check": "U3.19 -> RF_DISABLE",
+      "pass": true
+    },
+    {
+      "check": "U3.20 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U3.25 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U3 30 MHz-6 GHz specified switch",
+      "pass": true
+    },
+    {
+      "check": "U4.16 -> +3V3_RF",
+      "pass": true
+    },
+    {
+      "check": "U4.17 -> RF_OUT0",
+      "pass": true
+    },
+    {
+      "check": "U4.18 -> RF_OUT1",
+      "pass": true
+    },
+    {
+      "check": "U4.19 -> RF_DISABLE",
+      "pass": true
+    },
+    {
+      "check": "U4.20 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U4.25 -> GND",
+      "pass": true
+    },
+    {
+      "check": "U4 30 MHz-6 GHz specified switch",
+      "pass": true
+    },
+    {
+      "check": "U3.14 -> RF_315_IN",
+      "pass": true
+    },
+    {
+      "check": "U3.11 -> RF_433_IN",
+      "pass": true
+    },
+    {
+      "check": "U3.8 -> RF_868_915_IN",
+      "pass": true
+    },
+    {
+      "check": "U3.22 -> RF_SWITCH_IN",
+      "pass": true
+    },
+    {
+      "check": "U4.8 -> RF_315_OUT",
+      "pass": true
+    },
+    {
+      "check": "U4.11 -> RF_433_OUT",
+      "pass": true
+    },
+    {
+      "check": "U4.14 -> RF868_B",
+      "pass": true
+    },
+    {
+      "check": "U4.22 -> RF_COMBINED",
+      "pass": true
+    },
+    {
+      "check": "C3.1 -> +3V3_USB",
       "pass": true
     },
     {
@@ -171,7 +411,7 @@
       "pass": true
     },
     {
-      "check": "C4.1 -> +3V3",
+      "check": "C4.1 -> +3V3_USB",
       "pass": true
     },
     {
@@ -179,7 +419,7 @@
       "pass": true
     },
     {
-      "check": "C6.1 -> +3V3",
+      "check": "C6.1 -> +3V3_USB",
       "pass": true
     },
     {
@@ -187,15 +427,7 @@
       "pass": true
     },
     {
-      "check": "C7.1 -> +3V3",
-      "pass": true
-    },
-    {
-      "check": "C7.2 -> GND",
-      "pass": true
-    },
-    {
-      "check": "C8.1 -> +3V3",
+      "check": "C8.1 -> +3V3_USB",
       "pass": true
     },
     {
@@ -203,7 +435,15 @@
       "pass": true
     },
     {
-      "check": "C9.1 -> +3V3",
+      "check": "C7.1 -> VBUS_PROTECTED",
+      "pass": true
+    },
+    {
+      "check": "C7.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C9.1 -> VBUS_PROTECTED",
       "pass": true
     },
     {
@@ -224,6 +464,18 @@
     },
     {
       "check": "C12.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C71.1 -> +3V3",
+      "pass": true
+    },
+    {
+      "check": "C71.2 -> GND",
+      "pass": true
+    },
+    {
+      "check": "C8 omitted to limit attach-time capacitance",
       "pass": true
     },
     {
@@ -323,11 +575,11 @@
       "pass": true
     },
     {
-      "check": "U3.1_to_C60.1_mm <= 2.5",
+      "check": "U3.16_to_C60.1_mm <= 2.5",
       "pass": true
     },
     {
-      "check": "U4.1_to_C61.1_mm <= 2.5",
+      "check": "U4.16_to_C61.1_mm <= 2.5",
       "pass": true
     },
     {
@@ -376,7 +628,7 @@
     },
     {
       "check": "CC1101 crystal pin 10 within 3.5 mm",
-      "pass": true
+      "pass": false
     },
     {
       "check": "Balun orientation matches top-view audit frame",
@@ -443,7 +695,15 @@
       "pass": true
     },
     {
-      "check": "Eight initial regulator thermal vias",
+      "check": "Eight initial power-area ground stitching vias",
+      "pass": true
+    },
+    {
+      "check": "Placement ground vias have not been reassigned by touching power pads",
+      "pass": true
+    },
+    {
+      "check": "RF_N bridge pad lies above RF_P: no differential crossover",
       "pass": true
     },
     {
@@ -466,21 +726,21 @@
   "measurements": {
     "U1.2_to_C11.1_mm": 1.951,
     "U1.2_to_C12.1_mm": 1.866,
-    "U2.4_to_C21.1_mm": 1.332,
+    "U2.4_to_C21.1_mm": 1.366,
     "U2.9_to_C22.1_mm": 3.472,
     "U2.11_to_C23.1_mm": 2.658,
     "U2.14_to_C24.1_mm": 2.212,
     "U2.15_to_C25.1_mm": 2.437,
     "U2.18_to_C26.1_mm": 2.144,
-    "U3.1_to_C60.1_mm": 1.681,
-    "U4.1_to_C61.1_mm": 1.263,
+    "U3.16_to_C60.1_mm": 1.445,
+    "U4.16_to_C61.1_mm": 2.32,
     "U5.5_to_C4.1_mm": 1.454,
     "U5.6_to_C6.1_mm": 2.003,
     "U5.7_to_C7.1_mm": 1.356,
-    "U2.8_to_Y1.1_mm": 3.449,
-    "U2.10_to_Y1.3_mm": 1.762,
+    "U2.8_to_Y1.1_mm": 2.195,
+    "U2.10_to_Y1.3_mm": 4.478,
     "ESP32_antenna_tip_y_mm": -6.45
   },
   "parity_mismatches": [],
-  "footprints": 107
+  "footprints": 121
 }

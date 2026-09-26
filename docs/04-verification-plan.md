@@ -2,7 +2,16 @@
 
 No manufacturing order should be placed until all pre-order gates are checked.
 
-## A2 current checkpoint — 2026-09-22
+## A3 current checkpoint — 2026-09-26
+
+The routed A3 candidate has zero native DRC violations and zero unconnected
+items. See [A3 engineering decisions and bench acceptance](06-A3-prototype-engineering.md)
+and [fresh preflight](../reports/preflight-A3.json). One old crystal-placement
+screening target is exceeded; it remains visible in the artifact audit.
+Six independent/supplier review categories remain pending. No physical tests
+have occurred and no order is authorized by these reports.
+
+## A2 historical checkpoint — 2026-09-22
 
 - [x] Replace the incompatible crystal placeholder with an exact four-pad
   26 MHz part, manufacturer land pattern and documented initial load calculation.

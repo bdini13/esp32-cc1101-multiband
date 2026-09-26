@@ -16,7 +16,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_REVIEWS = {'power', 'rf', 'impedance', 'parts', 'mechanical', 'independent'}
 
-def evaluate(erc, drc, bom, reviews):
+def evaluate(erc, drc, bom, reviews, artifact=None):
     blockers = []
     erc_count = sum(len(sheet['violations']) for sheet in erc['sheets'])
     counts = {
@@ -27,6 +27,8 @@ def evaluate(erc, drc, bom, reviews):
             int(row['Qty per board']) > 0 and not row['Proposed part'].strip()
             for row in bom),
     }
+    if artifact is not None:
+        counts['artifact_failed_checks'] = sum(not c['pass'] for c in artifact['checks'])
     for name, value in counts.items():
         if value: blockers.append(f'{name}: {value}')
     if drc.get('schematic_parity'):
@@ -43,6 +45,7 @@ def evaluate(erc, drc, bom, reviews):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--kicad-cli', default='kicad-cli')
+    parser.add_argument('--kicad-python', required=True, help='Python executable with pcbnew')
     parser.add_argument('--output', type=Path, help='Optional generated JSON report')
     args = parser.parse_args()
     version = subprocess.check_output([args.kicad_cli, 'version'], text=True).strip()
@@ -50,7 +53,7 @@ def main():
         reports = {}
         for kind, source, mode in [
             ('erc', 'hardware/esp32-cc1101-multiband.kicad_sch', 'sch'),
-            ('drc', 'hardware/A2-routing-candidate.kicad_pcb', 'pcb'),
+            ('drc', 'hardware/A3-routing-candidate.kicad_pcb', 'pcb'),
         ]:
             destination = Path(directory) / f'{kind}.json'
             # KiCad's default exit status does not reject unconnected items;
@@ -59,10 +62,29 @@ def main():
                             '--output', str(destination), source],
                            cwd=ROOT, check=True, capture_output=True, text=True)
             reports[kind] = json.loads(destination.read_text())
+        fresh_xml=Path(directory)/'fresh.xml'
+        parity=Path(directory)/'parity.json'
+        subprocess.run([args.kicad_cli,'sch','export','netlist','--format','kicadxml',
+                        '--output',str(fresh_xml),'hardware/esp32-cc1101-multiband.kicad_sch'],
+                       cwd=ROOT,check=True,capture_output=True,text=True)
+        result=subprocess.run([args.kicad_python,'hardware/audit_connectivity.py',str(fresh_xml),
+                               'hardware/A3-routing-candidate.kicad_pcb',str(parity)],
+                              cwd=ROOT,capture_output=True,text=True)
+        if result.returncode not in (0,1) or not parity.exists():
+            raise RuntimeError('Connectivity audit execution failed: '+result.stderr)
+        reports['drc']['schematic_parity']=json.loads(parity.read_text())
     with (ROOT / 'hardware/bom-draft.csv').open() as file:
         bom = list(csv.DictReader(file))
     reviews = json.loads((ROOT / 'hardware/preorder-reviews.json').read_text())
-    counts, blockers = evaluate(reports['erc'], reports['drc'], bom, reviews['reviews'])
+    with tempfile.TemporaryDirectory(prefix='cc1101-artifact-audit-') as directory:
+        artifact_path=Path(directory)/'fresh-artifact.json'
+        audit_result=subprocess.run([args.kicad_python,'hardware/audit_design.py',
+                                     '--output',str(artifact_path)],cwd=ROOT,
+                                    capture_output=True,text=True)
+        if audit_result.returncode not in (0,1) or not artifact_path.exists():
+            raise RuntimeError('Artifact audit failed to execute: '+audit_result.stderr)
+        artifact=json.loads(artifact_path.read_text())
+    counts, blockers = evaluate(reports['erc'], reports['drc'], bom, reviews['reviews'],artifact)
     # Bind this snapshot to exact project inputs. Re-run after every change.
     inputs = sorted(p for p in (ROOT / 'hardware').rglob('*') if p.is_file()
                     and p.suffix in {'.kicad_sch', '.kicad_pcb', '.kicad_pro',
@@ -72,11 +94,12 @@ def main():
         'revision': reviews['revision'], 'kicad_version': version,
         'status': 'BLOCKED' if blockers else 'REQUIRES_OWNER_ORDER_APPROVAL',
         'scope': 'Prototype pre-order checks only; no bench/RF/compliance validation.',
-        'schematic_parity': 'Not requested: candidate has a separate basename. Independent connectivity review is mandatory.',
+        'schematic_parity': 'Fresh CLI XML compared to candidate references, values, footprint names and every numbered pad net.',
         'counts': counts, 'blockers': blockers,
         'input_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                          for p in inputs},
         'erc': reports['erc'], 'candidate_drc': reports['drc'],
+        'artifact_audit': artifact,
     }
     if args.output:
         args.output.write_text(json.dumps(snapshot, indent=2) + '\n')

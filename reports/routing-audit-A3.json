@@ -1,0 +1,442 @@
+{
+  "status": "EXPERIMENT_ONLY_NOT_RELEASED",
+  "track_segments_by_layer_and_vias": {
+    "F.Cu": 742,
+    "vias": 172,
+    "B.Cu": 165,
+    "In2.Cu": 98
+  },
+  "total_trace_length_by_net_mm": {
+    "/+3V3": 142.375,
+    "/+3V3_RF": 107.668,
+    "/+3V3_USB": 36.925,
+    "/AUTO_DTR_N": 18.179,
+    "/AUTO_Q1_BASE": 2.225,
+    "/AUTO_Q2_BASE": 1.914,
+    "/AUTO_RTS_N": 9.832,
+    "/BALUN_50R": 1.065,
+    "/BALUN_M1": 2.279,
+    "/BAL_N": 1.402,
+    "/BAL_P": 1.402,
+    "/BUCK_BST": 2.05,
+    "/BUCK_SW": 6.706,
+    "/CC1101_CSN": 32.133,
+    "/CC1101_DCOUPL": 1.881,
+    "/CC1101_GDO0": 46.756,
+    "/CC1101_GDO2": 45.455,
+    "/CC1101_RBIAS": 1.71,
+    "/CC1101_RF_N": 2.924,
+    "/CC1101_RF_P": 2.924,
+    "/CC1101_XOSC_Q1": 4.545,
+    "/CC1101_XOSC_Q2": 8.142,
+    "/CHASSIS": 27.345,
+    "/CP2102_RST_N": 4.681,
+    "/ESP_EN": 43.397,
+    "/ESP_IO0": 53.525,
+    "/EXP_GPIO13": 19.451,
+    "/EXP_GPIO14": 21.373,
+    "/EXP_GPIO22": 40.606,
+    "/EXP_GPIO34": 33.933,
+    "/EXP_GPIO35": 34.701,
+    "/GND": 186.876,
+    "/MAIN_POWER_EN": 21.269,
+    "/POWER_LED_A": 4.68,
+    "/POWER_SLEW": 1.71,
+    "/RF315_A": 2.758,
+    "/RF315_B": 2.639,
+    "/RF315_TRAP": 1.7,
+    "/RF433_A": 3.035,
+    "/RF433_B": 3.035,
+    "/RF433_C": 2.935,
+    "/RF868_A": 3.18,
+    "/RF868_B": 11.598,
+    "/RF_315_IN": 3.831,
+    "/RF_315_OUT": 7.977,
+    "/RF_433_IN": 1.115,
+    "/RF_433_OUT": 2.672,
+    "/RF_868_915_IN": 5.358,
+    "/RF_COMBINED": 10.287,
+    "/RF_DISABLE": 52.14,
+    "/RF_FEED": 2.228,
+    "/RF_OUT0": 66.439,
+    "/RF_OUT1": 79.505,
+    "/RF_SMA": 10.921,
+    "/RF_SW0": 63.109,
+    "/RF_SW1": 65.731,
+    "/RF_SWITCH_IN": 2.581,
+    "/SPI_MISO": 41.305,
+    "/SPI_MOSI": 49.283,
+    "/SPI_SCLK": 35.587,
+    "/STATUS_LED": 32.888,
+    "/STATUS_LED_A": 4.113,
+    "/U3_RF4_TERM": 1.913,
+    "/U4_RF4_TERM": 1.624,
+    "/UART_RX_ESP": 38.524,
+    "/UART_RX_USB": 18.013,
+    "/UART_TX_ESP": 75.733,
+    "/UART_TX_USB": 19.629,
+    "/USB_ACTIVE": 37.745,
+    "/USB_CC1": 13.456,
+    "/USB_CC2": 7.305,
+    "/USB_DM": 5.05,
+    "/USB_DM_CONN": 8.906,
+    "/USB_DP": 7.12,
+    "/USB_DP_CONN": 7.313,
+    "/USB_VBUS_SENSE": 16.524,
+    "/VBUS_IN": 17.142,
+    "/VBUS_PROTECTED": 91.487,
+    "/VBUS_SWITCHED": 6.405
+  },
+  "layer_constraint_violations": [],
+  "power_segments_below_0_40_mm_require_review": [
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.018
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.366
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.3,
+      "length_mm": 0.8
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.099
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 2.133
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.812
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.47
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.45
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.406
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.25,
+      "length_mm": 0.027
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.33
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.1
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.702
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.562
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.512
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.212
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.102
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.806
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.15,
+      "length_mm": 0.48
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.948
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.63
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.662
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.78
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.212
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.3,
+      "length_mm": 1.05
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.3,
+      "length_mm": 1.2
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.3,
+      "length_mm": 3.09
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.02
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 0.68
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.9
+    },
+    {
+      "net": "/+3V3_RF",
+      "width_mm": 0.2,
+      "length_mm": 1.25
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.15,
+      "length_mm": 0.685
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.3,
+      "length_mm": 0.662
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.3,
+      "length_mm": 0.4
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.25,
+      "length_mm": 0.126
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.15,
+      "length_mm": 0.369
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.15,
+      "length_mm": 0.882
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.3,
+      "length_mm": 0.707
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.15,
+      "length_mm": 0.947
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.15,
+      "length_mm": 0.761
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.15,
+      "length_mm": 0.228
+    },
+    {
+      "net": "/VBUS_PROTECTED",
+      "width_mm": 0.15,
+      "length_mm": 0.183
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 1.5
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 1.15
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 1.985
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.3,
+      "length_mm": 0.237
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 2.6
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 1.4
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.3,
+      "length_mm": 0.221
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 0.849
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 6.1
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 1.011
+    },
+    {
+      "net": "/+3V3",
+      "width_mm": 0.2,
+      "length_mm": 0.5
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.3,
+      "length_mm": 0.86
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.3,
+      "length_mm": 0.795
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.3,
+      "length_mm": 0.99
+    },
+    {
+      "net": "/VBUS_IN",
+      "width_mm": 0.3,
+      "length_mm": 0.795
+    },
+    {
+      "net": "/+3V3_USB",
+      "width_mm": 0.25,
+      "length_mm": 0.05
+    },
+    {
+      "net": "/+3V3_USB",
+      "width_mm": 0.25,
+      "length_mm": 0.45
+    },
+    {
+      "net": "/BUCK_SW",
+      "width_mm": 0.3,
+      "length_mm": 1.2
+    },
+    {
+      "net": "/BUCK_SW",
+      "width_mm": 0.3,
+      "length_mm": 0.311
+    },
+    {
+      "net": "/BUCK_SW",
+      "width_mm": 0.3,
+      "length_mm": 2.78
+    }
+  ],
+  "intentional_USB_DM_connector_crossover_vias_mm": [
+    [
+      8.7,
+      18.25
+    ],
+    [
+      6.1,
+      17.25
+    ]
+  ],
+  "via_centers_inside_numbered_SMD_pads": [
+    {
+      "reference": "C21",
+      "pad": "1",
+      "position_mm": [
+        46.5,
+        18.9
+      ],
+      "requirement": "RESIN_FILLED_COPPER_CAPPED"
+    },
+    {
+      "reference": "U5",
+      "pad": "25",
+      "position_mm": [
+        16.0,
+        19.4
+      ],
+      "requirement": "RESIN_FILLED_COPPER_CAPPED"
+    }
+  ],
+  "via_screen_limit": "Center-inside-pad screen only; assembler must review every pad-adjacent via too.",
+  "crystal_review": "Pin-10 placement exceeds the retained 3.5 mm screening target. Total net lengths include load-cap branches, not just IC-to-crystal length.",
+  "not_validated": [
+    "RF impedance/matching",
+    "USB differential coupling/skew",
+    "Power voltage drop and thermal behavior",
+    "Local bypass loops",
+    "Digital exclusion beneath RF/crystal"
+  ]
+}

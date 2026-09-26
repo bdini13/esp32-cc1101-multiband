@@ -17,6 +17,11 @@ def main():
             str(FW / 'tests/diagnostics_test.cpp'), '-o', executable,
         ], check=True)
         subprocess.run([executable], check=True, timeout=10)
+        subprocess.run([
+            os.environ.get('CXX','c++'),'-std=c++11','-Wall','-Wextra','-Werror',
+            '-pedantic','-UNDEBUG','-I',str(FW/'include'),
+            str(FW/'tests/rf_boot_test.cpp'),'-o',executable],check=True)
+        subprocess.run([executable],check=True,timeout=10)
 
 if __name__ == '__main__':
     main()

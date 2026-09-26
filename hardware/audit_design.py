@@ -5,6 +5,7 @@ Run with KiCad's bundled Python after regenerating schematic, XML, PCB and BOM.
 Checks the generated artifacts, not just the generator's intended assignments.
 """
 import csv
+import argparse
 import json
 import math
 from pathlib import Path
@@ -16,6 +17,9 @@ HERE = Path(__file__).resolve().parent
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path,default=HERE.parent/'reports/design-audit.json')
+    args=parser.parse_args()
     root = ET.parse(HERE / "esp32-cc1101-multiband.xml").getroot()
     board = pcbnew.LoadBoard(str(HERE / "esp32-cc1101-multiband.kicad_pcb"))
     footprints = {f.GetReference(): f for f in board.GetFootprints()}
@@ -52,8 +56,12 @@ def main():
     for pin in (16, 19, 21):
         net_is("U2", pin, "GND")
     net_is("U2", 5, "CC1101_DCOUPL")
-    for pin in (5, 6, 7):
-        net_is("U5", pin, "+3V3")
+    for pin in (5, 6):
+        net_is("U5", pin, "+3V3_USB")
+    net_is("U5", 7, "VBUS_PROTECTED")
+    net_is("U5", 15, "USB_ACTIVE")
+    net_is("U5", 20, "UART_RX_USB")
+    net_is("U5", 21, "UART_TX_USB")
     net_is("U5", 8, "USB_VBUS_SENSE")
     for ref, p1, p2, value in (
         ("R5", "VBUS_PROTECTED", "USB_VBUS_SENSE", "22.1k 1%"),
@@ -69,19 +77,44 @@ def main():
     net_is("D2", 2, "GND")
     check(comps["D2"].findtext("footprint") == "Diode_SMD:D_SOD-882",
           "PESD5V0S1UL uses SOD-882")
-    check(comps["U6"].findtext("value") == "AP7361C-33E-13",
-          "Regulator is E, not different-pinout ER")
-    for pin, net in ((1, "VBUS_PROTECTED"), (2, "GND"), (3, "+3V3")):
+    check(comps["U6"].findtext("value") == "AP63203WU-7",
+          "Regulator is fixed 3.3 V AP63203")
+    for pin, net in ((1, "+3V3"), (2, "VBUS_SWITCHED"), (3, "VBUS_SWITCHED"),
+                     (4,"GND"),(5,"BUCK_SW"),(6,"BUCK_BST")):
         net_is("U6", pin, net)
-    check(comps["U6"].findtext("footprint") == "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
-          "Regulator tab is pin 2 (GND)")
+    check(comps["U6"].findtext("footprint") == "ESP32_CC1101_RF:Diodes_TSOT26",
+          "Buck uses manufacturer TSOT26 land pattern")
+    for ref, pins in {
+        'U7': {1:'VBUS_PROTECTED',2:'GND',3:'MAIN_POWER_EN',4:'POWER_SLEW',5:'VBUS_SWITCHED',6:'VBUS_SWITCHED'},
+        'U8': {1:'GND',2:'UART_TX_USB',3:'UART_RX_USB',4:'GND',5:'UART_TX_ESP',6:'UART_RX_ESP',7:'GND',8:'+3V3'},
+        'L1': {1:'BUCK_SW',2:'+3V3'}, 'C14': {1:'BUCK_BST',2:'BUCK_SW'},
+        'C70': {1:'POWER_SLEW',2:'GND'}, 'R70': {1:'USB_ACTIVE',2:'GND'},
+        'R71': {1:'MAIN_POWER_EN',2:'GND'}, 'J4': {1:'USB_ACTIVE',2:'MAIN_POWER_EN',3:'+3V3_USB'},
+    }.items():
+        for pin, net in pins.items(): net_is(ref,pin,net)
+    for ref in ('C1','C2','C13'):
+        check(comps[ref].findtext('value') == '22uF 25V' and
+              comps[ref].findtext('footprint') == 'Capacitor_SMD:C_1206_3216Metric',
+              ref+' high-voltage 1206 capacitor selected for DC-bias margin')
+    for ref, signal in [('R31','RF_SW0'),('R32','RF_SW1'),('R33','RF_DISABLE'),
+                        ('R34','RF_OUT0'),('R35','RF_OUT1')]:
+        check({nets.get((ref,'1')),nets.get((ref,'2'))} == {'/'+signal,'/+3V3_RF'},
+              ref+' pulls '+signal+' HIGH at reset')
+        check(comps[ref].findtext('value') == '10k pullup', ref+' uses 10k, not weak 100k pullup')
 
     for ref in ("U3", "U4"):
-        for pin, net in ((1, "+3V3_RF"), (2, "RF_SW0"), (3, "RF_SW1"), (8, "GND")):
+        for pin, net in ((16, "+3V3_RF"), (17, "RF_SW0" if ref=='U3' else 'RF_OUT0'),
+                         (18, "RF_SW1" if ref=='U3' else 'RF_OUT1'), (19,'RF_DISABLE'), (20,'GND'),(25,'GND')):
             net_is(ref, pin, net)
-    for ref in ("C3", "C4", "C6", "C7", "C8", "C9", "C11", "C12"):
-        net_is(ref, 1, "+3V3")
+        check(comps[ref].findtext('value') == 'PE42442A-Z',ref+' 30 MHz-6 GHz specified switch')
+    for ref,pins in {'U3':{14:'RF_315_IN',11:'RF_433_IN',8:'RF_868_915_IN',22:'RF_SWITCH_IN'},
+                     'U4':{8:'RF_315_OUT',11:'RF_433_OUT',14:'RF868_B',22:'RF_COMBINED'}}.items():
+        for pin,net in pins.items(): net_is(ref,pin,net)
+    for ref in ("C3", "C4", "C6", "C8", "C7", "C9", "C11", "C12", "C71"):
+        net_is(ref, 1, "+3V3_USB" if ref in ('C3','C4','C6','C8') else
+               'VBUS_PROTECTED' if ref in ('C7','C9') else '+3V3')
         net_is(ref, 2, "GND")
+    check('DNP' in comps['C8'].findtext('value'),'C8 omitted to limit attach-time capacitance')
     for ref in ("C21", "C22", "C23", "C24", "C25", "C26", "C60", "C61"):
         net_is(ref, 1, "+3V3_RF")
         net_is(ref, 2, "GND")
@@ -92,7 +125,7 @@ def main():
         ("U2", 4, "C21", 3.5), ("U2", 9, "C22", 3.5),
         ("U2", 11, "C23", 3.5), ("U2", 14, "C24", 3.5),
         ("U2", 15, "C25", 3.5), ("U2", 18, "C26", 3.5),
-        ("U3", 1, "C60", 2.5), ("U4", 1, "C61", 2.5),
+        ("U3", 16, "C60", 2.5), ("U4", 16, "C61", 2.5),
         ("U5", 5, "C4", 2.5), ("U5", 6, "C6", 2.5),
         ("U5", 7, "C7", 2.5),
     ):
@@ -136,7 +169,11 @@ def main():
     measurements["ESP32_antenna_tip_y_mm"] = round(ey - 12.75, 3)
     check(board.GetCopperLayerCount() == 4, "Four copper layers")
     check(sum(isinstance(t, pcbnew.PCB_VIA) for t in board.GetTracks()) == 8,
-          "Eight initial regulator thermal vias")
+          "Eight initial power-area ground stitching vias")
+    check(all(t.GetNetname() == '/GND' for t in board.GetTracks()
+              if isinstance(t,pcbnew.PCB_VIA)), 'Placement ground vias have not been reassigned by touching power pads')
+    check(xy(pad('C42',1))[1] < xy(pad('C42',2))[1],
+          'RF_N bridge pad lies above RF_P: no differential crossover')
     copper_zones = [z for z in board.Zones() if not z.GetIsRuleArea()]
     check(len(copper_zones) == 3 and all(z.GetNetname() == "/GND" for z in copper_zones),
           "Initial F.Cu / In1.Cu / B.Cu ground heat-spreading zones")
@@ -165,7 +202,7 @@ def main():
               "scope": "Corrected draft only; not manufacturing approval",
               "checks": checks, "measurements": measurements,
               "parity_mismatches": mismatches, "footprints": len(footprints)}
-    output = HERE.parent / "reports" / "design-audit.json"
+    output = args.output
     output.write_text(json.dumps(report, indent=2) + "\n")
     print(f"{report['status']}: {sum(c['pass'] for c in checks)}/{len(checks)} checks")
     for c in checks:

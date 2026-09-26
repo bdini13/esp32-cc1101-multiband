@@ -1,5 +1,9 @@
 # Bring-up firmware
 
+**A3 hardware only. Do not flash this switch mapping onto A2.** Before fitting
+J4, configure/read back the CP2102N's 500 mA bus-powered descriptor with the
+shunt removed. Follow the [power setup](../../docs/06-A3-prototype-engineering.md).
+
 This PlatformIO/Arduino program verifies the initial digital hardware without
 transmitting RF. It:
 
@@ -33,7 +37,11 @@ prove a counterfeit. The old all-zero-bus false-positive has been removed.
 
 The unused, unguarded path-selection helper was removed. There is no command
 interface that can select an RF branch, enter RX/TX, or write a modem profile.
-External switch pulldowns remain necessary during reset and before code runs.
+Five external 10 kohm pullups remain necessary during reset and before code runs.
+GPIO4 is the shared RF disable; GPIO32/33 select U3 and GPIO16/17 select U4.
+The startup helper preloads all five outputs HIGH before enabling their output
+drivers. PE42442 state 111 is isolated; 000 is not. Additional host tests check
+the exact A3 pin map, output preload ordering and re-isolation ordering.
 Passing diagnostics does not establish sensitivity, crystal accuracy, RF
 isolation, emissions compliance or hardware reliability.
 
