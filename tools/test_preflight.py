@@ -47,5 +47,10 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual(counts['artifact_failed_checks'],1)
         self.assertIn('artifact_failed_checks: 1',blockers)
 
+    def test_route_screen_failure_blocks_clean_native_checks(self):
+        routes={'checks':[{'pass':False}]}
+        _, blockers=evaluate(self.erc,self.drc,self.bom,self.reviews,routes=routes)
+        self.assertIn('route_screen_failed_checks: 1',blockers)
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,5 +1,9 @@
 # A3 prototype-review checkpoint — 2026-09-26
 
+**Historical pre-refinement snapshot.** The crystal failure below has since
+been resolved without changing its threshold. See the
+[current refinement report](autonomous-refinement-A3-2026-09-26.md).
+
 **Fully connected review candidate, not an approved order or proven radio.**
 The owner's five-board prototype goal is unchanged. No hardware, quote, order,
 human signature or measurement is represented by this checkpoint.

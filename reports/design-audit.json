@@ -1,6 +1,6 @@
 {
-  "status": "FAIL",
-  "scope": "Corrected draft only; not manufacturing approval",
+  "status": "PASS",
+  "scope": "Routed A3 candidate; initial-via checks explicitly use placement seed. Not manufacturing approval.",
   "checks": [
     {
       "check": "U2.4 -> +3V3_RF",
@@ -628,7 +628,7 @@
     },
     {
       "check": "CC1101 crystal pin 10 within 3.5 mm",
-      "pass": false
+      "pass": true
     },
     {
       "check": "Balun orientation matches top-view audit frame",
@@ -695,7 +695,7 @@
       "pass": true
     },
     {
-      "check": "Eight initial power-area ground stitching vias",
+      "check": "Placement seed: eight initial power-area ground stitching vias",
       "pass": true
     },
     {
@@ -732,13 +732,13 @@
     "U2.14_to_C24.1_mm": 2.212,
     "U2.15_to_C25.1_mm": 2.437,
     "U2.18_to_C26.1_mm": 2.144,
-    "U3.16_to_C60.1_mm": 1.445,
+    "U3.16_to_C60.1_mm": 1.813,
     "U4.16_to_C61.1_mm": 2.32,
     "U5.5_to_C4.1_mm": 1.454,
     "U5.6_to_C6.1_mm": 2.003,
     "U5.7_to_C7.1_mm": 1.356,
-    "U2.8_to_Y1.1_mm": 2.195,
-    "U2.10_to_Y1.3_mm": 4.478,
+    "U2.8_to_Y1.1_mm": 3.468,
+    "U2.10_to_Y1.3_mm": 3.479,
     "ESP32_antenna_tip_y_mm": -6.45
   },
   "parity_mismatches": [],

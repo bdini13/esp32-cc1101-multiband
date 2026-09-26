@@ -116,12 +116,24 @@ remaining digital routing. RF ground lands connect to the switch exposed
 paddles and nearby ground vias. R40's redundant zero-ohm series jumper was
 removed to eliminate a detour; L41 now feeds the input switch directly.
 
-The crystal was rotated to make room for digital pin escape without routing
-clock signals through vias. One oscillator connection is consequently longer
-than the old 3.5 mm straight-line screening goal. This is **not** an approved
-waiver of startup/frequency testing. Record actual routed lengths, load trim,
-cold-start behavior and probe loading during review; do not probe it casually
-with a high-capacitance scope probe.
+The crystal now uses a -37.5 degree diagonal orientation with relocated load
+capacitors and rerouted digital/power escapes. Both pin-center distances
+(3.468 / 3.479 mm) meet the unchanged 3.5 mm screening goal. Actual clock
+routes are 4.299 / 3.994 mm, without vias. Digital copper on every layer is
+outside the projected Q1 pad by at least 0.2079 mm, against a new 0.20 mm
+project screen. These numerical screens are not manufacturer qualification.
+Record load trim, cold-start behavior, frequency and probe loading during
+review; do not casually probe the oscillator with a high-capacitance probe.
+[CC1101 oscillator/layout guidance](https://www.ti.com/lit/ds/symlink/cc1101.pdf).
+
+The new [routed-path model](../reports/route-margins-A3.json) estimates 7.423 mV
+drop in the main ESP32 copper path at 0.5 A, with 0.8 mm minimum trace width.
+It assumes 80 C copper, 80% of target copper thickness and 20 um via plating.
+It omits components, pad spreading, cable and ground-return resistance, and
+does not model temperature rise, transients or RF noise. Its independent load
+cases are not an approved simultaneous-load budget. The remaining 60 narrow
+branch/neck segments remain listed; a narrow trace is not automatically an
+error when its current is small, nor does this model approve every branch.
 
 The balun and filter values remain reference-derived starting values, not a
 four-band match. Board parasitics and the new switch packages alter the circuit.

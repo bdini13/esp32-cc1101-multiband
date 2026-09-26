@@ -16,7 +16,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_REVIEWS = {'power', 'rf', 'impedance', 'parts', 'mechanical', 'independent'}
 
-def evaluate(erc, drc, bom, reviews, artifact=None):
+def evaluate(erc, drc, bom, reviews, artifact=None, routes=None):
     blockers = []
     erc_count = sum(len(sheet['violations']) for sheet in erc['sheets'])
     counts = {
@@ -29,6 +29,8 @@ def evaluate(erc, drc, bom, reviews, artifact=None):
     }
     if artifact is not None:
         counts['artifact_failed_checks'] = sum(not c['pass'] for c in artifact['checks'])
+    if routes is not None:
+        counts['route_screen_failed_checks'] = sum(not c['pass'] for c in routes['checks'])
     for name, value in counts.items():
         if value: blockers.append(f'{name}: {value}')
     if drc.get('schematic_parity'):
@@ -84,11 +86,18 @@ def main():
         if audit_result.returncode not in (0,1) or not artifact_path.exists():
             raise RuntimeError('Artifact audit failed to execute: '+audit_result.stderr)
         artifact=json.loads(artifact_path.read_text())
-    counts, blockers = evaluate(reports['erc'], reports['drc'], bom, reviews['reviews'],artifact)
+        route_path=Path(directory)/'fresh-routes.json'
+        subprocess.run([args.kicad_python,'hardware/route_metrics.py','--output',str(route_path)],
+                       cwd=ROOT,check=True,capture_output=True,text=True)
+        routes=json.loads(route_path.read_text())
+    counts, blockers = evaluate(reports['erc'], reports['drc'], bom, reviews['reviews'],artifact,routes)
     # Bind this snapshot to exact project inputs. Re-run after every change.
     inputs = sorted(p for p in (ROOT / 'hardware').rglob('*') if p.is_file()
                     and p.suffix in {'.kicad_sch', '.kicad_pcb', '.kicad_pro',
-                                     '.kicad_sym', '.kicad_mod', '.csv', '.json'})
+                                     '.kicad_sym', '.kicad_mod', '.csv', '.json', '.py'})
+    inputs += sorted((ROOT/'tools').glob('*.py'))
+    inputs += sorted(p for p in (ROOT/'firmware/bringup').rglob('*') if p.is_file()
+                     and '.pio' not in p.parts and p.suffix in {'.cpp','.h','.ini'})
     snapshot = {
         'generated_utc': datetime.now(timezone.utc).isoformat(),
         'revision': reviews['revision'], 'kicad_version': version,
@@ -100,6 +109,7 @@ def main():
                          for p in inputs},
         'erc': reports['erc'], 'candidate_drc': reports['drc'],
         'artifact_audit': artifact,
+        'route_screens': routes,
     }
     if args.output:
         args.output.write_text(json.dumps(snapshot, indent=2) + '\n')

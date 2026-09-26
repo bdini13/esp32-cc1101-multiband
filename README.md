@@ -30,15 +30,16 @@ file or a fabrication package. Bottom and inner routes are not shown here.*
 </details>
 
 [Schematic SVG](output/svg-A3/esp32-cc1101-multiband.svg) ·
-[Latest design report](reports/prototype-review-A3-2026-09-26.md) ·
+[Latest design report](reports/autonomous-refinement-A3-2026-09-26.md) ·
 [Draft BOM](hardware/bom-draft.csv) · [Roadmap](ROADMAP.md)
 
 Latest work: A3 replaces the power supply and RF switches, completes routed
 connectivity, adds safe RF boot sequencing and proposes all populated parts.
 See [engineering decisions and first-power instructions](docs/06-A3-prototype-engineering.md)
-and the [pre-order blocker report](reports/preflight-A3.json). One retained
-crystal-placement screening check fails; independent/supplier reviews remain
-pending. No hardware has been tested. Do not order historical A2 files.
+and the [pre-order blocker report](reports/preflight-A3.json). The crystal was
+relocated and rerouted: all 180 artifact checks and six route screens now pass.
+Independent/supplier reviews remain pending. No hardware has been tested.
+Do not order historical A2 files.
 
 ## Building blocks and design inputs
 
@@ -133,11 +134,12 @@ Snapshot: **2026-09-26**, KiCad 10.0.6. Design-file checks, not lab results.
 |---|---|
 | Schematic ERC | 0 reported violations |
 | Main placement seed DRC | 0 violations; 283 unconnected items (not the routed board) |
-| Targeted artifact checks | 179 / 180; crystal pin-10 distance screening fails |
+| Targeted artifact checks | **180 / 180 passing** on refined candidate / explicit seed checks |
+| Added route screens | **6 / 6 passing**; oscillator routing, cross-layer clearance and modeled DC drops |
 | Separate A3 routed candidate DRC | **0 violations; 0 unconnected items** |
 | Fresh schematic / routed PCB comparison | Every numbered pad net, value and footprint name matches |
 | Layer constraints | No signal traces on In1; RF/clock top-only; documented USB crossover |
-| Candidate power routing | Main rails explicitly routed; 62 narrower branch/neck segments flagged for review |
+| Candidate power routing | Main rails explicitly routed; 60 narrower branch/neck segments listed; critical copper paths quantitatively screened |
 | Parts selection | **94 / 94** populated positions have proposed exact parts; sourcing unapproved |
 | Physical boards tested | **None** |
 

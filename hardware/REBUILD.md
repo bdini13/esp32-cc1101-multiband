@@ -11,6 +11,7 @@ unless that installation provides it.
 - `esp32-cc1101-multiband.kicad_pcb`: generated placement seed, intentionally unrouted.
 - `A3-critical-routes.kicad_pcb`: manually specified RF/clock/USB/power seed.
 - `routing/A3-before-local-finishing.kicad_pcb`: preserved imported router checkpoint.
+- `routing/A3-before-crystal-refinement.kicad_pcb`: preserved connected layout before the crystal improvement.
 - `A3-routing-candidate.kicad_pcb`: current fully connected review candidate.
 
 Every PCB needs its same-basename .kicad_pro so clearances and minimum
@@ -37,9 +38,30 @@ set -e
 ```
 
 The finishing step shifts C60 0.4 mm north relative to the placement seed.
-It does not silently change the schematic or the preserved router checkpoint.
+The later refinement rotates/moves Y1, moves C31/C32 and reroutes the nearby
+clock/power/digital geometry. Neither step changes the schematic. The upstream
+placement/critical-route seeds intentionally retain their older geometry.
 
-## Reproduce the final local finishing step
+## Reproduce the final crystal refinement
+
+```sh
+"$KICAD_PYTHON" hardware/refine_crystal.py hardware/routing/A3-before-crystal-refinement.kicad_pcb hardware/A3-routing-candidate.kicad_pcb
+"$KICAD_CLI" pcb drc --format json --output reports/drc-A3-routing-candidate.json hardware/A3-routing-candidate.kicad_pcb
+"$KICAD_PYTHON" hardware/audit_connectivity.py hardware/esp32-cc1101-multiband.xml hardware/A3-routing-candidate.kicad_pcb reports/connectivity-A3.json
+"$KICAD_PYTHON" hardware/audit_design.py
+"$KICAD_PYTHON" hardware/route_metrics.py
+"$KICAD_PYTHON" hardware/audit_routing.py
+```
+
+The refinement rejects an input whose SHA-256 differs from the preserved
+checkpoint and refuses to overwrite its own input. Expected: 180/180 artifact
+checks, 6/6 route screens and native DRC 0 violations / 0 unconnected items.
+Regenerated UUIDs may differ; do not claim byte-identical output hashes.
+
+## Reproduce the earlier local finishing step
+
+This overwrites the candidate with the **pre-refinement** state. Run the final
+refinement above afterward to restore the current geometry.
 
 ```sh
 "$KICAD_PYTHON" hardware/finish_routes.py hardware/routing/A3-before-local-finishing.kicad_pcb
@@ -67,6 +89,7 @@ review artifact.
 ```sh
 "$KICAD_PYTHON" hardware/audit_design.py
 "$KICAD_PYTHON" tools/test_connectivity.py
+"$KICAD_PYTHON" tools/test_route_metrics.py
 "$SCHEMATIC_PYTHON" tools/test_firmware.py
 "$SCHEMATIC_PYTHON" tools/test_preflight.py
 "$SCHEMATIC_PYTHON" tools/engineering_budget.py
@@ -74,9 +97,11 @@ pio run -d firmware/bringup
 "$SCHEMATIC_PYTHON" tools/preflight.py --kicad-cli "$KICAD_CLI" --kicad-python "$KICAD_PYTHON" --output reports/preflight-A3.json
 ```
 
-Run the checks independently: artifact audit currently exits 1 because the
-retained 3.5 mm crystal pin-10 screening target fails (actual 4.478 mm).
-Preflight exits 2: that screening failure plus six pending review categories.
+Artifact audit now passes on the final candidate: both crystal terminals meet
+the unchanged 3.5 mm target. Preflight exits 2 for six pending review categories,
+with zero machine-screen failures. It freshly reruns schematic parity, the
+artifact audit and route metrics. Input hashes include check/generator code
+and firmware sources as well as hardware artifacts.
 Do not change a threshold or mark a human review approved to make checks green.
 Firmware tests/build are host-only; no hardware is flashed by these commands.
 

@@ -56,7 +56,7 @@ def main():
         'intentional_USB_DM_connector_crossover_vias_mm': usb_crossover_vias,
         'via_centers_inside_numbered_SMD_pads': in_pad,
         'via_screen_limit': 'Center-inside-pad screen only; assembler must review every pad-adjacent via too.',
-        'crystal_review': 'Pin-10 placement exceeds the retained 3.5 mm screening target. Total net lengths include load-cap branches, not just IC-to-crystal length.',
+        'crystal_review': 'Refined candidate meets the original 3.5 mm pin-center placement screen. See route-margins-A3.json for center-to-center routed lengths and all-layer Q1 digital clearance. Total net lengths here include load-cap branches.',
         'not_validated': ['RF impedance/matching', 'USB differential coupling/skew',
                           'Power voltage drop and thermal behavior',
                           'Local bypass loops', 'Digital exclusion beneath RF/crystal'],

@@ -21,7 +21,10 @@ does not close a phase; all acceptance gates require human review.
 - [ ] Confirm fabricator stackup and 50-ohm RF / 90-ohm USB geometry.
 - [x] Propose exact parts for all populated BOM positions.
 - [ ] Verify current stock, authorized sourcing and assembler substitutions.
-- [ ] Review the longer crystal connection; measure startup and frequency on prototypes.
+- [x] Relocate/reroute crystal to pass the original 3.5 mm placement screen;
+  shorten the longest route and remove digital copper beneath the Q1 pad.
+- [x] Add actual-path copper resistance and cross-layer oscillator screens.
+- [ ] Independently review the refined clock layout; measure startup/frequency.
 - [ ] Confirm filled/capped via processing at C21 and the USB bridge exposed pad.
 - [ ] Review connectors, solder/paste, RF pin mapping and assembly orientation.
 - [ ] Obtain independent electrical/RF review; repeat ERC/DRC/audits.

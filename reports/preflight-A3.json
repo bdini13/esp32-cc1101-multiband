@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-26T13:24:34.349878+00:00",
+  "generated_utc": "2026-09-26T14:04:43.086998+00:00",
   "revision": "A3",
   "kicad_version": "10.0.6",
   "status": "BLOCKED",
@@ -10,10 +10,10 @@
     "candidate_drc_violations": 0,
     "candidate_unconnected": 0,
     "populated_positions_without_exact_part": 0,
-    "artifact_failed_checks": 1
+    "artifact_failed_checks": 0,
+    "route_screen_failed_checks": 0
   },
   "blockers": [
-    "artifact_failed_checks: 1",
     "Human review pending: impedance",
     "Human review pending: independent",
     "Human review pending: mechanical",
@@ -26,27 +26,58 @@
     "hardware/A2-routing-candidate.kicad_pro": "625036fc1827f9f2f5dfd8739605a6df3112d13a86ebecd3a76f0dfa28c9af4f",
     "hardware/A3-critical-routes.kicad_pcb": "e2ba381e4229f21128f2022ad10be8e827f066c82af93771e921808b13ed8b7c",
     "hardware/A3-critical-routes.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
-    "hardware/A3-routing-candidate.kicad_pcb": "c3a48f205171fc8cc8fbb7b726f8c19429724a8c3ffed2dd2e0aad3a6224120d",
+    "hardware/A3-routing-candidate.kicad_pcb": "e26dd8993da1c1dd0441d1e1c102102c38fc55201d2f76fd17ef14fa1c1cf404",
     "hardware/A3-routing-candidate.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
+    "hardware/audit_connectivity.py": "ceedc803269fd4688fd11c9116670847b0147af6e0deaa10142b8095e9020871",
+    "hardware/audit_design.py": "e41107d5a214ed9e0a4936104a9d39504b2ad98e887483b16b7045c6e35d1b49",
+    "hardware/audit_routing.py": "3478e058743661ff92e130346bfe0584daa923461949feadb850731af50488f2",
     "hardware/bom-accessories.csv": "1df1c83aae1ffbd06f3e97a6a04e0719b0c97d892e1fea1951de9e9a38bb5b7e",
     "hardware/bom-draft.csv": "c0a95095fabc3aeb3e921455e92f1ad08ec79f1a9479f377a2c6a0f4f89c311e",
+    "hardware/configure_routing.py": "a1759883b319e11d40d8452ee264400912fb98d82fd4cab77c779593db2ac50e",
     "hardware/esp32-cc1101-multiband.kicad_pcb": "7130155a8eb4d4f2b7a503922a5d07ddf3f75f3de38dec71603d68e6719ee098",
     "hardware/esp32-cc1101-multiband.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
     "hardware/esp32-cc1101-multiband.kicad_sch": "a915076b521d7a1c9dc41c04d9e430d88ee989d7f33fabb327cdf97aae2b0feb",
+    "hardware/finish_routes.py": "663c6de521956f759accd58e0d5334caaa8ad1d35eb9e010b2382298738d19ae",
+    "hardware/generate_a3_footprints.py": "1da921fb1d51ce0a7bb3eeda1168f28d25a428c6991ece7bcab18d31a9e0165f",
+    "hardware/generate_bom.py": "fce28a370d493650559c5e0723b2a739916a40182b22e414c4db26ff28cf17ce",
+    "hardware/generate_pcb.py": "2cf419fda2cbe4c0a6e474d0d56dc3dc1693bf90f655d868ea357ca26534dc79",
+    "hardware/generate_schematic.py": "579a5a0858847088f8c02e150b4f71ed431bdf141a26be510ec52ce02b6d9cfb",
+    "hardware/generate_symbols.py": "cbc4b936b820895777796b2f705ba68923ef87f023eb6a4d0b2390c8bedc0a1e",
+    "hardware/import_routing.py": "a6282663942c01364aed8355b9bac9466234686a7000a4a25a3d63f52f85dcf0",
     "hardware/lib/ESP32_CC1101.kicad_sym": "9b90792b1d1f8cf65f2a950a6d62304eb6ec982331837b6ba7ebb870df275ea0",
     "hardware/lib/esp32_cc1101.pretty/Abracon_ABM8_4Pin_3.2x2.5mm.kicad_mod": "46e9aa35638184b490456c8f2071676846f0c2ac63c607efa8094ae04ee0d878",
     "hardware/lib/esp32_cc1101.pretty/Diodes_TSOT26.kicad_mod": "76df35c9566860d84982a3623d5a357039af42702e7e0f611c71682de70f3097",
     "hardware/lib/esp32_cc1101.pretty/Infineon_PG-TSNP-8-1.kicad_mod": "12961760699c4faf2b3baa5fac61045b57540fa98529920f2c6de5d1da6d31dd",
     "hardware/lib/esp32_cc1101.pretty/TTM_B0310J50100AHF.kicad_mod": "4de59aa713a3e3ffe21f10771175d70db3bbaa45282f1378d2e15964af73e156",
     "hardware/lib/esp32_cc1101.pretty/pSemi_PE42442_QFN24.kicad_mod": "442c46c2e1428373552c79599769c67a6dad33e9d03341d1b778dc7cc3f0f4a5",
-    "hardware/preorder-reviews.json": "df9db8dc7b02575c2dd3018c43bf54fa2a3c3a052a9f91077c7b122d04c08161",
+    "hardware/preorder-reviews.json": "60f73a007d636208f30cd607606255bdd2502784ef73171ec63d8364d84d7414",
+    "hardware/prepare_routing.py": "8f42faad3caed3953aeb7cddab2ffee98bcd2cc0f18794c474c79df95302e7b5",
+    "hardware/refine_crystal.py": "0b2a9498ad2ca73a0d74b12d8ddc46b8ffe2dc499431784f00b018916efd7c94",
+    "hardware/route_critical.py": "795e78750604cff7cd2e048069bf1e00d94206ff99e6da321a42d6086719c13b",
+    "hardware/route_metrics.py": "360472da1cab4223029bd435e4e14dc3bbe71a81d1d1408c52e7e445abb657ec",
+    "hardware/routing/A3-before-crystal-refinement.kicad_pcb": "c3a48f205171fc8cc8fbb7b726f8c19429724a8c3ffed2dd2e0aad3a6224120d",
+    "hardware/routing/A3-before-crystal-refinement.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
     "hardware/routing/A3-before-local-finishing.kicad_pcb": "60b0e3e03b1f008f6f4a87288fa9de4e5116cbb246284e9da549f358a65636e2",
-    "hardware/routing/A3-before-local-finishing.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0"
+    "hardware/routing/A3-before-local-finishing.kicad_pro": "522b62a6c0f0b09d36a435da84f0c5279fee99effa2d426986b0fc17a321f3c0",
+    "tools/check_publication.py": "59489e21b94cce989fb99dddaf662ae09bb542ccca0991544a2b781270a2de6f",
+    "tools/engineering_budget.py": "c48929eb633273f6589a290588ba0e269908e87b6d6be2090efa687bdffa5075",
+    "tools/preflight.py": "5d3e713d98b3ef845449412e9dd6be10ab3d3d484ca306ca030afdd20da17ace",
+    "tools/sanitize_netlist_paths.py": "b3f6f0f7f8b22b8c33bd9ea986c3bf0f0a086ba87365d05f2d2bca6cf91c37e2",
+    "tools/test_connectivity.py": "8a54b322b4216cb278293b0b17eb6636c60b7c26d942a26050c4c56fb034e97d",
+    "tools/test_firmware.py": "d047becf65824ef91955d023b4a5c06643954f90c27d171dfd210e5ede641318",
+    "tools/test_preflight.py": "3210f0ab4db7831ef586a05c440f29ded3ebe1ee75d8d4ad73954082c53e5bb0",
+    "tools/test_route_metrics.py": "fc2a6bdd837658828ed8680fe2ecb423a4a1b0adbe0565c8728f03adf06702a1",
+    "firmware/bringup/include/radio_diagnostics.h": "1666c078045b9499c21ac564823869038c240e5fa6b1b41f0dabcaded1d41820",
+    "firmware/bringup/include/rf_boot.h": "777214c13c003a2fae78f3e5cb044693b14e2e4e95490ba2ac2bbc4e4fe7d9e9",
+    "firmware/bringup/platformio.ini": "e031abb26be42a5a1350cf69fbe7d9c8f975c193db3c8021427a923b0981d390",
+    "firmware/bringup/src/main.cpp": "50ee8c4950bd8977fa624fc893a88aeb0465c81857d3b518b9f55ebd12b7d007",
+    "firmware/bringup/tests/diagnostics_test.cpp": "7ddc69fcb615990095c16520097bea6c3e8b857aa8422475d6b60c340c80bb94",
+    "firmware/bringup/tests/rf_boot_test.cpp": "6c9d9b929c7d8fe5191d52a2e90f42e0d31d8bc333e1459c2d111a899445bbcc"
   },
   "erc": {
     "$schema": "https://schemas.kicad.org/erc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-26T09:24:32",
+    "date": "2026-09-26T10:04:40",
     "ignored_checks": [
       {
         "description": "Global label only appears once in the schematic",
@@ -82,7 +113,7 @@
   "candidate_drc": {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-26T09:24:33",
+    "date": "2026-09-26T10:04:41",
     "ignored_checks": [
       {
         "description": "Footprint has no courtyard defined",
@@ -116,8 +147,8 @@
     "violations": []
   },
   "artifact_audit": {
-    "status": "FAIL",
-    "scope": "Corrected draft only; not manufacturing approval",
+    "status": "PASS",
+    "scope": "Routed A3 candidate; initial-via checks explicitly use placement seed. Not manufacturing approval.",
     "checks": [
       {
         "check": "U2.4 -> +3V3_RF",
@@ -745,7 +776,7 @@
       },
       {
         "check": "CC1101 crystal pin 10 within 3.5 mm",
-        "pass": false
+        "pass": true
       },
       {
         "check": "Balun orientation matches top-view audit frame",
@@ -812,7 +843,7 @@
         "pass": true
       },
       {
-        "check": "Eight initial power-area ground stitching vias",
+        "check": "Placement seed: eight initial power-area ground stitching vias",
         "pass": true
       },
       {
@@ -849,16 +880,372 @@
       "U2.14_to_C24.1_mm": 2.212,
       "U2.15_to_C25.1_mm": 2.437,
       "U2.18_to_C26.1_mm": 2.144,
-      "U3.16_to_C60.1_mm": 1.445,
+      "U3.16_to_C60.1_mm": 1.813,
       "U4.16_to_C61.1_mm": 2.32,
       "U5.5_to_C4.1_mm": 1.454,
       "U5.6_to_C6.1_mm": 2.003,
       "U5.7_to_C7.1_mm": 1.356,
-      "U2.8_to_Y1.1_mm": 2.195,
-      "U2.10_to_Y1.3_mm": 4.478,
+      "U2.8_to_Y1.1_mm": 3.468,
+      "U2.10_to_Y1.3_mm": 3.479,
       "ESP32_antenna_tip_y_mm": -6.45
     },
     "parity_mismatches": [],
     "footprints": 121
+  },
+  "route_screens": {
+    "status": "PASS_SCREEN_ONLY",
+    "board": "A3-routing-candidate.kicad_pcb",
+    "paths": [
+      {
+        "from": "J1.A4",
+        "to": "F1.1",
+        "net": "/VBUS_IN",
+        "assumed_current_A": 0.5,
+        "modeled_R_ohm_at_80C": 0.02866,
+        "modeled_drop_mV": 14.331,
+        "copper_path_length_mm": 9.607,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.3
+      },
+      {
+        "from": "J1.A9",
+        "to": "F1.1",
+        "net": "/VBUS_IN",
+        "assumed_current_A": 0.5,
+        "modeled_R_ohm_at_80C": 0.04093,
+        "modeled_drop_mV": 20.464,
+        "copper_path_length_mm": 13.825,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.3
+      },
+      {
+        "from": "F1.2",
+        "to": "U7.1",
+        "net": "/VBUS_PROTECTED",
+        "assumed_current_A": 0.5,
+        "modeled_R_ohm_at_80C": 0.00933,
+        "modeled_drop_mV": 4.667,
+        "copper_path_length_mm": 4.686,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.6
+      },
+      {
+        "from": "F1.2",
+        "to": "U5.7",
+        "net": "/VBUS_PROTECTED",
+        "assumed_current_A": 0.02,
+        "modeled_R_ohm_at_80C": 0.04492,
+        "modeled_drop_mV": 0.898,
+        "copper_path_length_mm": 22.267,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.4
+      },
+      {
+        "from": "U7.6",
+        "to": "U6.3",
+        "net": "/VBUS_SWITCHED",
+        "assumed_current_A": 0.5,
+        "modeled_R_ohm_at_80C": 0.00501,
+        "modeled_drop_mV": 2.506,
+        "copper_path_length_mm": 3.692,
+        "via_transitions": 0,
+        "minimum_trace_width_mm": 0.5
+      },
+      {
+        "from": "L1.2",
+        "to": "U1.2",
+        "net": "/+3V3",
+        "assumed_current_A": 0.5,
+        "modeled_R_ohm_at_80C": 0.01485,
+        "modeled_drop_mV": 7.423,
+        "copper_path_length_mm": 12.043,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.8
+      },
+      {
+        "from": "L1.2",
+        "to": "FB1.1",
+        "net": "/+3V3",
+        "assumed_current_A": 0.1,
+        "modeled_R_ohm_at_80C": 0.1114,
+        "modeled_drop_mV": 11.14,
+        "copper_path_length_mm": 29.044,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.4
+      },
+      {
+        "from": "FB1.2",
+        "to": "U2.4",
+        "net": "/+3V3_RF",
+        "assumed_current_A": 0.1,
+        "modeled_R_ohm_at_80C": 0.10432,
+        "modeled_drop_mV": 10.432,
+        "copper_path_length_mm": 35.467,
+        "via_transitions": 4,
+        "minimum_trace_width_mm": 0.2
+      },
+      {
+        "from": "FB1.2",
+        "to": "U2.9",
+        "net": "/+3V3_RF",
+        "assumed_current_A": 0.1,
+        "modeled_R_ohm_at_80C": 0.07564,
+        "modeled_drop_mV": 7.564,
+        "copper_path_length_mm": 26.442,
+        "via_transitions": 3,
+        "minimum_trace_width_mm": 0.15
+      },
+      {
+        "from": "FB1.2",
+        "to": "U3.16",
+        "net": "/+3V3_RF",
+        "assumed_current_A": 0.1,
+        "modeled_R_ohm_at_80C": 0.05195,
+        "modeled_drop_mV": 5.195,
+        "copper_path_length_mm": 21.746,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.2
+      },
+      {
+        "from": "FB1.2",
+        "to": "U4.16",
+        "net": "/+3V3_RF",
+        "assumed_current_A": 0.1,
+        "modeled_R_ohm_at_80C": 0.13316,
+        "modeled_drop_mV": 13.316,
+        "copper_path_length_mm": 62.339,
+        "via_transitions": 2,
+        "minimum_trace_width_mm": 0.2
+      },
+      {
+        "from": "U5.6",
+        "to": "U5.5",
+        "net": "/+3V3_USB",
+        "assumed_current_A": 0.02,
+        "modeled_R_ohm_at_80C": 0.00137,
+        "modeled_drop_mV": 0.027,
+        "copper_path_length_mm": 0.45,
+        "via_transitions": 0,
+        "minimum_trace_width_mm": 0.25
+      },
+      {
+        "from": "U2.8",
+        "to": "Y1.1",
+        "net": "/CC1101_XOSC_Q1",
+        "assumed_current_A": 0,
+        "modeled_R_ohm_at_80C": 0.02181,
+        "modeled_drop_mV": 0.0,
+        "copper_path_length_mm": 4.299,
+        "via_transitions": 0,
+        "minimum_trace_width_mm": 0.15
+      },
+      {
+        "from": "U2.10",
+        "to": "Y1.3",
+        "net": "/CC1101_XOSC_Q2",
+        "assumed_current_A": 0,
+        "modeled_R_ohm_at_80C": 0.01519,
+        "modeled_drop_mV": 0.0,
+        "copper_path_length_mm": 3.994,
+        "via_transitions": 0,
+        "minimum_trace_width_mm": 0.2
+      }
+    ],
+    "checks": [
+      {
+        "check": "Digital copper clears projected Q1 pad by >=0.20 mm on every layer",
+        "pass": true
+      },
+      {
+        "check": "U2.8 to Y1.1 routed length <5 mm, no vias",
+        "pass": true
+      },
+      {
+        "check": "U2.10 to Y1.3 routed length <5 mm, no vias",
+        "pass": true
+      },
+      {
+        "check": "Main ESP32 path >=0.8 mm and modeled drop <25 mV at 0.5 A",
+        "pass": true
+      },
+      {
+        "check": "Each USB contact-to-fuse copper path modeled drop <50 mV at 0.5 A",
+        "pass": true
+      },
+      {
+        "check": "RF branch copper paths modeled drop <25 mV at 0.1 A (bead excluded)",
+        "pass": true
+      }
+    ],
+    "screen_limits": "Project engineering screens, not quoted manufacturer maxima. Individual load cases are independent, not an approved simultaneous-load budget.",
+    "assumptions": {
+      "copper_temperature_C": 80,
+      "copper_resistivity_20C_ohm_mm": 1.724e-05,
+      "temperature_coefficient_per_C": 0.00393,
+      "outer_copper_mm": 0.028000000000000004,
+      "inner_copper_mm": 0.01216,
+      "via_plating_mm": 0.02,
+      "via_span_mm": 1.6,
+      "limitations": "Least-resistance single copper path, parallel paths ignored. Pad/contact spreading, components, cable and ground-return resistance omitted. All layer transitions charged full via-barrel resistance. Clock lengths use pin-center/crystal-center contacts. Not an ampacity/thermal rating or tolerance guarantee."
+    },
+    "oscillator_Q1_pad_projected_digital_clearances_under_1mm": [
+      {
+        "net": "/CC1101_GDO2",
+        "layer": "B.Cu",
+        "clearance_mm": 0.2079,
+        "start_mm": [
+          49.0,
+          24.7253
+        ],
+        "end_mm": [
+          46.5,
+          22.2253
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_CSN",
+        "layer": "In2.Cu",
+        "clearance_mm": 0.2695,
+        "start_mm": [
+          48.45,
+          21.8183
+        ],
+        "end_mm": [
+          47.1406,
+          23.7277
+        ],
+        "via": false
+      },
+      {
+        "net": "/RF_OUT0",
+        "layer": "In2.Cu",
+        "clearance_mm": 0.3137,
+        "start_mm": [
+          47.5411,
+          24.45
+        ],
+        "end_mm": [
+          52.5,
+          24.45
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_CSN",
+        "layer": "In2.Cu",
+        "clearance_mm": 0.5035,
+        "start_mm": [
+          48.35,
+          20.8
+        ],
+        "end_mm": [
+          48.45,
+          21.8183
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_GDO2",
+        "layer": "B.Cu",
+        "clearance_mm": 0.6157,
+        "start_mm": [
+          50.4772,
+          25.9425
+        ],
+        "end_mm": [
+          49.0,
+          24.7253
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_CSN",
+        "layer": "F.Cu",
+        "clearance_mm": 0.6166,
+        "start_mm": [
+          47.1406,
+          23.7277
+        ],
+        "end_mm": [
+          47.1406,
+          23.7277
+        ],
+        "via": true
+      },
+      {
+        "net": "/CC1101_CSN",
+        "layer": "B.Cu",
+        "clearance_mm": 0.7923,
+        "start_mm": [
+          47.1406,
+          23.7277
+        ],
+        "end_mm": [
+          47.9052,
+          24.4923
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_CSN",
+        "layer": "B.Cu",
+        "clearance_mm": 0.8984,
+        "start_mm": [
+          47.9052,
+          24.4923
+        ],
+        "end_mm": [
+          47.9052,
+          32.0138
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_GDO0",
+        "layer": "B.Cu",
+        "clearance_mm": 0.9119,
+        "start_mm": [
+          48.8787,
+          21.4
+        ],
+        "end_mm": [
+          47.8,
+          21.4
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_GDO0",
+        "layer": "B.Cu",
+        "clearance_mm": 0.9339,
+        "start_mm": [
+          48.8787,
+          21.4287
+        ],
+        "end_mm": [
+          48.8787,
+          21.4
+        ],
+        "via": false
+      },
+      {
+        "net": "/CC1101_GDO0",
+        "layer": "B.Cu",
+        "clearance_mm": 0.9589,
+        "start_mm": [
+          49.2264,
+          21.4287
+        ],
+        "end_mm": [
+          48.8787,
+          21.4287
+        ],
+        "via": false
+      }
+    ],
+    "digital_copper_projected_under_Q1_pad": [],
+    "oscillator_screen_scope": "All copper layers projected onto full rectangular pad envelope; rounded corners ignored conservatively. Ground plane shielding does not waive this screen.",
+    "oscillator_guidance_source": "https://www.ti.com/lit/ds/symlink/cc1101.pdf"
   }
 }

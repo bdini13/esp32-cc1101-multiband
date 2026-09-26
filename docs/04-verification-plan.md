@@ -6,8 +6,9 @@ No manufacturing order should be placed until all pre-order gates are checked.
 
 The routed A3 candidate has zero native DRC violations and zero unconnected
 items. See [A3 engineering decisions and bench acceptance](06-A3-prototype-engineering.md)
-and [fresh preflight](../reports/preflight-A3.json). One old crystal-placement
-screening target is exceeded; it remains visible in the artifact audit.
+and [fresh preflight](../reports/preflight-A3.json). The refined crystal layout
+now passes the unchanged placement target; all 180 artifact checks and six
+route screens pass. See the [refinement evidence](../reports/autonomous-refinement-A3-2026-09-26.md).
 Six independent/supplier review categories remain pending. No physical tests
 have occurred and no order is authorized by these reports.
 

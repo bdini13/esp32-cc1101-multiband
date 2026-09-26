@@ -21,7 +21,9 @@ loads are not approved. USB suspend shuts down the main rail.
 
 The RF rail passes through a ferrite and local bypass capacitors. CC1101
 DGUARD is supplied, not grounded. A 26 MHz four-pad crystal provides its clock;
-load capacitance and the longer oscillator connection need bench verification.
+load capacitance and oscillator startup/frequency need bench verification.
+The refined diagonal placement meets both original distance targets and
+reduces the longest clock route to approximately 3.99 mm.
 
 ## Radio path
 

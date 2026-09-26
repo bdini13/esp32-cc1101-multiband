@@ -1,14 +1,14 @@
 {
   "status": "EXPERIMENT_ONLY_NOT_RELEASED",
   "track_segments_by_layer_and_vias": {
-    "F.Cu": 742,
+    "F.Cu": 736,
     "vias": 172,
-    "B.Cu": 165,
-    "In2.Cu": 98
+    "B.Cu": 173,
+    "In2.Cu": 100
   },
   "total_trace_length_by_net_mm": {
     "/+3V3": 142.375,
-    "/+3V3_RF": 107.668,
+    "/+3V3_RF": 108.045,
     "/+3V3_USB": 36.925,
     "/AUTO_DTR_N": 18.179,
     "/AUTO_Q1_BASE": 2.225,
@@ -20,15 +20,15 @@
     "/BAL_P": 1.402,
     "/BUCK_BST": 2.05,
     "/BUCK_SW": 6.706,
-    "/CC1101_CSN": 32.133,
+    "/CC1101_CSN": 32.846,
     "/CC1101_DCOUPL": 1.881,
-    "/CC1101_GDO0": 46.756,
-    "/CC1101_GDO2": 45.455,
+    "/CC1101_GDO0": 47.976,
+    "/CC1101_GDO2": 45.478,
     "/CC1101_RBIAS": 1.71,
     "/CC1101_RF_N": 2.924,
     "/CC1101_RF_P": 2.924,
-    "/CC1101_XOSC_Q1": 4.545,
-    "/CC1101_XOSC_Q2": 8.142,
+    "/CC1101_XOSC_Q1": 6.103,
+    "/CC1101_XOSC_Q2": 6.373,
     "/CHASSIS": 27.345,
     "/CP2102_RST_N": 4.681,
     "/ESP_EN": 43.397,
@@ -38,7 +38,7 @@
     "/EXP_GPIO22": 40.606,
     "/EXP_GPIO34": 33.933,
     "/EXP_GPIO35": 34.701,
-    "/GND": 186.876,
+    "/GND": 183.872,
     "/MAIN_POWER_EN": 21.269,
     "/POWER_LED_A": 4.68,
     "/POWER_SLEW": 1.71,
@@ -58,7 +58,7 @@
     "/RF_COMBINED": 10.287,
     "/RF_DISABLE": 52.14,
     "/RF_FEED": 2.228,
-    "/RF_OUT0": 66.439,
+    "/RF_OUT0": 66.502,
     "/RF_OUT1": 79.505,
     "/RF_SMA": 10.921,
     "/RF_SW0": 63.109,
@@ -103,11 +103,6 @@
       "net": "/+3V3_RF",
       "width_mm": 0.3,
       "length_mm": 0.8
-    },
-    {
-      "net": "/+3V3_RF",
-      "width_mm": 0.15,
-      "length_mm": 0.099
     },
     {
       "net": "/+3V3_RF",
@@ -162,7 +157,7 @@
     {
       "net": "/+3V3_RF",
       "width_mm": 0.15,
-      "length_mm": 0.512
+      "length_mm": 0.662
     },
     {
       "net": "/+3V3_RF",
@@ -178,11 +173,6 @@
       "net": "/+3V3_RF",
       "width_mm": 0.2,
       "length_mm": 0.806
-    },
-    {
-      "net": "/+3V3_RF",
-      "width_mm": 0.15,
-      "length_mm": 0.48
     },
     {
       "net": "/+3V3_RF",
@@ -212,7 +202,7 @@
     {
       "net": "/+3V3_RF",
       "width_mm": 0.3,
-      "length_mm": 1.05
+      "length_mm": 1.452
     },
     {
       "net": "/+3V3_RF",
@@ -431,7 +421,7 @@
     }
   ],
   "via_screen_limit": "Center-inside-pad screen only; assembler must review every pad-adjacent via too.",
-  "crystal_review": "Pin-10 placement exceeds the retained 3.5 mm screening target. Total net lengths include load-cap branches, not just IC-to-crystal length.",
+  "crystal_review": "Refined candidate meets the original 3.5 mm pin-center placement screen. See route-margins-A3.json for center-to-center routed lengths and all-layer Q1 digital clearance. Total net lengths here include load-cap branches.",
   "not_validated": [
     "RF impedance/matching",
     "USB differential coupling/skew",

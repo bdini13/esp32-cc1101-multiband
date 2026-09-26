@@ -1,0 +1,356 @@
+{
+  "status": "PASS_SCREEN_ONLY",
+  "board": "A3-routing-candidate.kicad_pcb",
+  "paths": [
+    {
+      "from": "J1.A4",
+      "to": "F1.1",
+      "net": "/VBUS_IN",
+      "assumed_current_A": 0.5,
+      "modeled_R_ohm_at_80C": 0.02866,
+      "modeled_drop_mV": 14.331,
+      "copper_path_length_mm": 9.607,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.3
+    },
+    {
+      "from": "J1.A9",
+      "to": "F1.1",
+      "net": "/VBUS_IN",
+      "assumed_current_A": 0.5,
+      "modeled_R_ohm_at_80C": 0.04093,
+      "modeled_drop_mV": 20.464,
+      "copper_path_length_mm": 13.825,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.3
+    },
+    {
+      "from": "F1.2",
+      "to": "U7.1",
+      "net": "/VBUS_PROTECTED",
+      "assumed_current_A": 0.5,
+      "modeled_R_ohm_at_80C": 0.00933,
+      "modeled_drop_mV": 4.667,
+      "copper_path_length_mm": 4.686,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.6
+    },
+    {
+      "from": "F1.2",
+      "to": "U5.7",
+      "net": "/VBUS_PROTECTED",
+      "assumed_current_A": 0.02,
+      "modeled_R_ohm_at_80C": 0.04492,
+      "modeled_drop_mV": 0.898,
+      "copper_path_length_mm": 22.267,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.4
+    },
+    {
+      "from": "U7.6",
+      "to": "U6.3",
+      "net": "/VBUS_SWITCHED",
+      "assumed_current_A": 0.5,
+      "modeled_R_ohm_at_80C": 0.00501,
+      "modeled_drop_mV": 2.506,
+      "copper_path_length_mm": 3.692,
+      "via_transitions": 0,
+      "minimum_trace_width_mm": 0.5
+    },
+    {
+      "from": "L1.2",
+      "to": "U1.2",
+      "net": "/+3V3",
+      "assumed_current_A": 0.5,
+      "modeled_R_ohm_at_80C": 0.01485,
+      "modeled_drop_mV": 7.423,
+      "copper_path_length_mm": 12.043,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.8
+    },
+    {
+      "from": "L1.2",
+      "to": "FB1.1",
+      "net": "/+3V3",
+      "assumed_current_A": 0.1,
+      "modeled_R_ohm_at_80C": 0.1114,
+      "modeled_drop_mV": 11.14,
+      "copper_path_length_mm": 29.044,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.4
+    },
+    {
+      "from": "FB1.2",
+      "to": "U2.4",
+      "net": "/+3V3_RF",
+      "assumed_current_A": 0.1,
+      "modeled_R_ohm_at_80C": 0.10432,
+      "modeled_drop_mV": 10.432,
+      "copper_path_length_mm": 35.467,
+      "via_transitions": 4,
+      "minimum_trace_width_mm": 0.2
+    },
+    {
+      "from": "FB1.2",
+      "to": "U2.9",
+      "net": "/+3V3_RF",
+      "assumed_current_A": 0.1,
+      "modeled_R_ohm_at_80C": 0.07564,
+      "modeled_drop_mV": 7.564,
+      "copper_path_length_mm": 26.442,
+      "via_transitions": 3,
+      "minimum_trace_width_mm": 0.15
+    },
+    {
+      "from": "FB1.2",
+      "to": "U3.16",
+      "net": "/+3V3_RF",
+      "assumed_current_A": 0.1,
+      "modeled_R_ohm_at_80C": 0.05195,
+      "modeled_drop_mV": 5.195,
+      "copper_path_length_mm": 21.746,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.2
+    },
+    {
+      "from": "FB1.2",
+      "to": "U4.16",
+      "net": "/+3V3_RF",
+      "assumed_current_A": 0.1,
+      "modeled_R_ohm_at_80C": 0.13316,
+      "modeled_drop_mV": 13.316,
+      "copper_path_length_mm": 62.339,
+      "via_transitions": 2,
+      "minimum_trace_width_mm": 0.2
+    },
+    {
+      "from": "U5.6",
+      "to": "U5.5",
+      "net": "/+3V3_USB",
+      "assumed_current_A": 0.02,
+      "modeled_R_ohm_at_80C": 0.00137,
+      "modeled_drop_mV": 0.027,
+      "copper_path_length_mm": 0.45,
+      "via_transitions": 0,
+      "minimum_trace_width_mm": 0.25
+    },
+    {
+      "from": "U2.8",
+      "to": "Y1.1",
+      "net": "/CC1101_XOSC_Q1",
+      "assumed_current_A": 0,
+      "modeled_R_ohm_at_80C": 0.02181,
+      "modeled_drop_mV": 0.0,
+      "copper_path_length_mm": 4.299,
+      "via_transitions": 0,
+      "minimum_trace_width_mm": 0.15
+    },
+    {
+      "from": "U2.10",
+      "to": "Y1.3",
+      "net": "/CC1101_XOSC_Q2",
+      "assumed_current_A": 0,
+      "modeled_R_ohm_at_80C": 0.01519,
+      "modeled_drop_mV": 0.0,
+      "copper_path_length_mm": 3.994,
+      "via_transitions": 0,
+      "minimum_trace_width_mm": 0.2
+    }
+  ],
+  "checks": [
+    {
+      "check": "Digital copper clears projected Q1 pad by >=0.20 mm on every layer",
+      "pass": true
+    },
+    {
+      "check": "U2.8 to Y1.1 routed length <5 mm, no vias",
+      "pass": true
+    },
+    {
+      "check": "U2.10 to Y1.3 routed length <5 mm, no vias",
+      "pass": true
+    },
+    {
+      "check": "Main ESP32 path >=0.8 mm and modeled drop <25 mV at 0.5 A",
+      "pass": true
+    },
+    {
+      "check": "Each USB contact-to-fuse copper path modeled drop <50 mV at 0.5 A",
+      "pass": true
+    },
+    {
+      "check": "RF branch copper paths modeled drop <25 mV at 0.1 A (bead excluded)",
+      "pass": true
+    }
+  ],
+  "screen_limits": "Project engineering screens, not quoted manufacturer maxima. Individual load cases are independent, not an approved simultaneous-load budget.",
+  "assumptions": {
+    "copper_temperature_C": 80,
+    "copper_resistivity_20C_ohm_mm": 1.724e-05,
+    "temperature_coefficient_per_C": 0.00393,
+    "outer_copper_mm": 0.028000000000000004,
+    "inner_copper_mm": 0.01216,
+    "via_plating_mm": 0.02,
+    "via_span_mm": 1.6,
+    "limitations": "Least-resistance single copper path, parallel paths ignored. Pad/contact spreading, components, cable and ground-return resistance omitted. All layer transitions charged full via-barrel resistance. Clock lengths use pin-center/crystal-center contacts. Not an ampacity/thermal rating or tolerance guarantee."
+  },
+  "oscillator_Q1_pad_projected_digital_clearances_under_1mm": [
+    {
+      "net": "/CC1101_GDO2",
+      "layer": "B.Cu",
+      "clearance_mm": 0.2079,
+      "start_mm": [
+        49.0,
+        24.7253
+      ],
+      "end_mm": [
+        46.5,
+        22.2253
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_CSN",
+      "layer": "In2.Cu",
+      "clearance_mm": 0.2695,
+      "start_mm": [
+        48.45,
+        21.8183
+      ],
+      "end_mm": [
+        47.1406,
+        23.7277
+      ],
+      "via": false
+    },
+    {
+      "net": "/RF_OUT0",
+      "layer": "In2.Cu",
+      "clearance_mm": 0.3137,
+      "start_mm": [
+        47.5411,
+        24.45
+      ],
+      "end_mm": [
+        52.5,
+        24.45
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_CSN",
+      "layer": "In2.Cu",
+      "clearance_mm": 0.5035,
+      "start_mm": [
+        48.35,
+        20.8
+      ],
+      "end_mm": [
+        48.45,
+        21.8183
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_GDO2",
+      "layer": "B.Cu",
+      "clearance_mm": 0.6157,
+      "start_mm": [
+        50.4772,
+        25.9425
+      ],
+      "end_mm": [
+        49.0,
+        24.7253
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_CSN",
+      "layer": "F.Cu",
+      "clearance_mm": 0.6166,
+      "start_mm": [
+        47.1406,
+        23.7277
+      ],
+      "end_mm": [
+        47.1406,
+        23.7277
+      ],
+      "via": true
+    },
+    {
+      "net": "/CC1101_CSN",
+      "layer": "B.Cu",
+      "clearance_mm": 0.7923,
+      "start_mm": [
+        47.1406,
+        23.7277
+      ],
+      "end_mm": [
+        47.9052,
+        24.4923
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_CSN",
+      "layer": "B.Cu",
+      "clearance_mm": 0.8984,
+      "start_mm": [
+        47.9052,
+        24.4923
+      ],
+      "end_mm": [
+        47.9052,
+        32.0138
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_GDO0",
+      "layer": "B.Cu",
+      "clearance_mm": 0.9119,
+      "start_mm": [
+        48.8787,
+        21.4
+      ],
+      "end_mm": [
+        47.8,
+        21.4
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_GDO0",
+      "layer": "B.Cu",
+      "clearance_mm": 0.9339,
+      "start_mm": [
+        48.8787,
+        21.4287
+      ],
+      "end_mm": [
+        48.8787,
+        21.4
+      ],
+      "via": false
+    },
+    {
+      "net": "/CC1101_GDO0",
+      "layer": "B.Cu",
+      "clearance_mm": 0.9589,
+      "start_mm": [
+        49.2264,
+        21.4287
+      ],
+      "end_mm": [
+        48.8787,
+        21.4287
+      ],
+      "via": false
+    }
+  ],
+  "digital_copper_projected_under_Q1_pad": [],
+  "oscillator_screen_scope": "All copper layers projected onto full rectangular pad envelope; rounded corners ignored conservatively. Ground plane shielding does not waive this screen.",
+  "oscillator_guidance_source": "https://www.ti.com/lit/ds/symlink/cc1101.pdf"
+}

@@ -21,7 +21,8 @@ def main():
     parser.add_argument('--output',type=Path,default=HERE.parent/'reports/design-audit.json')
     args=parser.parse_args()
     root = ET.parse(HERE / "esp32-cc1101-multiband.xml").getroot()
-    board = pcbnew.LoadBoard(str(HERE / "esp32-cc1101-multiband.kicad_pcb"))
+    board = pcbnew.LoadBoard(str(HERE / "A3-routing-candidate.kicad_pcb"))
+    placement = pcbnew.LoadBoard(str(HERE / "esp32-cc1101-multiband.kicad_pcb"))
     footprints = {f.GetReference(): f for f in board.GetFootprints()}
     comps = {c.attrib["ref"]: c for c in root.findall("components/comp")
              if c.findtext("footprint", "")}
@@ -168,9 +169,9 @@ def main():
           "ESP32 antenna feed lies beyond y=0 board edge")
     measurements["ESP32_antenna_tip_y_mm"] = round(ey - 12.75, 3)
     check(board.GetCopperLayerCount() == 4, "Four copper layers")
-    check(sum(isinstance(t, pcbnew.PCB_VIA) for t in board.GetTracks()) == 8,
-          "Eight initial power-area ground stitching vias")
-    check(all(t.GetNetname() == '/GND' for t in board.GetTracks()
+    check(sum(isinstance(t, pcbnew.PCB_VIA) for t in placement.GetTracks()) == 8,
+          "Placement seed: eight initial power-area ground stitching vias")
+    check(all(t.GetNetname() == '/GND' for t in placement.GetTracks()
               if isinstance(t,pcbnew.PCB_VIA)), 'Placement ground vias have not been reassigned by touching power pads')
     check(xy(pad('C42',1))[1] < xy(pad('C42',2))[1],
           'RF_N bridge pad lies above RF_P: no differential crossover')
@@ -199,7 +200,7 @@ def main():
               r["Footprint"] == comps[r["Reference"]].findtext("footprint") for r in rows),
           "BOM values and footprints match schematic")
     report = {"status": "PASS" if all(c["pass"] for c in checks) else "FAIL",
-              "scope": "Corrected draft only; not manufacturing approval",
+              "scope": "Routed A3 candidate; initial-via checks explicitly use placement seed. Not manufacturing approval.",
               "checks": checks, "measurements": measurements,
               "parity_mismatches": mismatches, "footprints": len(footprints)}
     output = args.output
